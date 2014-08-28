@@ -12,9 +12,12 @@
 
 #define TB_SAFEAREA_PADDING 40
 #define UXA_HANDLE_WIDTH TB_SAFEAREA_PADDING*2
+#define TIMER_COUNT_DOWN 0.5
 
 @interface UXATimerView : UIControl
     @property (nonatomic,assign) int angle;
+    @property (nonatomic,assign) int secondsBegin;
+    @property (nonatomic,assign) int secondsLeft;
     -(void)updateCounter:(NSTimer *)theTimer;
     -(void)countdownTimer;
 @end
