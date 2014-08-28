@@ -14,10 +14,10 @@
 #define SQR(x)			( (x) * (x) )
 
 @interface UXATimerView(){
-    int radius;
-    int center_x;
-    int center_y;
-    float rediusPerSecond;
+    int _radius;
+    int _center_x;
+    int _center_y;
+    float _rediusPerSecond;
     UILabel *_countdownLabel;
     NSTimer *_timer;
 }
@@ -34,17 +34,17 @@ int hours, minutes, seconds;
         self.opaque = NO;
         
         self.secondsBegin = 60*5;
-        rediusPerSecond = 360.0 / (float)self.secondsBegin ;
+        _rediusPerSecond = 360.0 / (float)self.secondsBegin ;
 
         self.secondsLeft = self.secondsBegin;
         [self countdownTimer];
         
-        radius = self.frame.size.width/2 - TB_SAFEAREA_PADDING;
-        center_x = self.frame.size.width/2;
-        center_y = self.frame.size.height/2;
+        _radius = self.frame.size.width/2 - TB_SAFEAREA_PADDING;
+        _center_x = self.frame.size.width/2;
+        _center_y = self.frame.size.height/2;
         self.angle = 89;
         
-        _countdownLabel = [ [UILabel alloc ] initWithFrame:CGRectMake(center_x, center_y , UXA_HANDLE_WIDTH, UXA_HANDLE_WIDTH) ];
+        _countdownLabel = [ [UILabel alloc ] initWithFrame:CGRectMake(_center_x, _center_y , UXA_HANDLE_WIDTH, UXA_HANDLE_WIDTH) ];
         _countdownLabel.opaque = NO;
         _countdownLabel.textAlignment = NSTextAlignmentCenter;
         _countdownLabel.textColor = [UIColor redColor];
@@ -101,9 +101,9 @@ int hours, minutes, seconds;
 
 -(void) drawTheCircle:(CGContextRef)context{
     CGContextSetFillColorWithColor(context, [[UIColor redColor] CGColor]);
-    CGContextMoveToPoint(context, center_x, center_y);
+    CGContextMoveToPoint(context, _center_x, _center_y);
     int angle = self.angle != 90 ? self.angle : 89;
-    CGContextAddArc(context, center_x, center_y, radius,  ToRad(-90), ToRad(-angle), 1);
+    CGContextAddArc(context, _center_x, _center_y, _radius,  ToRad(-90), ToRad(-angle), 1);
     CGContextClosePath(context);
     CGContextFillPath(context);
 }
@@ -168,8 +168,8 @@ int hours, minutes, seconds;
     CGPoint centerPoint = CGPointMake(self.frame.size.width/2 - UXA_HANDLE_WIDTH/2, self.frame.size.height/2 - UXA_HANDLE_WIDTH/2);
     
     CGPoint result;
-    result.y = round(centerPoint.y + radius * sin(ToRad(-angleInt))) ;
-    result.x = round(centerPoint.x + radius * cos(ToRad(-angleInt)));
+    result.y = round(centerPoint.y + _radius * sin(ToRad(-angleInt))) ;
+    result.x = round(centerPoint.x + _radius * cos(ToRad(-angleInt)));
     
     return result;
 }
@@ -194,7 +194,6 @@ static inline int TimeFromAngle(int begin, int angle){
     float rediusPerSecond = 360.0 / (float)begin ;
     float countAngle = angle > 90 ? angle-90 : 270+angle;
     float time = countAngle / rediusPerSecond;
-    NSLog(@"Angle Value %d CountAngle Value %f", angle, countAngle);
     return (int)time;
 }
 
