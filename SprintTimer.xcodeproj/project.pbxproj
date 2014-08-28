@@ -1,0 +1,480 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		5D758A4919AE2D1A00E6E520 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D758A4819AE2D1A00E6E520 /* Foundation.framework */; };
+		5D758A4B19AE2D1A00E6E520 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D758A4A19AE2D1A00E6E520 /* CoreGraphics.framework */; };
+		5D758A4D19AE2D1A00E6E520 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D758A4C19AE2D1A00E6E520 /* UIKit.framework */; };
+		5D758A5319AE2D1A00E6E520 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5D758A5119AE2D1A00E6E520 /* InfoPlist.strings */; };
+		5D758A5519AE2D1A00E6E520 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D758A5419AE2D1A00E6E520 /* main.m */; };
+		5D758A5919AE2D1A00E6E520 /* UXAAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D758A5819AE2D1A00E6E520 /* UXAAppDelegate.m */; };
+		5D758A5C19AE2D1A00E6E520 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5D758A5A19AE2D1A00E6E520 /* Main.storyboard */; };
+		5D758A5F19AE2D1A00E6E520 /* UXAViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D758A5E19AE2D1A00E6E520 /* UXAViewController.m */; };
+		5D758A6119AE2D1A00E6E520 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5D758A6019AE2D1A00E6E520 /* Images.xcassets */; };
+		5D758A6819AE2D1A00E6E520 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D758A6719AE2D1A00E6E520 /* XCTest.framework */; };
+		5D758A6919AE2D1A00E6E520 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D758A4819AE2D1A00E6E520 /* Foundation.framework */; };
+		5D758A6A19AE2D1A00E6E520 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D758A4C19AE2D1A00E6E520 /* UIKit.framework */; };
+		5D758A7219AE2D1A00E6E520 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5D758A7019AE2D1A00E6E520 /* InfoPlist.strings */; };
+		5D758A7419AE2D1A00E6E520 /* SprintTimerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D758A7319AE2D1A00E6E520 /* SprintTimerTests.m */; };
+		5D758AC819AE33BB00E6E520 /* UXATimerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D758AC719AE33BB00E6E520 /* UXATimerView.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		5D758A6B19AE2D1A00E6E520 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5D758A3D19AE2D1900E6E520 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5D758A4419AE2D1900E6E520;
+			remoteInfo = SprintTimer;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		5D758A4519AE2D1A00E6E520 /* SprintTimer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SprintTimer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5D758A4819AE2D1A00E6E520 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		5D758A4A19AE2D1A00E6E520 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		5D758A4C19AE2D1A00E6E520 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		5D758A5019AE2D1A00E6E520 /* SprintTimer-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SprintTimer-Info.plist"; sourceTree = "<group>"; };
+		5D758A5219AE2D1A00E6E520 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		5D758A5419AE2D1A00E6E520 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		5D758A5619AE2D1A00E6E520 /* SprintTimer-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SprintTimer-Prefix.pch"; sourceTree = "<group>"; };
+		5D758A5719AE2D1A00E6E520 /* UXAAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UXAAppDelegate.h; sourceTree = "<group>"; };
+		5D758A5819AE2D1A00E6E520 /* UXAAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UXAAppDelegate.m; sourceTree = "<group>"; };
+		5D758A5B19AE2D1A00E6E520 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		5D758A5D19AE2D1A00E6E520 /* UXAViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UXAViewController.h; sourceTree = "<group>"; };
+		5D758A5E19AE2D1A00E6E520 /* UXAViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UXAViewController.m; sourceTree = "<group>"; };
+		5D758A6019AE2D1A00E6E520 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		5D758A6619AE2D1A00E6E520 /* SprintTimerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SprintTimerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5D758A6719AE2D1A00E6E520 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		5D758A6F19AE2D1A00E6E520 /* SprintTimerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SprintTimerTests-Info.plist"; sourceTree = "<group>"; };
+		5D758A7119AE2D1A00E6E520 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		5D758A7319AE2D1A00E6E520 /* SprintTimerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SprintTimerTests.m; sourceTree = "<group>"; };
+		5D758AC619AE33BB00E6E520 /* UXATimerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UXATimerView.h; sourceTree = "<group>"; };
+		5D758AC719AE33BB00E6E520 /* UXATimerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UXATimerView.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		5D758A4219AE2D1900E6E520 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5D758A4B19AE2D1A00E6E520 /* CoreGraphics.framework in Frameworks */,
+				5D758A4D19AE2D1A00E6E520 /* UIKit.framework in Frameworks */,
+				5D758A4919AE2D1A00E6E520 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5D758A6319AE2D1A00E6E520 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5D758A6819AE2D1A00E6E520 /* XCTest.framework in Frameworks */,
+				5D758A6A19AE2D1A00E6E520 /* UIKit.framework in Frameworks */,
+				5D758A6919AE2D1A00E6E520 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5D758A3C19AE2D1900E6E520 = {
+			isa = PBXGroup;
+			children = (
+				5D758A4E19AE2D1A00E6E520 /* SprintTimer */,
+				5D758A6D19AE2D1A00E6E520 /* SprintTimerTests */,
+				5D758A4719AE2D1A00E6E520 /* Frameworks */,
+				5D758A4619AE2D1A00E6E520 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		5D758A4619AE2D1A00E6E520 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5D758A4519AE2D1A00E6E520 /* SprintTimer.app */,
+				5D758A6619AE2D1A00E6E520 /* SprintTimerTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5D758A4719AE2D1A00E6E520 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5D758A4819AE2D1A00E6E520 /* Foundation.framework */,
+				5D758A4A19AE2D1A00E6E520 /* CoreGraphics.framework */,
+				5D758A4C19AE2D1A00E6E520 /* UIKit.framework */,
+				5D758A6719AE2D1A00E6E520 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5D758A4E19AE2D1A00E6E520 /* SprintTimer */ = {
+			isa = PBXGroup;
+			children = (
+				5D758A5719AE2D1A00E6E520 /* UXAAppDelegate.h */,
+				5D758A5819AE2D1A00E6E520 /* UXAAppDelegate.m */,
+				5D758A5A19AE2D1A00E6E520 /* Main.storyboard */,
+				5D758A5D19AE2D1A00E6E520 /* UXAViewController.h */,
+				5D758A5E19AE2D1A00E6E520 /* UXAViewController.m */,
+				5D758AC619AE33BB00E6E520 /* UXATimerView.h */,
+				5D758AC719AE33BB00E6E520 /* UXATimerView.m */,
+				5D758A6019AE2D1A00E6E520 /* Images.xcassets */,
+				5D758A4F19AE2D1A00E6E520 /* Supporting Files */,
+			);
+			path = SprintTimer;
+			sourceTree = "<group>";
+		};
+		5D758A4F19AE2D1A00E6E520 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				5D758A5019AE2D1A00E6E520 /* SprintTimer-Info.plist */,
+				5D758A5119AE2D1A00E6E520 /* InfoPlist.strings */,
+				5D758A5419AE2D1A00E6E520 /* main.m */,
+				5D758A5619AE2D1A00E6E520 /* SprintTimer-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		5D758A6D19AE2D1A00E6E520 /* SprintTimerTests */ = {
+			isa = PBXGroup;
+			children = (
+				5D758A7319AE2D1A00E6E520 /* SprintTimerTests.m */,
+				5D758A6E19AE2D1A00E6E520 /* Supporting Files */,
+			);
+			path = SprintTimerTests;
+			sourceTree = "<group>";
+		};
+		5D758A6E19AE2D1A00E6E520 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				5D758A6F19AE2D1A00E6E520 /* SprintTimerTests-Info.plist */,
+				5D758A7019AE2D1A00E6E520 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		5D758A4419AE2D1900E6E520 /* SprintTimer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5D758A7719AE2D1A00E6E520 /* Build configuration list for PBXNativeTarget "SprintTimer" */;
+			buildPhases = (
+				5D758A4119AE2D1900E6E520 /* Sources */,
+				5D758A4219AE2D1900E6E520 /* Frameworks */,
+				5D758A4319AE2D1900E6E520 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SprintTimer;
+			productName = SprintTimer;
+			productReference = 5D758A4519AE2D1A00E6E520 /* SprintTimer.app */;
+			productType = "com.apple.product-type.application";
+		};
+		5D758A6519AE2D1A00E6E520 /* SprintTimerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5D758A7A19AE2D1A00E6E520 /* Build configuration list for PBXNativeTarget "SprintTimerTests" */;
+			buildPhases = (
+				5D758A6219AE2D1A00E6E520 /* Sources */,
+				5D758A6319AE2D1A00E6E520 /* Frameworks */,
+				5D758A6419AE2D1A00E6E520 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5D758A6C19AE2D1A00E6E520 /* PBXTargetDependency */,
+			);
+			name = SprintTimerTests;
+			productName = SprintTimerTests;
+			productReference = 5D758A6619AE2D1A00E6E520 /* SprintTimerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		5D758A3D19AE2D1900E6E520 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = UXA;
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = "Apirak Panatkool";
+				TargetAttributes = {
+					5D758A6519AE2D1A00E6E520 = {
+						TestTargetID = 5D758A4419AE2D1900E6E520;
+					};
+				};
+			};
+			buildConfigurationList = 5D758A4019AE2D1900E6E520 /* Build configuration list for PBXProject "SprintTimer" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 5D758A3C19AE2D1900E6E520;
+			productRefGroup = 5D758A4619AE2D1A00E6E520 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				5D758A4419AE2D1900E6E520 /* SprintTimer */,
+				5D758A6519AE2D1A00E6E520 /* SprintTimerTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		5D758A4319AE2D1900E6E520 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5D758A6119AE2D1A00E6E520 /* Images.xcassets in Resources */,
+				5D758A5319AE2D1A00E6E520 /* InfoPlist.strings in Resources */,
+				5D758A5C19AE2D1A00E6E520 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5D758A6419AE2D1A00E6E520 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5D758A7219AE2D1A00E6E520 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5D758A4119AE2D1900E6E520 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5D758A5F19AE2D1A00E6E520 /* UXAViewController.m in Sources */,
+				5D758A5519AE2D1A00E6E520 /* main.m in Sources */,
+				5D758A5919AE2D1A00E6E520 /* UXAAppDelegate.m in Sources */,
+				5D758AC819AE33BB00E6E520 /* UXATimerView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5D758A6219AE2D1A00E6E520 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5D758A7419AE2D1A00E6E520 /* SprintTimerTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		5D758A6C19AE2D1A00E6E520 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5D758A4419AE2D1900E6E520 /* SprintTimer */;
+			targetProxy = 5D758A6B19AE2D1A00E6E520 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		5D758A5119AE2D1A00E6E520 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5D758A5219AE2D1A00E6E520 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		5D758A5A19AE2D1A00E6E520 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5D758A5B19AE2D1A00E6E520 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		5D758A7019AE2D1A00E6E520 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5D758A7119AE2D1A00E6E520 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		5D758A7519AE2D1A00E6E520 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+		5D758A7619AE2D1A00E6E520 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		5D758A7819AE2D1A00E6E520 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SprintTimer/SprintTimer-Prefix.pch";
+				INFOPLIST_FILE = "SprintTimer/SprintTimer-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		5D758A7919AE2D1A00E6E520 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SprintTimer/SprintTimer-Prefix.pch";
+				INFOPLIST_FILE = "SprintTimer/SprintTimer-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		5D758A7B19AE2D1A00E6E520 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/SprintTimer.app/SprintTimer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SprintTimer/SprintTimer-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "SprintTimerTests/SprintTimerTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		5D758A7C19AE2D1A00E6E520 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/SprintTimer.app/SprintTimer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SprintTimer/SprintTimer-Prefix.pch";
+				INFOPLIST_FILE = "SprintTimerTests/SprintTimerTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		5D758A4019AE2D1900E6E520 /* Build configuration list for PBXProject "SprintTimer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5D758A7519AE2D1A00E6E520 /* Debug */,
+				5D758A7619AE2D1A00E6E520 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5D758A7719AE2D1A00E6E520 /* Build configuration list for PBXNativeTarget "SprintTimer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5D758A7819AE2D1A00E6E520 /* Debug */,
+				5D758A7919AE2D1A00E6E520 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		5D758A7A19AE2D1A00E6E520 /* Build configuration list for PBXNativeTarget "SprintTimerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5D758A7B19AE2D1A00E6E520 /* Debug */,
+				5D758A7C19AE2D1A00E6E520 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 5D758A3D19AE2D1900E6E520 /* Project object */;
+}
