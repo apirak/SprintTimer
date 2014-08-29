@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-#define UXA_TIMER_SIZE 600
+#define UXA_TIMER_SIZE (1190+60)/2
 
 #define TB_SAFEAREA_PADDING 40
 #define UXA_HANDLE_WIDTH TB_SAFEAREA_PADDING*2
