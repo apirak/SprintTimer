@@ -76,27 +76,23 @@
 -(void)selectTimerType:(id)sender {
     UIButton *button = (UIButton *)sender;
     if(button.tag == 1){
-        [timerButton setBackgroundImage:[[UIImage imageNamed:@"Timer_button_selected.png"]
-                                         stretchableImageWithLeftCapWidth:10.0 topCapHeight:0.0] forState:UIControlStateNormal];
-        [crazyButton setBackgroundImage:[[UIImage imageNamed:@"Crazy8_button.png"]
-                                         stretchableImageWithLeftCapWidth:10.0 topCapHeight:0.0] forState:UIControlStateNormal];
-        [UIView beginAnimations:@"MoveView" context:nil];
-        [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
-        [UIView setAnimationDuration:0.3f];
-        [tabLineBarView setFrame:CGRectMake(50, 80, 120, 6)];
-        [UIView commitAnimations];
+        [self setTimerName:@"Timer_button_selected.png" Crazy8Name:@"Crazy8_button.png" BarXPoition:50];
         
     } else {
-        [timerButton setBackgroundImage:[[UIImage imageNamed:@"Timer_button.png"]
-                                         stretchableImageWithLeftCapWidth:10.0 topCapHeight:0.0] forState:UIControlStateNormal];
-        [crazyButton setBackgroundImage:[[UIImage imageNamed:@"Crazy8_button_selected.png"]
-                                         stretchableImageWithLeftCapWidth:10.0 topCapHeight:0.0] forState:UIControlStateNormal];
-        [UIView beginAnimations:@"MoveView" context:nil];
-        [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
-        [UIView setAnimationDuration:0.3f];
-        [tabLineBarView setFrame:CGRectMake(196, 80, 120, 6)];
-        [UIView commitAnimations];
+        [self setTimerName:@"Timer_button.png" Crazy8Name:@"Crazy8_button_selected.png" BarXPoition:196];
     }
+}
+
+-(void)setTimerName:(NSString*)timerName Crazy8Name:(NSString*)crazy8Name BarXPoition:(NSInteger)barXPosition {
+    [timerButton setBackgroundImage:[[UIImage imageNamed:timerName]
+                                     stretchableImageWithLeftCapWidth:10.0 topCapHeight:0.0] forState:UIControlStateNormal];
+    [crazyButton setBackgroundImage:[[UIImage imageNamed:crazy8Name]
+                                     stretchableImageWithLeftCapWidth:10.0 topCapHeight:0.0] forState:UIControlStateNormal];
+    [UIView beginAnimations:@"MoveView" context:nil];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
+    [UIView setAnimationDuration:0.3f];
+    [tabLineBarView setFrame:CGRectMake(barXPosition, 80, 120, 6)];
+    [UIView commitAnimations];
 }
 
 -(void)selectTotalTime:(id)sender {
