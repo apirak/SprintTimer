@@ -18,6 +18,7 @@
     @property (nonatomic,assign) int angle;
     @property (nonatomic,assign) int secondsBegin;
     @property (nonatomic,assign) int secondsLeft;
+
     -(void)updateCounter:(NSTimer *)theTimer;
     -(void)countdownTimer;
 @end

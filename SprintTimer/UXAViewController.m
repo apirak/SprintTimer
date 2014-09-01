@@ -11,11 +11,16 @@
 
 @interface UXAViewController ()
 
+
 @end
 
 @implementation UXAViewController
 
 @synthesize timerLabel;
+@synthesize timerButton;
+@synthesize crazyButton;
+@synthesize totalTimeButton;
+@synthesize tabLineBarView;
 
 - (void)viewDidLoad
 {
@@ -25,20 +30,40 @@
     
     [timerView addTarget:self action:@selector(newValue:) forControlEvents:UIControlEventValueChanged];
     [self.view addSubview:timerView];
-
-    UIButton *button=[UIButton buttonWithType:UIButtonTypeRoundedRect];
-    button.imageView.frame=CGRectMake(0.0f, 0.0f, 50.0f, 44.0f);
-    UILabel *label=[[UILabel alloc] initWithFrame:CGRectMake(0.0f, 35.0f, 50.0f, 44.0f)];
-    [button addSubview:label];
     
-    UIButton *sampleButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [sampleButton setFrame:CGRectMake(0, 10, 200, 52)];
-    [sampleButton setTitle:@"Button Title" forState:UIControlStateNormal];
-    [sampleButton setBackgroundImage:[[UIImage imageNamed:@"crazy_icon_selected.png"]
+    timerButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [timerButton setTag:1];
+    [timerButton setFrame:CGRectMake(62, 45, 97, 33)];
+    [timerButton setBackgroundImage:[[UIImage imageNamed:@"Timer_button_selected.png"]
                                       stretchableImageWithLeftCapWidth:10.0 topCapHeight:0.0] forState:UIControlStateNormal];
-    [sampleButton addTarget:self action:@selector(buttonPressed)
+    [timerButton addTarget:self action:@selector(selectTimerType:)
            forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:sampleButton];
+    [self.view addSubview:timerButton];
+    
+    
+    crazyButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [crazyButton setTag:2];
+    [crazyButton setFrame:CGRectMake(200, 45, 114, 33)];
+    [crazyButton setBackgroundImage:[[UIImage imageNamed:@"Crazy8_button.png"]
+                                     stretchableImageWithLeftCapWidth:10.0 topCapHeight:0.0] forState:UIControlStateNormal];
+    [crazyButton addTarget:self action:@selector(selectTimerType:)
+          forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:crazyButton];
+    
+    
+    totalTimeButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    [totalTimeButton setTitleColor:[UIColor colorWithRed:155/255.0 green:155/255.0 blue:155/255.0 alpha:1.0] forState:UIControlStateNormal];
+    [[totalTimeButton titleLabel] setFont:[UIFont fontWithName:@"Avenir Next" size:24]];
+    [totalTimeButton setFrame:CGRectMake(890, 45, 113, 29)];
+    [totalTimeButton setTitle:@"5 min" forState:UIControlStateNormal];
+    [totalTimeButton addTarget:self action:@selector(selectTotalTime:)
+          forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:totalTimeButton];
+    
+    
+    tabLineBarView = [[UIView alloc] initWithFrame:CGRectMake(50, 80, 120, 6)];
+    [tabLineBarView setBackgroundColor:[UIColor colorWithRed:1.0 green:0.0 blue:0.0 alpha:1.0]];
+    [self.view addSubview:tabLineBarView];
     
 }
 
@@ -48,7 +73,33 @@
     NSLog(@"Slider Value %d",timer.angle);
 }
 
--(void)buttonPressed {
+-(void)selectTimerType:(id)sender {
+    UIButton *button = (UIButton *)sender;
+    if(button.tag == 1){
+        [timerButton setBackgroundImage:[[UIImage imageNamed:@"Timer_button_selected.png"]
+                                         stretchableImageWithLeftCapWidth:10.0 topCapHeight:0.0] forState:UIControlStateNormal];
+        [crazyButton setBackgroundImage:[[UIImage imageNamed:@"Crazy8_button.png"]
+                                         stretchableImageWithLeftCapWidth:10.0 topCapHeight:0.0] forState:UIControlStateNormal];
+        [UIView beginAnimations:@"MoveView" context:nil];
+        [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
+        [UIView setAnimationDuration:0.3f];
+        [tabLineBarView setFrame:CGRectMake(50, 80, 120, 6)];
+        [UIView commitAnimations];
+        
+    } else {
+        [timerButton setBackgroundImage:[[UIImage imageNamed:@"Timer_button.png"]
+                                         stretchableImageWithLeftCapWidth:10.0 topCapHeight:0.0] forState:UIControlStateNormal];
+        [crazyButton setBackgroundImage:[[UIImage imageNamed:@"Crazy8_button_selected.png"]
+                                         stretchableImageWithLeftCapWidth:10.0 topCapHeight:0.0] forState:UIControlStateNormal];
+        [UIView beginAnimations:@"MoveView" context:nil];
+        [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
+        [UIView setAnimationDuration:0.3f];
+        [tabLineBarView setFrame:CGRectMake(196, 80, 120, 6)];
+        [UIView commitAnimations];
+    }
+}
+
+-(void)selectTotalTime:(id)sender {
     
 }
 

@@ -11,5 +11,9 @@
 @interface UXAViewController : UIViewController
 
 @property (weak, nonatomic) IBOutlet UILabel *timerLabel;
+@property (nonatomic, assign) IBOutlet UIButton *crazyButton;
+@property (nonatomic, assign) IBOutlet UIButton *timerButton;
+@property (nonatomic, assign) IBOutlet UIButton *totalTimeButton;
+@property (nonatomic, retain) UIView *tabLineBarView;
 
 @end

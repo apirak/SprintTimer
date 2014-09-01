@@ -22,14 +22,14 @@
 		5D758A7219AE2D1A00E6E520 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5D758A7019AE2D1A00E6E520 /* InfoPlist.strings */; };
 		5D758A7419AE2D1A00E6E520 /* SprintTimerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D758A7319AE2D1A00E6E520 /* SprintTimerTests.m */; };
 		5D758AC819AE33BB00E6E520 /* UXATimerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D758AC719AE33BB00E6E520 /* UXATimerView.m */; };
-		5DB4B04E19B0CFEF008371E2 /* Crazy8_icon_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 5DB4B04619B0CFEF008371E2 /* Crazy8_icon_selected.png */; };
-		5DB4B04F19B0CFEF008371E2 /* Crazy8_icon_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5DB4B04719B0CFEF008371E2 /* Crazy8_icon_selected@2x.png */; };
-		5DB4B05019B0CFEF008371E2 /* Crazy8_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 5DB4B04819B0CFEF008371E2 /* Crazy8_icon.png */; };
-		5DB4B05119B0CFEF008371E2 /* Crazy8_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5DB4B04919B0CFEF008371E2 /* Crazy8_icon@2x.png */; };
-		5DB4B05219B0CFEF008371E2 /* Timer_icon_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 5DB4B04A19B0CFEF008371E2 /* Timer_icon_selected.png */; };
-		5DB4B05319B0CFEF008371E2 /* Timer_icon_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5DB4B04B19B0CFEF008371E2 /* Timer_icon_selected@2x.png */; };
-		5DB4B05419B0CFEF008371E2 /* Timer_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 5DB4B04C19B0CFEF008371E2 /* Timer_icon.png */; };
-		5DB4B05519B0CFEF008371E2 /* Timer_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5DB4B04D19B0CFEF008371E2 /* Timer_icon@2x.png */; };
+		5DF34D0019B4D30B004B086C /* Crazy8_button_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 5DF34CF819B4D30B004B086C /* Crazy8_button_selected.png */; };
+		5DF34D0119B4D30B004B086C /* Crazy8_button_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5DF34CF919B4D30B004B086C /* Crazy8_button_selected@2x.png */; };
+		5DF34D0219B4D30B004B086C /* Crazy8_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 5DF34CFA19B4D30B004B086C /* Crazy8_button.png */; };
+		5DF34D0319B4D30B004B086C /* Crazy8_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5DF34CFB19B4D30B004B086C /* Crazy8_button@2x.png */; };
+		5DF34D0C19B4D39B004B086C /* Timer_button_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 5DF34D0819B4D39B004B086C /* Timer_button_selected.png */; };
+		5DF34D0D19B4D39B004B086C /* Timer_button_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5DF34D0919B4D39B004B086C /* Timer_button_selected@2x.png */; };
+		5DF34D0E19B4D39B004B086C /* Timer_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 5DF34D0A19B4D39B004B086C /* Timer_button.png */; };
+		5DF34D0F19B4D39B004B086C /* Timer_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5DF34D0B19B4D39B004B086C /* Timer_button@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,14 +64,14 @@
 		5D758A7319AE2D1A00E6E520 /* SprintTimerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SprintTimerTests.m; sourceTree = "<group>"; };
 		5D758AC619AE33BB00E6E520 /* UXATimerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UXATimerView.h; sourceTree = "<group>"; };
 		5D758AC719AE33BB00E6E520 /* UXATimerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UXATimerView.m; sourceTree = "<group>"; };
-		5DB4B04619B0CFEF008371E2 /* Crazy8_icon_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Crazy8_icon_selected.png; sourceTree = "<group>"; };
-		5DB4B04719B0CFEF008371E2 /* Crazy8_icon_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Crazy8_icon_selected@2x.png"; sourceTree = "<group>"; };
-		5DB4B04819B0CFEF008371E2 /* Crazy8_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Crazy8_icon.png; sourceTree = "<group>"; };
-		5DB4B04919B0CFEF008371E2 /* Crazy8_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Crazy8_icon@2x.png"; sourceTree = "<group>"; };
-		5DB4B04A19B0CFEF008371E2 /* Timer_icon_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Timer_icon_selected.png; sourceTree = "<group>"; };
-		5DB4B04B19B0CFEF008371E2 /* Timer_icon_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Timer_icon_selected@2x.png"; sourceTree = "<group>"; };
-		5DB4B04C19B0CFEF008371E2 /* Timer_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Timer_icon.png; sourceTree = "<group>"; };
-		5DB4B04D19B0CFEF008371E2 /* Timer_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Timer_icon@2x.png"; sourceTree = "<group>"; };
+		5DF34CF819B4D30B004B086C /* Crazy8_button_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Crazy8_button_selected.png; sourceTree = "<group>"; };
+		5DF34CF919B4D30B004B086C /* Crazy8_button_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Crazy8_button_selected@2x.png"; sourceTree = "<group>"; };
+		5DF34CFA19B4D30B004B086C /* Crazy8_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Crazy8_button.png; sourceTree = "<group>"; };
+		5DF34CFB19B4D30B004B086C /* Crazy8_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Crazy8_button@2x.png"; sourceTree = "<group>"; };
+		5DF34D0819B4D39B004B086C /* Timer_button_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Timer_button_selected.png; sourceTree = "<group>"; };
+		5DF34D0919B4D39B004B086C /* Timer_button_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Timer_button_selected@2x.png"; sourceTree = "<group>"; };
+		5DF34D0A19B4D39B004B086C /* Timer_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Timer_button.png; sourceTree = "<group>"; };
+		5DF34D0B19B4D39B004B086C /* Timer_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Timer_button@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,14 +177,14 @@
 		5DB3C89219B0CF5D00C7A40F /* Asset */ = {
 			isa = PBXGroup;
 			children = (
-				5DB4B04619B0CFEF008371E2 /* Crazy8_icon_selected.png */,
-				5DB4B04719B0CFEF008371E2 /* Crazy8_icon_selected@2x.png */,
-				5DB4B04819B0CFEF008371E2 /* Crazy8_icon.png */,
-				5DB4B04919B0CFEF008371E2 /* Crazy8_icon@2x.png */,
-				5DB4B04A19B0CFEF008371E2 /* Timer_icon_selected.png */,
-				5DB4B04B19B0CFEF008371E2 /* Timer_icon_selected@2x.png */,
-				5DB4B04C19B0CFEF008371E2 /* Timer_icon.png */,
-				5DB4B04D19B0CFEF008371E2 /* Timer_icon@2x.png */,
+				5DF34D0819B4D39B004B086C /* Timer_button_selected.png */,
+				5DF34D0919B4D39B004B086C /* Timer_button_selected@2x.png */,
+				5DF34D0A19B4D39B004B086C /* Timer_button.png */,
+				5DF34D0B19B4D39B004B086C /* Timer_button@2x.png */,
+				5DF34CF819B4D30B004B086C /* Crazy8_button_selected.png */,
+				5DF34CF919B4D30B004B086C /* Crazy8_button_selected@2x.png */,
+				5DF34CFA19B4D30B004B086C /* Crazy8_button.png */,
+				5DF34CFB19B4D30B004B086C /* Crazy8_button@2x.png */,
 			);
 			name = Asset;
 			sourceTree = "<group>";
@@ -266,16 +266,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5DB4B04E19B0CFEF008371E2 /* Crazy8_icon_selected.png in Resources */,
+				5DF34D0C19B4D39B004B086C /* Timer_button_selected.png in Resources */,
+				5DF34D0119B4D30B004B086C /* Crazy8_button_selected@2x.png in Resources */,
 				5D758A6119AE2D1A00E6E520 /* Images.xcassets in Resources */,
-				5DB4B05419B0CFEF008371E2 /* Timer_icon.png in Resources */,
+				5DF34D0E19B4D39B004B086C /* Timer_button.png in Resources */,
+				5DF34D0D19B4D39B004B086C /* Timer_button_selected@2x.png in Resources */,
+				5DF34D0019B4D30B004B086C /* Crazy8_button_selected.png in Resources */,
 				5D758A5319AE2D1A00E6E520 /* InfoPlist.strings in Resources */,
-				5DB4B05219B0CFEF008371E2 /* Timer_icon_selected.png in Resources */,
-				5DB4B05119B0CFEF008371E2 /* Crazy8_icon@2x.png in Resources */,
-				5DB4B05019B0CFEF008371E2 /* Crazy8_icon.png in Resources */,
-				5DB4B05319B0CFEF008371E2 /* Timer_icon_selected@2x.png in Resources */,
-				5DB4B04F19B0CFEF008371E2 /* Crazy8_icon_selected@2x.png in Resources */,
-				5DB4B05519B0CFEF008371E2 /* Timer_icon@2x.png in Resources */,
+				5DF34D0F19B4D39B004B086C /* Timer_button@2x.png in Resources */,
+				5DF34D0219B4D30B004B086C /* Crazy8_button.png in Resources */,
+				5DF34D0319B4D30B004B086C /* Crazy8_button@2x.png in Resources */,
 				5D758A5C19AE2D1A00E6E520 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
