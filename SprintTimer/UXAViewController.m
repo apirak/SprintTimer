@@ -11,7 +11,6 @@
 
 @interface UXAViewController ()
 
-
 @end
 
 @implementation UXAViewController
@@ -21,6 +20,7 @@
 @synthesize crazyButton;
 @synthesize totalTimeButton;
 @synthesize tabLineBarView;
+
 
 - (void)viewDidLoad
 {
@@ -53,10 +53,10 @@
     
     totalTimeButton = [UIButton buttonWithType:UIButtonTypeSystem];
     [totalTimeButton setTitleColor:[UIColor colorWithRed:155/255.0 green:155/255.0 blue:155/255.0 alpha:1.0] forState:UIControlStateNormal];
-    [[totalTimeButton titleLabel] setFont:[UIFont fontWithName:@"Avenir Next" size:24]];
+    [[totalTimeButton titleLabel] setFont:[UIFont fontWithName:@"Avenir Next" size:36]];
     [totalTimeButton setFrame:CGRectMake(890, 45, 113, 29)];
     [totalTimeButton setTitle:@"5 min" forState:UIControlStateNormal];
-    [totalTimeButton addTarget:self action:@selector(selectTotalTime:)
+    [totalTimeButton addTarget:self action:@selector(chooseTimeButtonTapped:)
           forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:totalTimeButton];
     
@@ -66,6 +66,7 @@
     [self.view addSubview:tabLineBarView];
     
 }
+
 
 /** This function is called when Circular slider value changes **/
 -(void)newValue:(UXATimerView*)timer{
@@ -90,13 +91,41 @@
                                      stretchableImageWithLeftCapWidth:10.0 topCapHeight:0.0] forState:UIControlStateNormal];
     [UIView beginAnimations:@"MoveView" context:nil];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
-    [UIView setAnimationDuration:0.3f];
+    [UIView setAnimationDuration:0.2f];
     [tabLineBarView setFrame:CGRectMake(barXPosition, 80, 120, 6)];
     [UIView commitAnimations];
 }
 
--(void)selectTotalTime:(id)sender {
+-(IBAction)chooseTimeButtonTapped:(id)sender {
+    NSLog(@"choose Time Button");
+    if (_timePicker == nil) {
+        _timePicker = [[UXATimePickerViewController alloc] initWithStyle:UITableViewStylePlain];
+        _timePicker.delegate = self;
+    }
+
+    if (_timePickerPopover == nil) {
+        _timePickerPopover = [[UIPopoverController alloc] initWithContentViewController:_timePicker];
+        [_timePickerPopover presentPopoverFromRect:CGRectMake(890, 45, 113, 29) inView:self.view
+          permittedArrowDirections:UIPopoverArrowDirectionAny
+                          animated:YES];
+    }
+    else {
+        [_timePickerPopover dismissPopoverAnimated:YES];
+        _timePickerPopover = nil;
+    }
+}
+
+#pragma mark - TimePickerDelegate method
+
+-(void)selectedTime:(NSInteger *)newTime
+{
+    NSLog(@"super time");
     
+    //Dismiss the popover if it's showing.
+    if (_timePickerPopover) {
+        [_timePickerPopover dismissPopoverAnimated:YES];
+        _timePickerPopover = nil;
+    }
 }
 
 - (void)didReceiveMemoryWarning

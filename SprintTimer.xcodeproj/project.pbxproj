@@ -30,6 +30,7 @@
 		5DF34D0D19B4D39B004B086C /* Timer_button_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5DF34D0919B4D39B004B086C /* Timer_button_selected@2x.png */; };
 		5DF34D0E19B4D39B004B086C /* Timer_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 5DF34D0A19B4D39B004B086C /* Timer_button.png */; };
 		5DF34D0F19B4D39B004B086C /* Timer_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5DF34D0B19B4D39B004B086C /* Timer_button@2x.png */; };
+		5DF34D1219B5A119004B086C /* UXATimePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DF34D1119B5A119004B086C /* UXATimePickerViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +73,8 @@
 		5DF34D0919B4D39B004B086C /* Timer_button_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Timer_button_selected@2x.png"; sourceTree = "<group>"; };
 		5DF34D0A19B4D39B004B086C /* Timer_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Timer_button.png; sourceTree = "<group>"; };
 		5DF34D0B19B4D39B004B086C /* Timer_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Timer_button@2x.png"; sourceTree = "<group>"; };
+		5DF34D1019B5A119004B086C /* UXATimePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UXATimePickerViewController.h; sourceTree = "<group>"; };
+		5DF34D1119B5A119004B086C /* UXATimePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UXATimePickerViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +144,8 @@
 				5D758AC719AE33BB00E6E520 /* UXATimerView.m */,
 				5D758A6019AE2D1A00E6E520 /* Images.xcassets */,
 				5D758A4F19AE2D1A00E6E520 /* Supporting Files */,
+				5DF34D1019B5A119004B086C /* UXATimePickerViewController.h */,
+				5DF34D1119B5A119004B086C /* UXATimePickerViewController.m */,
 			);
 			path = SprintTimer;
 			sourceTree = "<group>";
@@ -295,6 +300,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5DF34D1219B5A119004B086C /* UXATimePickerViewController.m in Sources */,
 				5D758A5F19AE2D1A00E6E520 /* UXAViewController.m in Sources */,
 				5D758A5519AE2D1A00E6E520 /* main.m in Sources */,
 				5D758A5919AE2D1A00E6E520 /* UXAAppDelegate.m in Sources */,
