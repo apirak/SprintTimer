@@ -10,12 +10,13 @@
 
 @protocol TimePickerDelegate <NSObject>
 @required
-    -(void)selectedTime:(NSInteger *)newTime;
+-(void)selectedTime:(NSInteger)newTime withLabel:(NSString *)selectedLabel;
 @end
 
 @interface UXATimePickerViewController : UITableViewController
 
 @property (nonatomic, strong) NSMutableArray *timeNames;
+@property (nonatomic, strong) NSDictionary *timeNamesValue;
 @property (nonatomic, weak) id<TimePickerDelegate> delegate;
 
 @end

@@ -15,10 +15,13 @@
 #define TIMER_COUNT_DOWN 0.5
 
 @interface UXATimerView : UIControl
-    @property (nonatomic,assign) int angle;
-    @property (nonatomic,assign) int secondsBegin;
-    @property (nonatomic,assign) int secondsLeft;
 
-    -(void)updateCounter:(NSTimer *)theTimer;
-    -(void)countdownTimer;
+@property (nonatomic,assign) int angle;
+@property (nonatomic,assign) int secondsBegin;
+@property (nonatomic,assign) int secondsLeft;
+
+-(void)updateTotalTime:(int)totalTime;
+-(void)updateCounter;
+-(void)countdownTimer;
+
 @end

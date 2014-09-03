@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "UXATimePickerViewController.h"
+#import "UXATimerView.h"
 
 @interface UXAViewController : UIViewController <TimePickerDelegate>
 
@@ -16,6 +17,7 @@
 @property (nonatomic, assign) IBOutlet UIButton *timerButton;
 @property (nonatomic, assign) IBOutlet UIButton *totalTimeButton;
 @property (nonatomic, retain) UIView *tabLineBarView;
+@property (nonatomic, retain) UXATimerView *timerView;
 
 @property (nonatomic, strong) UXATimePickerViewController *timePicker;
 @property (nonatomic, strong) UIPopoverController *timePickerPopover;

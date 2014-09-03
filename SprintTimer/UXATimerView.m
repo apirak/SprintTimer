@@ -125,7 +125,7 @@ int hours, minutes, seconds;
 
 #pragma mark - Timer Countdown -
 
-- (void)updateCounter:(NSTimer *)theTimer {
+- (void)updateCounter {
     if(self.secondsLeft > 0 ){
         self.secondsLeft -- ;
         hours = self.secondsLeft / 3600;
@@ -146,7 +146,18 @@ int hours, minutes, seconds;
 -(void)countdownTimer{
     self.secondsLeft = hours = minutes = seconds = 0;
 
-    _timer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(updateCounter:) userInfo:nil repeats:YES];
+    _timer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(updateCounter) userInfo:nil repeats:YES];
+}
+
+-(void)updateTotalTime:(int)totalTime {
+    int runningTime = self.secondsBegin - self.secondsLeft;
+    self.secondsBegin = totalTime;
+    
+    if(runningTime < self.secondsBegin){
+        self.secondsLeft = self.secondsBegin - runningTime;
+    } else {
+        self.secondsLeft = self.secondsBegin;
+    }
 }
 
 

@@ -7,7 +7,6 @@
 //
 
 #import "UXAViewController.h"
-#import "UXATimerView.h"
 
 @interface UXAViewController ()
 
@@ -20,13 +19,14 @@
 @synthesize crazyButton;
 @synthesize totalTimeButton;
 @synthesize tabLineBarView;
+@synthesize timerView;
 
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    UXATimerView *timerView = [[UXATimerView alloc] initWithFrame:CGRectMake((1024-UXA_TIMER_SIZE)/2 ,120,UXA_TIMER_SIZE, UXA_TIMER_SIZE)];
+    timerView = [[UXATimerView alloc] initWithFrame:CGRectMake((1024-UXA_TIMER_SIZE)/2 ,120,UXA_TIMER_SIZE, UXA_TIMER_SIZE)];
     
     [timerView addTarget:self action:@selector(newValue:) forControlEvents:UIControlEventValueChanged];
     [self.view addSubview:timerView];
@@ -54,8 +54,10 @@
     totalTimeButton = [UIButton buttonWithType:UIButtonTypeSystem];
     [totalTimeButton setTitleColor:[UIColor colorWithRed:155/255.0 green:155/255.0 blue:155/255.0 alpha:1.0] forState:UIControlStateNormal];
     [[totalTimeButton titleLabel] setFont:[UIFont fontWithName:@"Avenir Next" size:36]];
-    [totalTimeButton setFrame:CGRectMake(890, 45, 113, 29)];
+    [totalTimeButton setFrame:CGRectMake(800, 45, 200, 29)];
     [totalTimeButton setTitle:@"5 min" forState:UIControlStateNormal];
+    [totalTimeButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
+    [totalTimeButton setContentEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 10)];
     [totalTimeButton addTarget:self action:@selector(chooseTimeButtonTapped:)
           forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:totalTimeButton];
@@ -97,7 +99,6 @@
 }
 
 -(IBAction)chooseTimeButtonTapped:(id)sender {
-    NSLog(@"choose Time Button");
     if (_timePicker == nil) {
         _timePicker = [[UXATimePickerViewController alloc] initWithStyle:UITableViewStylePlain];
         _timePicker.delegate = self;
@@ -117,11 +118,12 @@
 
 #pragma mark - TimePickerDelegate method
 
--(void)selectedTime:(NSInteger *)newTime
-{
-    NSLog(@"super time");
+-(void)selectedTime:(NSInteger)newTime withLabel:(NSString *)selectedLabel {
+    int intNewTimer = (int)newTime;
+    [timerView updateTotalTime:intNewTimer];
     
-    //Dismiss the popover if it's showing.
+    [totalTimeButton setTitle:selectedLabel forState:UIControlStateNormal];
+    
     if (_timePickerPopover) {
         [_timePickerPopover dismissPopoverAnimated:YES];
         _timePickerPopover = nil;

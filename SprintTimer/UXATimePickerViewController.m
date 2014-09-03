@@ -8,8 +8,12 @@
 
 #import "UXATimePickerViewController.h"
 
-@interface UXATimePickerViewController ()
 
+@interface UXATimePickerViewController (){
+    NSArray *_names;
+    NSArray *_seconds;
+    NSIndexPath *_selectedRow;
+}
 @end
 
 @implementation UXATimePickerViewController
@@ -26,23 +30,46 @@
         [_timeNames addObject:@"1 min"];
         [_timeNames addObject:@"2 min"];
         
+        
+        // Values and keys as arrays
+        _names = @[@"30 second",
+                            @"1 min",
+                            @"2 min",
+                            @"3 min",
+                            @"5 min",
+                            @"8 min",
+                            @"13 min",
+                            @"21 min",
+                            @"30 min",
+                            @"60 min"];
+        
+        _seconds = @[[NSNumber numberWithInt:30],
+                           [NSNumber numberWithInt:1*60],
+                           [NSNumber numberWithInt:2*60],
+                           [NSNumber numberWithInt:3*60],
+                           [NSNumber numberWithInt:5*60],
+                           [NSNumber numberWithInt:8*60],
+                           [NSNumber numberWithInt:13*60],
+                           [NSNumber numberWithInt:21*60],
+                           [NSNumber numberWithInt:30*60],
+                           [NSNumber numberWithInt:60*60]];
+        
+        _timeNamesValue = [NSDictionary dictionaryWithObjects:_seconds forKeys:_names];
+        
         //Make row selections persist.
         self.clearsSelectionOnViewWillAppear = NO;
+
         
-        //Calculate how tall the view should be by multiplying the individual row height
-        //by the total number of rows.
-        NSInteger rowsCount = [_timeNames count];
+        NSInteger rowsCount = [_timeNamesValue count];
         NSInteger singleRowHeight = [self.tableView.delegate tableView:self.tableView heightForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
         NSInteger totalRowsHeight = rowsCount * singleRowHeight;
         
         //Calculate how wide the view should be by finding how wide each string is expected to be
         CGFloat largestLabelWidth = 0;
-        for (NSString *timeName in _timeNames) {
-            
+        for (NSString *timeName in _names) {
             CGSize labelSize = [timeName sizeWithAttributes:
                            @{NSFontAttributeName:
                                  [UIFont boldSystemFontOfSize:20.0f]}];
-            
             if (labelSize.width > largestLabelWidth) {
                 largestLabelWidth = labelSize.width;
             }
@@ -76,19 +103,22 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [_timeNames count];
+    return [_names count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
-    // Configure the cell...
-    cell.textLabel.text = [_timeNames objectAtIndex:indexPath.row];
+    UIView *bgColorView = [[UIView alloc] init];
+    bgColorView.backgroundColor = [UIColor redColor];
+    [cell setSelectedBackgroundView:bgColorView];
+    cell.textLabel.text = [_names objectAtIndex:indexPath.row];
     
     return cell;
 }
@@ -96,25 +126,12 @@
 #pragma mark - Table view delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *selectedColorName = [_timeNames objectAtIndex:indexPath.row];
+    NSString *selectedTimeName = [_names objectAtIndex:indexPath.row];
+    _selectedRow = indexPath;
     
-    //Create a variable to hold the color, making its default color
-    //something annoying and obvious so you can see if you've missed
-    //a case here.
-    NSInteger time = 0;
-    
-    //Set the color object based on the selected color name.
-    if ([selectedColorName isEqualToString:@"Red"]) {
-        time = 1;
-    } else if ([selectedColorName isEqualToString:@"Green"]){
-        time = 2;
-    } else if ([selectedColorName isEqualToString:@"Blue"]) {
-        time = 3;
-    }
-    
-    //Notify the delegate if it exists.
+    int time = (int)[_timeNamesValue[selectedTimeName] integerValue];
     if (_delegate != nil) {
-        [_delegate selectedTime:&time];
+        [_delegate selectedTime:time withLabel:selectedTimeName];
     }
 }
 
