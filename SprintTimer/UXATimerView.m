@@ -139,12 +139,13 @@ int hours, minutes, seconds;
         [self setNeedsDisplay];
     }
     else{
-        self.secondsLeft = self.secondsBegin;
+        self.secondsLeft = 0;
     }
 }
 
 -(void)countdownTimer{
-    self.secondsLeft = hours = minutes = seconds = 0;
+    self.secondsLeft = self.secondsBegin;
+    hours = minutes = seconds = 0;
 
     _timer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(updateCounter) userInfo:nil repeats:YES];
 }
@@ -153,7 +154,7 @@ int hours, minutes, seconds;
     int runningTime = self.secondsBegin - self.secondsLeft;
     self.secondsBegin = totalTime;
     
-    if(runningTime < self.secondsBegin){
+    if(runningTime < self.secondsBegin && self.secondsLeft > 0){
         self.secondsLeft = self.secondsBegin - runningTime;
     } else {
         self.secondsLeft = self.secondsBegin;

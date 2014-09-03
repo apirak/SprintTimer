@@ -26,21 +26,21 @@
         _timeNames = [NSMutableArray array];
         
         //Set up the array of colors.
-        [_timeNames addObject:@"30 second"];
-        [_timeNames addObject:@"1 min"];
-        [_timeNames addObject:@"2 min"];
+        [_timeNames addObject:@"30 Second"];
+        [_timeNames addObject:@"1 Min"];
+        [_timeNames addObject:@"2 Min"];
         
         
         // Values and keys as arrays
         _names = @[@"30 second",
-                            @"1 min",
-                            @"2 min",
-                            @"3 min",
-                            @"5 min",
-                            @"8 min",
-                            @"13 min",
-                            @"21 min",
-                            @"30 min",
+                            @"1 Min",
+                            @"2 Min",
+                            @"3 Min",
+                            @"5 Min",
+                            @"8 Min",
+                            @"13 Min",
+                            @"21 Min",
+                            @"30 Min",
                             @"60 min"];
         
         _seconds = @[[NSNumber numberWithInt:30],
