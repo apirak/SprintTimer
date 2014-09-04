@@ -22,15 +22,9 @@
 {
     self = [super initWithStyle:style];
     if (self) {
-        //Initialize the array
-        _timeNames = [NSMutableArray array];
-        
-        //Set up the array of colors.
-        [_timeNames addObject:@"30 Second"];
-        [_timeNames addObject:@"1 Min"];
-        [_timeNames addObject:@"2 Min"];
-        
-        
+//        _selectedRow = [self.tableView indexPathForSelectedRow];
+        _selectedRow = [NSIndexPath indexPathForRow:4 inSection:4];
+
         // Values and keys as arrays
         _names = @[@"30 second",
                             @"1 Min",
@@ -115,6 +109,12 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
+    if (indexPath.row == _selectedRow.row) {
+        [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
+    } else {
+        [cell setAccessoryType:UITableViewCellAccessoryNone];
+    }
+    
     UIView *bgColorView = [[UIView alloc] init];
     bgColorView.backgroundColor = [UIColor redColor];
     [cell setSelectedBackgroundView:bgColorView];
@@ -128,6 +128,8 @@
 {
     NSString *selectedTimeName = [_names objectAtIndex:indexPath.row];
     _selectedRow = indexPath;
+    
+    [self.tableView reloadData];
     
     int time = (int)[_timeNamesValue[selectedTimeName] integerValue];
     if (_delegate != nil) {
