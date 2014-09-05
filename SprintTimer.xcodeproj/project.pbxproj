@@ -242,6 +242,9 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Apirak Panatkool";
 				TargetAttributes = {
+					5D758A4419AE2D1900E6E520 = {
+						DevelopmentTeam = PCHW29V3CU;
+					};
 					5D758A6519AE2D1A00E6E520 = {
 						TestTargetID = 5D758A4419AE2D1900E6E520;
 					};
@@ -431,10 +434,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SprintTimer/SprintTimer-Prefix.pch";
 				INFOPLIST_FILE = "SprintTimer/SprintTimer-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -444,10 +450,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SprintTimer/SprintTimer-Prefix.pch";
 				INFOPLIST_FILE = "SprintTimer/SprintTimer-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

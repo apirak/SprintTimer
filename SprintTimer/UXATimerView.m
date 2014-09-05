@@ -20,6 +20,7 @@
     float _rediusPerSecond;
     UILabel *_countdownLabel;
     NSTimer *_timer;
+    BOOL _dragTimer;
 }
 @end
 
@@ -61,12 +62,14 @@ int hours, minutes, seconds;
 
 -(BOOL)beginTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event{
     [super beginTrackingWithTouch:touch withEvent:event];
+    _dragTimer = true;
     
     return YES;
 }
 
 -(BOOL)continueTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event{
     [super continueTrackingWithTouch:touch withEvent:event];
+    _dragTimer = true;
     
     CGPoint lastPoint = [touch locationInView:self];
     [self movehandle:lastPoint];
@@ -77,7 +80,7 @@ int hours, minutes, seconds;
 
 -(void)endTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event{
     [super endTrackingWithTouch:touch withEvent:event];
-    
+    _dragTimer = false;
 }
 
 #pragma mark - UIControl Position -
@@ -104,21 +107,27 @@ int hours, minutes, seconds;
     CGContextMoveToPoint(context, _center_x, _center_y);
     int angle = self.angle != 90 ? self.angle : 89;
     CGContextAddArc(context, _center_x, _center_y, _radius,  ToRad(-90), ToRad(-angle), 1);
-    CGContextSetLineWidth(context, 2.0);
     CGContextClosePath(context);
     CGContextFillPath(context);
 }
 
 -(void) drawTheHandle:(CGContextRef)context{
+
     CGContextSaveGState(context);
     CGPoint handleCenter =  [self pointFromAngle: self.angle];
     
-    [[UIColor colorWithWhite:1.0 alpha:1]set];
+    if (_dragTimer == true) {
+        [[UIColor colorWithRed:1.0 green:0.8 blue:0.8 alpha:1]set];
+    } else {
+        [[UIColor colorWithWhite:1.0 alpha:1]set];
+    }
+
     CGContextFillEllipseInRect(context, CGRectMake(handleCenter.x, handleCenter.y, UXA_HANDLE_WIDTH, UXA_HANDLE_WIDTH));
     
     CGContextRestoreGState(context);
     
     CGContextBeginPath(context);
+    CGContextSetLineWidth(context, 2.0);
     CGContextAddEllipseInRect(context, CGRectMake(handleCenter.x, handleCenter.y, UXA_HANDLE_WIDTH, UXA_HANDLE_WIDTH));
     [[UIColor colorWithRed:1.0 green:0.0 blue:0.0 alpha:1.0]set];
     CGContextDrawPath(context, kCGPathStroke);
