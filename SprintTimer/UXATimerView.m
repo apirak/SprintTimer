@@ -104,6 +104,7 @@ int hours, minutes, seconds;
     CGContextMoveToPoint(context, _center_x, _center_y);
     int angle = self.angle != 90 ? self.angle : 89;
     CGContextAddArc(context, _center_x, _center_y, _radius,  ToRad(-90), ToRad(-angle), 1);
+    CGContextSetLineWidth(context, 2.0);
     CGContextClosePath(context);
     CGContextFillPath(context);
 }
