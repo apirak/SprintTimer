@@ -26,6 +26,8 @@
 
 @implementation UXATimerView
 
+@synthesize audioPlayer;
+
 int hours, minutes, seconds;
 
 - (id)initWithFrame:(CGRect)frame
@@ -51,8 +53,37 @@ int hours, minutes, seconds;
         _countdownLabel.textColor = [UIColor redColor];
         _countdownLabel.font = [UIFont fontWithName:@"Helvetica Neue" size:(24.0)];
         _countdownLabel.text =  [NSString stringWithFormat:@"%02d:%02d", minutes, seconds];
+        
         [self setCountDownPosition];
         [self addSubview:_countdownLabel];
+        
+        
+        
+        
+        NSString *soundFilePath = [NSString stringWithFormat:@"%@/bell.caf", [[NSBundle mainBundle] resourcePath]];
+        NSURL *soundFileURL = [NSURL fileURLWithPath:soundFilePath];
+        NSError *error;
+        self.audioPlayer = [[AVAudioPlayer alloc]
+                       initWithContentsOfURL:soundFileURL
+                       error:&error];
+        
+        [[AVAudioSession sharedInstance] setDelegate: self];
+        NSError *setCategoryError = nil;
+        [[AVAudioSession sharedInstance] setCategory: AVAudioSessionCategoryPlayback error: &setCategoryError];
+        if (setCategoryError) {
+            NSLog(@"Error setting category! %@", setCategoryError);
+        }
+        
+        if (error)
+        {
+            NSLog(@"Error in audioPlayer: %@",
+                  [error localizedDescription]);
+        } else {
+            [self.audioPlayer setNumberOfLoops:0];
+            [self.audioPlayer setVolume: 1];
+            self.audioPlayer.delegate = self;
+            [self.audioPlayer prepareToPlay];
+        }
         
     }
     return self;
@@ -145,6 +176,10 @@ int hours, minutes, seconds;
         _countdownLabel.text =  [NSString stringWithFormat:@"%02d:%02d", minutes, seconds];
         self.angle = AngleFromTime(self.secondsBegin, self.secondsLeft);
         
+        if(self.secondsLeft == 0){
+            [self.audioPlayer play];
+        }
+        
         [self setCountDownPosition];
         [self setNeedsDisplay];
     }
@@ -217,6 +252,25 @@ static inline int TimeFromAngle(int begin, int angle){
     float countAngle = angle > 90 ? angle-90 : 270+angle;
     float time = countAngle / rediusPerSecond;
     return (int)time;
+}
+
+
+#pragma mark -- Play Alarm --
+
+-(void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag {
+    NSLog(@"Play successfully");
+}
+
+-(void)audioPlayerDecodeErrorDidOccur:(AVAudioPlayer *)player error:(NSError *)error {
+    NSLog(@"Player Decode Error Did Occour");
+}
+
+-(void)audioPlayerBeginInterruption:(AVAudioPlayer *)player {
+    NSLog(@"Player Begin Interruption");
+}
+
+-(void)audioPlayerEndInterruption:(AVAudioPlayer *)player {
+    NSLog(@"Audio Player End Interruption");
 }
 
 @end

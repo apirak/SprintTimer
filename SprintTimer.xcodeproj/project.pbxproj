@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5D21D3C619BE0407003E95E4 /* bell.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 5D21D3C519BE0407003E95E4 /* bell.m4a */; };
+		5D21D3C819BE06BF003E95E4 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D21D3C719BE06BF003E95E4 /* AVFoundation.framework */; };
+		5D21D3CA19BE06D1003E95E4 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D21D3C919BE06D1003E95E4 /* AudioToolbox.framework */; };
+		5D21D3D019BE18F6003E95E4 /* bell.caf in Resources */ = {isa = PBXBuildFile; fileRef = 5D21D3CF19BE18F6003E95E4 /* bell.caf */; };
 		5D758A4919AE2D1A00E6E520 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D758A4819AE2D1A00E6E520 /* Foundation.framework */; };
 		5D758A4B19AE2D1A00E6E520 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D758A4A19AE2D1A00E6E520 /* CoreGraphics.framework */; };
 		5D758A4D19AE2D1A00E6E520 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D758A4C19AE2D1A00E6E520 /* UIKit.framework */; };
@@ -44,6 +48,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5D21D3C519BE0407003E95E4 /* bell.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = bell.m4a; sourceTree = "<group>"; };
+		5D21D3C719BE06BF003E95E4 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		5D21D3C919BE06D1003E95E4 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		5D21D3CF19BE18F6003E95E4 /* bell.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = bell.caf; sourceTree = "<group>"; };
 		5D758A4519AE2D1A00E6E520 /* SprintTimer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SprintTimer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D758A4819AE2D1A00E6E520 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		5D758A4A19AE2D1A00E6E520 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -82,6 +90,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5D21D3CA19BE06D1003E95E4 /* AudioToolbox.framework in Frameworks */,
+				5D21D3C819BE06BF003E95E4 /* AVFoundation.framework in Frameworks */,
 				5D758A4B19AE2D1A00E6E520 /* CoreGraphics.framework in Frameworks */,
 				5D758A4D19AE2D1A00E6E520 /* UIKit.framework in Frameworks */,
 				5D758A4919AE2D1A00E6E520 /* Foundation.framework in Frameworks */,
@@ -123,6 +133,8 @@
 		5D758A4719AE2D1A00E6E520 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5D21D3C919BE06D1003E95E4 /* AudioToolbox.framework */,
+				5D21D3C719BE06BF003E95E4 /* AVFoundation.framework */,
 				5D758A4819AE2D1A00E6E520 /* Foundation.framework */,
 				5D758A4A19AE2D1A00E6E520 /* CoreGraphics.framework */,
 				5D758A4C19AE2D1A00E6E520 /* UIKit.framework */,
@@ -182,6 +194,8 @@
 		5DB3C89219B0CF5D00C7A40F /* Asset */ = {
 			isa = PBXGroup;
 			children = (
+				5D21D3CF19BE18F6003E95E4 /* bell.caf */,
+				5D21D3C519BE0407003E95E4 /* bell.m4a */,
 				5DF34D0819B4D39B004B086C /* Timer_button_selected.png */,
 				5DF34D0919B4D39B004B086C /* Timer_button_selected@2x.png */,
 				5DF34D0A19B4D39B004B086C /* Timer_button.png */,
@@ -281,6 +295,8 @@
 				5DF34D0D19B4D39B004B086C /* Timer_button_selected@2x.png in Resources */,
 				5DF34D0019B4D30B004B086C /* Crazy8_button_selected.png in Resources */,
 				5D758A5319AE2D1A00E6E520 /* InfoPlist.strings in Resources */,
+				5D21D3D019BE18F6003E95E4 /* bell.caf in Resources */,
+				5D21D3C619BE0407003E95E4 /* bell.m4a in Resources */,
 				5DF34D0F19B4D39B004B086C /* Timer_button@2x.png in Resources */,
 				5DF34D0219B4D30B004B086C /* Crazy8_button.png in Resources */,
 				5DF34D0319B4D30B004B086C /* Crazy8_button@2x.png in Resources */,
