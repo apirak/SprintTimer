@@ -79,24 +79,30 @@
 -(void)selectTimerType:(id)sender {
     UIButton *button = (UIButton *)sender;
     if(button.tag == 1){
-        [self setTimerName:@"Timer_button_selected.png" Crazy8Name:@"Crazy8_button.png" BarXPoition:50 TimerViewXPosition:(1024-UXA_TIMER_SIZE)/2];
+        [self setTimerName:@"Timer_button_selected.png" Crazy8Name:@"Crazy8_button.png" BarXPoition:50 TimerViewHidden:NO];
     } else {
-        [self setTimerName:@"Timer_button.png" Crazy8Name:@"Crazy8_button_selected.png" BarXPoition:196 TimerViewXPosition:(0-UXA_TIMER_SIZE)];
+        [self setTimerName:@"Timer_button.png" Crazy8Name:@"Crazy8_button_selected.png" BarXPoition:196 TimerViewHidden:YES];
     }
 }
 
--(void)setTimerName:(NSString*)timerName Crazy8Name:(NSString*)crazy8Name BarXPoition:(NSInteger)barXPosition TimerViewXPosition:(NSInteger)timerViewXPosition {
+-(void)setTimerName:(NSString*)timerName Crazy8Name:(NSString*)crazy8Name BarXPoition:(NSInteger)barXPosition TimerViewHidden:(BOOL)timerViewHidden {
     [timerButton setBackgroundImage:[[UIImage imageNamed:timerName]
                                      stretchableImageWithLeftCapWidth:10.0 topCapHeight:0.0] forState:UIControlStateNormal];
     [crazyButton setBackgroundImage:[[UIImage imageNamed:crazy8Name]
                                      stretchableImageWithLeftCapWidth:10.0 topCapHeight:0.0] forState:UIControlStateNormal];
     [UIView beginAnimations:@"MoveView" context:nil];
-//    [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
     [UIView setAnimationDuration:0.5f];
     [tabLineBarView setFrame:CGRectMake(barXPosition, 80, 120, 6)];
-    [timerView setFrame:CGRectMake(timerViewXPosition ,120,UXA_TIMER_SIZE, UXA_TIMER_SIZE)];
     [UIView commitAnimations];
+    
+    CATransition *transition = [CATransition animation];
+    transition.duration = 0.25;
+    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
+    transition.type = kCATransitionFade;
+    transition.delegate = self;
+    [self.view.layer addAnimation:transition forKey:nil];
+    [timerView setHidden:timerViewHidden];
 }
 
 -(IBAction)chooseTimeButtonTapped:(id)sender {
