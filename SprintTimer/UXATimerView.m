@@ -42,7 +42,7 @@ int hours, minutes, seconds;
         self.secondsLeft = self.secondsBegin;
         [self countdownTimer];
         
-        _radius = self.frame.size.width/2 - TB_SAFEAREA_PADDING;
+        _radius = self.frame.size.width/2 - UXA_TIMERVIEW_PADDING - UXA_TIMERVIEW_MARGIN;
         _center_x = self.frame.size.width/2;
         _center_y = self.frame.size.height/2;
         self.angle = 89;
@@ -56,8 +56,6 @@ int hours, minutes, seconds;
         
         [self setCountDownPosition];
         [self addSubview:_countdownLabel];
-        
-        
         
         
         NSString *soundFilePath = [NSString stringWithFormat:@"%@/bell.caf", [[NSBundle mainBundle] resourcePath]];
@@ -225,7 +223,7 @@ int hours, minutes, seconds;
     CGPoint centerPoint = CGPointMake(self.frame.size.width/2 - UXA_HANDLE_WIDTH/2, self.frame.size.height/2 - UXA_HANDLE_WIDTH/2);
     
     CGPoint result;
-    result.y = round(centerPoint.y + _radius * sin(ToRad(-angleInt))) ;
+    result.y = round(centerPoint.y + _radius * sin(ToRad(-angleInt)));
     result.x = round(centerPoint.x + _radius * cos(ToRad(-angleInt)));
     
     return result;

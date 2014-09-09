@@ -10,11 +10,12 @@
 #import <AVFoundation/AVFoundation.h>
 #import <AudioToolbox/AudioToolbox.h>
 
-#define UXA_TIMER_SIZE (1190+60)/2
-
-#define TB_SAFEAREA_PADDING 40
-#define UXA_HANDLE_WIDTH TB_SAFEAREA_PADDING*2
+#define UXA_TIMERVIEW_WIDTH (768-120)
+#define UXA_TIMERVIEW_PADDING 40
+#define UXA_TIMERVIEW_MARGIN 5
+#define UXA_HANDLE_WIDTH (UXA_TIMERVIEW_PADDING*2)
 #define TIMER_COUNT_DOWN 0.5
+
 
 @interface UXATimerView : UIControl <AVAudioPlayerDelegate>
 

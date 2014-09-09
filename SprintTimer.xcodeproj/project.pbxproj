@@ -11,6 +11,7 @@
 		5D21D3C819BE06BF003E95E4 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D21D3C719BE06BF003E95E4 /* AVFoundation.framework */; };
 		5D21D3CA19BE06D1003E95E4 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D21D3C919BE06D1003E95E4 /* AudioToolbox.framework */; };
 		5D21D3D019BE18F6003E95E4 /* bell.caf in Resources */ = {isa = PBXBuildFile; fileRef = 5D21D3CF19BE18F6003E95E4 /* bell.caf */; };
+		5D2BF62119BF5B6200728645 /* UXACrazyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D2BF62019BF5B6200728645 /* UXACrazyView.m */; };
 		5D758A4919AE2D1A00E6E520 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D758A4819AE2D1A00E6E520 /* Foundation.framework */; };
 		5D758A4B19AE2D1A00E6E520 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D758A4A19AE2D1A00E6E520 /* CoreGraphics.framework */; };
 		5D758A4D19AE2D1A00E6E520 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D758A4C19AE2D1A00E6E520 /* UIKit.framework */; };
@@ -52,6 +53,8 @@
 		5D21D3C719BE06BF003E95E4 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		5D21D3C919BE06D1003E95E4 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		5D21D3CF19BE18F6003E95E4 /* bell.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = bell.caf; sourceTree = "<group>"; };
+		5D2BF61F19BF5B6200728645 /* UXACrazyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UXACrazyView.h; sourceTree = "<group>"; };
+		5D2BF62019BF5B6200728645 /* UXACrazyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UXACrazyView.m; sourceTree = "<group>"; };
 		5D758A4519AE2D1A00E6E520 /* SprintTimer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SprintTimer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D758A4819AE2D1A00E6E520 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		5D758A4A19AE2D1A00E6E520 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -111,6 +114,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5D2BF62219BF5B7200728645 /* ClockView */ = {
+			isa = PBXGroup;
+			children = (
+				5D758AC619AE33BB00E6E520 /* UXATimerView.h */,
+				5D758AC719AE33BB00E6E520 /* UXATimerView.m */,
+				5D2BF61F19BF5B6200728645 /* UXACrazyView.h */,
+				5D2BF62019BF5B6200728645 /* UXACrazyView.m */,
+			);
+			name = ClockView;
+			sourceTree = "<group>";
+		};
 		5D758A3C19AE2D1900E6E520 = {
 			isa = PBXGroup;
 			children = (
@@ -149,11 +163,10 @@
 				5DB3C89219B0CF5D00C7A40F /* Asset */,
 				5D758A5719AE2D1A00E6E520 /* UXAAppDelegate.h */,
 				5D758A5819AE2D1A00E6E520 /* UXAAppDelegate.m */,
-				5D758A5A19AE2D1A00E6E520 /* Main.storyboard */,
 				5D758A5D19AE2D1A00E6E520 /* UXAViewController.h */,
 				5D758A5E19AE2D1A00E6E520 /* UXAViewController.m */,
-				5D758AC619AE33BB00E6E520 /* UXATimerView.h */,
-				5D758AC719AE33BB00E6E520 /* UXATimerView.m */,
+				5D2BF62219BF5B7200728645 /* ClockView */,
+				5D758A5A19AE2D1A00E6E520 /* Main.storyboard */,
 				5D758A6019AE2D1A00E6E520 /* Images.xcassets */,
 				5D758A4F19AE2D1A00E6E520 /* Supporting Files */,
 				5DF34D1019B5A119004B086C /* UXATimePickerViewController.h */,
@@ -322,6 +335,7 @@
 				5DF34D1219B5A119004B086C /* UXATimePickerViewController.m in Sources */,
 				5D758A5F19AE2D1A00E6E520 /* UXAViewController.m in Sources */,
 				5D758A5519AE2D1A00E6E520 /* main.m in Sources */,
+				5D2BF62119BF5B6200728645 /* UXACrazyView.m in Sources */,
 				5D758A5919AE2D1A00E6E520 /* UXAAppDelegate.m in Sources */,
 				5D758AC819AE33BB00E6E520 /* UXATimerView.m in Sources */,
 			);

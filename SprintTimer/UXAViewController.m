@@ -20,16 +20,21 @@
 @synthesize totalTimeButton;
 @synthesize tabLineBarView;
 @synthesize timerView;
+@synthesize crazyView;
 
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    timerView = [[UXATimerView alloc] initWithFrame:CGRectMake((1024-UXA_TIMER_SIZE)/2 ,120,UXA_TIMER_SIZE, UXA_TIMER_SIZE)];
+    timerView = [[UXATimerView alloc] initWithFrame:CGRectMake((1024-UXA_TIMERVIEW_WIDTH)/2 ,100, UXA_TIMERVIEW_WIDTH, UXA_TIMERVIEW_WIDTH)];
     
     [timerView addTarget:self action:@selector(newValue:) forControlEvents:UIControlEventValueChanged];
     [self.view addSubview:timerView];
+    
+    crazyView = [[UXACrazyView alloc] initWithFrame:CGRectMake((1024-UXA_CRAZY_WIDTH)/2 ,100, UXA_CRAZY_WIDTH, UXA_CRAZY_HEIGHT)];
+    [crazyView setHidden:TRUE];
+    [self.view addSubview:crazyView];
     
     timerButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [timerButton setTag:1];
@@ -102,7 +107,13 @@
     transition.type = kCATransitionFade;
     transition.delegate = self;
     [self.view.layer addAnimation:transition forKey:nil];
-    [timerView setHidden:timerViewHidden];
+    if(timerViewHidden){
+        [timerView setHidden:YES];
+        [crazyView setHidden:NO];
+    } else {
+        [timerView setHidden:NO];
+        [crazyView setHidden:YES];
+    }
 }
 
 -(IBAction)chooseTimeButtonTapped:(id)sender {
