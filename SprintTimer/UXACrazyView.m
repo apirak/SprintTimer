@@ -8,6 +8,11 @@
 
 #import "UXACrazyView.h"
 
+@interface UXACrazyView(){
+    BOOL _dragTimer;
+}
+@end
+
 @implementation UXACrazyView
 
 - (id)initWithFrame:(CGRect)frame
@@ -26,6 +31,7 @@
 
     [self drawPaper:context];
     [self drawCountDownBar:context];
+    [self drawTheHandle:context];
 }
 
 -(void) drawPaper:(CGContextRef)context{
@@ -57,6 +63,37 @@
 
 -(void) drawCountDownBar:(CGContextRef)context {
     
+}
+
+-(void) drawTheHandle:(CGContextRef)context {
+    CGContextSaveGState(context);
+    CGPoint handleCenter =  [self pointFromSecondLeft];
+    
+    if (_dragTimer == true) {
+        [[UIColor colorWithRed:1.0 green:0.8 blue:0.8 alpha:1]set];
+    } else {
+        [[UIColor colorWithWhite:1.0 alpha:1]set];
+    }
+    
+    CGContextFillEllipseInRect(context, CGRectMake(handleCenter.x, handleCenter.y, UXA_CRAZY_HANDLE_WIDTH, UXA_CRAZY_HANDLE_WIDTH));
+    
+    CGContextRestoreGState(context);
+    
+    CGContextBeginPath(context);
+    CGContextSetLineWidth(context, 2.0);
+    CGContextAddEllipseInRect(context, CGRectMake(handleCenter.x, handleCenter.y, UXA_CRAZY_HANDLE_WIDTH, UXA_CRAZY_HANDLE_WIDTH));
+    [[UIColor colorWithRed:1.0 green:0.0 blue:0.0 alpha:1.0]set];
+    CGContextDrawPath(context, kCGPathStroke);
+}
+
+#pragma mark - Math -
+
+-(CGPoint)pointFromSecondLeft {
+    CGPoint result;
+    result.y = round(200);
+    result.x = round(200);
+    
+    return result;
 }
 
 @end
