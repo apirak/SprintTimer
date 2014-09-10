@@ -8,8 +8,9 @@
 
 #import "UXAViewController.h"
 
-@interface UXAViewController ()
-
+@interface UXAViewController (){
+    NSTimer *_timer;
+}
 @end
 
 @implementation UXAViewController
@@ -21,7 +22,11 @@
 @synthesize tabLineBarView;
 @synthesize timerView;
 @synthesize crazyView;
+@synthesize secondsLeft;
+@synthesize secondsBegin;
+@synthesize audioPlayer;
 
+int hours, minutes, seconds;
 
 - (void)viewDidLoad
 {
@@ -30,7 +35,9 @@
     timerView = [[UXATimerView alloc] initWithFrame:CGRectMake((1024-UXA_TIMERVIEW_WIDTH)/2 ,100, UXA_TIMERVIEW_WIDTH, UXA_TIMERVIEW_WIDTH)];
     
     [timerView addTarget:self action:@selector(newValue:) forControlEvents:UIControlEventValueChanged];
+    [timerView setDelegate:self];
     [self.view addSubview:timerView];
+    
     
     crazyView = [[UXACrazyView alloc] initWithFrame:CGRectMake((1024-UXA_CRAZY_WIDTH)/2 ,100, UXA_CRAZY_WIDTH, UXA_CRAZY_HEIGHT)];
     [crazyView setHidden:TRUE];
@@ -72,6 +79,63 @@
     [tabLineBarView setBackgroundColor:[UIColor colorWithRed:1.0 green:0.0 blue:0.0 alpha:1.0]];
     [self.view addSubview:tabLineBarView];
     
+    self.secondsBegin = 60*5;
+    self.secondsLeft = self.secondsBegin;
+    
+    NSString *soundFilePath = [NSString stringWithFormat:@"%@/bell.caf", [[NSBundle mainBundle] resourcePath]];
+    NSURL *soundFileURL = [NSURL fileURLWithPath:soundFilePath];
+    NSError *error;
+    self.audioPlayer = [[AVAudioPlayer alloc]
+                        initWithContentsOfURL:soundFileURL
+                        error:&error];
+    
+    [[AVAudioSession sharedInstance] setDelegate: self];
+    NSError *setCategoryError = nil;
+    [[AVAudioSession sharedInstance] setCategory: AVAudioSessionCategoryPlayback error: &setCategoryError];
+    if (setCategoryError) {
+        NSLog(@"Error setting category! %@", setCategoryError);
+    }
+    
+    if (error)
+    {
+        NSLog(@"Error in audioPlayer: %@",
+              [error localizedDescription]);
+    } else {
+        [self.audioPlayer setNumberOfLoops:0];
+        [self.audioPlayer setVolume: 1];
+        self.audioPlayer.delegate = self;
+        [self.audioPlayer prepareToPlay];
+    }
+    
+    [self countdownTimer];
+    
+//    [self setTimerName:@"Timer_button.png" Crazy8Name:@"Crazy8_button_selected.png" BarXPoition:196 TimerViewHidden:YES];
+    
+}
+
+- (void)updateCounter {
+    if(self.secondsLeft > 0 ){
+        self.secondsLeft -- ;
+        hours = self.secondsLeft / 3600;
+        minutes = (self.secondsLeft % 3600) / 60;
+        seconds = (self.secondsLeft % 3600) % 60;
+        
+        [timerView updateCounterSecondBegin:self.secondsBegin SecondLeft:self.secondsLeft Minutes:minutes Seconds:seconds];
+        
+        if(self.secondsLeft == 0){
+            [self.audioPlayer play];
+        }
+    }
+    else{
+        self.secondsLeft = 0;
+    }
+}
+
+
+-(void)countdownTimer{
+    hours = minutes = seconds = 0;
+    
+    _timer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(updateCounter) userInfo:nil repeats:YES];
 }
 
 
@@ -138,7 +202,7 @@
 
 -(void)selectedTime:(NSInteger)newTime withLabel:(NSString *)selectedLabel {
     int intNewTimer = (int)newTime;
-    [timerView updateTotalTime:intNewTimer];
+    [self updateTotalTime:intNewTimer];
     
     [totalTimeButton setTitle:selectedLabel forState:UIControlStateNormal];
     
@@ -148,10 +212,47 @@
     }
 }
 
+-(void)updateTotalTime:(int)totalTime {
+    int runningTime = self.secondsBegin - self.secondsLeft;
+    self.secondsBegin = totalTime;
+    
+    if(runningTime < self.secondsBegin && self.secondsLeft > 0){
+        self.secondsLeft = self.secondsBegin - runningTime;
+    } else {
+        self.secondsLeft = self.secondsBegin;
+    }
+    
+    [timerView setSecondsBegin:self.secondsBegin];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - TimeViewerDelegate method
+
+-(void)changeSecondLeft:(NSInteger)secondLeft {
+    self.secondsLeft = secondLeft;
+}
+
+#pragma mark -- Play Alarm --
+
+-(void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag {
+    NSLog(@"Play successfully");
+}
+
+-(void)audioPlayerDecodeErrorDidOccur:(AVAudioPlayer *)player error:(NSError *)error {
+    NSLog(@"Player Decode Error Did Occour");
+}
+
+-(void)audioPlayerBeginInterruption:(AVAudioPlayer *)player {
+    NSLog(@"Player Begin Interruption");
+}
+
+-(void)audioPlayerEndInterruption:(AVAudioPlayer *)player {
+    NSLog(@"Audio Player End Interruption");
 }
 
 @end

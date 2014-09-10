@@ -7,11 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AVFoundation/AVFoundation.h>
+#import <AudioToolbox/AudioToolbox.h>
 #import "UXATimePickerViewController.h"
 #import "UXATimerView.h"
 #import "UXACrazyView.h"
 
-@interface UXAViewController : UIViewController <TimePickerDelegate>
+//#define DEFAULT_VIEW @"CRAZY"
+
+@interface UXAViewController : UIViewController <AVAudioPlayerDelegate, TimePickerDelegate, TimeViewerDelegate>
+
+@property (strong, nonatomic)  AVAudioPlayer *audioPlayer;
 
 @property (weak, nonatomic) IBOutlet UILabel *timerLabel;
 @property (nonatomic, assign) IBOutlet UIButton *crazyButton;
@@ -20,6 +26,9 @@
 @property (nonatomic, retain) UIView *tabLineBarView;
 @property (nonatomic, retain) UXATimerView *timerView;
 @property (nonatomic, retain) UXACrazyView *crazyView;
+
+@property (nonatomic,assign) int secondsBegin;
+@property (nonatomic,assign) int secondsLeft;
 
 @property (nonatomic, strong) UXATimePickerViewController *timePicker;
 @property (nonatomic, strong) UIPopoverController *timePickerPopover;

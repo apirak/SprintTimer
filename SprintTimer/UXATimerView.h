@@ -7,8 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <AVFoundation/AVFoundation.h>
-#import <AudioToolbox/AudioToolbox.h>
 
 #define UXA_TIMERVIEW_WIDTH (768-120)
 #define UXA_TIMERVIEW_PADDING 40
@@ -16,16 +14,19 @@
 #define UXA_HANDLE_WIDTH (UXA_TIMERVIEW_PADDING*2)
 #define TIMER_COUNT_DOWN 0.5
 
+@protocol TimeViewerDelegate <NSObject>
+@required
+-(void)changeSecondLeft:(NSInteger)secondLeft;
+@end
 
-@interface UXATimerView : UIControl <AVAudioPlayerDelegate>
+@interface UXATimerView : UIControl 
+
 
 @property (nonatomic,assign) int angle;
 @property (nonatomic,assign) int secondsBegin;
-@property (nonatomic,assign) int secondsLeft;
-@property (strong, nonatomic)  AVAudioPlayer *audioPlayer;
+@property (nonatomic, weak) id<TimeViewerDelegate> delegate;
 
--(void)updateTotalTime:(int)totalTime;
--(void)updateCounter;
--(void)countdownTimer;
+-(void)updateCounterSecondBegin:(int)secondBegin SecondLeft:(int)secondLeft Minutes:(int)minutes Seconds:(int)seconds;
+
 
 @end
