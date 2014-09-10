@@ -27,6 +27,8 @@
 
 @synthesize secondsBegin;
 
+int hours, minutes, seconds;
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -132,9 +134,14 @@
 
 #pragma mark - Timer Countdown -
 
-- (void)updateCounterSecondBegin:(int)secondBegin SecondLeft:(int)secondLeft Minutes:(int)minutes Seconds:(int)seconds; {
+- (void)updateSecondLeft:(int)secondLeft; {
+    
+    hours = secondLeft / 3600;
+    minutes = (secondLeft % 3600) / 60;
+    seconds = (secondLeft % 3600) % 60;
+    
     _countdownLabel.text =  [NSString stringWithFormat:@"%02d:%02d", minutes, seconds];
-    self.angle = AngleFromTime(secondBegin, secondLeft);
+    self.angle = AngleFromTime(self.secondsBegin, secondLeft);
     
     [self setCountDownPosition];
     [self setNeedsDisplay];

@@ -26,8 +26,6 @@
 @synthesize secondsBegin;
 @synthesize audioPlayer;
 
-int hours, minutes, seconds;
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -116,11 +114,8 @@ int hours, minutes, seconds;
 - (void)updateCounter {
     if(self.secondsLeft > 0 ){
         self.secondsLeft -- ;
-        hours = self.secondsLeft / 3600;
-        minutes = (self.secondsLeft % 3600) / 60;
-        seconds = (self.secondsLeft % 3600) % 60;
         
-        [timerView updateCounterSecondBegin:self.secondsBegin SecondLeft:self.secondsLeft Minutes:minutes Seconds:seconds];
+        [timerView updateSecondLeft:self.secondsLeft];
         
         if(self.secondsLeft == 0){
             [self.audioPlayer play];
@@ -133,8 +128,6 @@ int hours, minutes, seconds;
 
 
 -(void)countdownTimer{
-    hours = minutes = seconds = 0;
-    
     _timer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(updateCounter) userInfo:nil repeats:YES];
 }
 

@@ -26,7 +26,7 @@
 @property (nonatomic,assign) int secondsBegin;
 @property (nonatomic, weak) id<TimeViewerDelegate> delegate;
 
--(void)updateCounterSecondBegin:(int)secondBegin SecondLeft:(int)secondLeft Minutes:(int)minutes Seconds:(int)seconds;
+-(void)updateSecondLeft:(int)secondLeft;
 
 
 @end
