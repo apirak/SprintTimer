@@ -10,19 +10,64 @@
 
 @interface UXACrazyView(){
     BOOL _dragTimer;
+    float _heightPerSecond;
+    int _handlerHeight;
+    UILabel *_countdownLabel;
+    
+    int handleBarX;
+    int handleBarY;
 }
 @end
 
 @implementation UXACrazyView
+
+@synthesize secondsBegin;
+
+int hours, minutes, seconds;
+int paperX, paperY, blockWidth, blockHeight;
 
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
         self.opaque = NO;
+        
+        self.secondsBegin = 300;
+        
+        paperX = (UXA_CRAZY_PADDING+UXA_CRAZY_MARGIN);
+        paperY = (UXA_CRAZY_PADDING+UXA_CRAZY_MARGIN);
+        
+        blockWidth = (UXA_CRAZY_PAPER_WIDTH - (UXA_CRAZY_PADDING*2) - (UXA_CRAZY_MARGIN*2))/4;
+        blockHeight = (UXA_CRAZY_PAPER_HEIGHT - (UXA_CRAZY_PADDING*2) - (UXA_CRAZY_MARGIN*2))/2;
+        
+        handleBarX = (UXA_CRAZY_WIDTH-(UXA_CRAZY_COUNTDOWN_WIDTH/2));
+        handleBarY = (UXA_CRAZY_PADDING+UXA_CRAZY_MARGIN);
+        
+        _countdownLabel = [ [UILabel alloc ] initWithFrame:CGRectMake(handleBarX, handleBarY , UXA_CRAZY_HANDLE_WIDTH, UXA_CRAZY_HANDLE_WIDTH) ];
+        _countdownLabel.opaque = NO;
+        _countdownLabel.textAlignment = NSTextAlignmentCenter;
+        _countdownLabel.textColor = [UIColor redColor];
+        _countdownLabel.font = [UIFont fontWithName:@"Helvetica Neue" size:(24.0)];
+        _countdownLabel.text =  [NSString stringWithFormat:@"%02d:%02d", 5, 0];
+        
+        [self setCountDownPosition];
+        [self addSubview:_countdownLabel];
     }
     return self;
 }
+
+#pragma mark - UIControl Position -
+
+- (void)setCountDownPosition {
+    CGRect frame = _countdownLabel.frame;
+    
+    CGPoint handleCenter = [self handleCenterPoint];
+
+    frame.origin.x = handleCenter.x;
+    frame.origin.y = handleCenter.y;
+    _countdownLabel.frame = frame;
+}
+
 
 #pragma mark - Drawing Functions -
 
@@ -35,13 +80,6 @@
 }
 
 -(void) drawPaper:(CGContextRef)context{
-    
-    int paperX = (UXA_CRAZY_PADDING+UXA_CRAZY_MARGIN);
-    int paperY = (UXA_CRAZY_PADDING+UXA_CRAZY_MARGIN);
-    
-    int blockWidth = (UXA_CRAZY_PAPER_WIDTH - (UXA_CRAZY_PADDING*2) - (UXA_CRAZY_MARGIN*2))/4;
-    int blockHeight = (UXA_CRAZY_PAPER_HEIGHT - (UXA_CRAZY_PADDING*2) - (UXA_CRAZY_MARGIN*2))/2;
-    
     CGContextSetStrokeColorWithColor(context, [UIColor grayColor].CGColor);
     CGContextSetLineWidth(context, 2.0);
     
@@ -67,7 +105,15 @@
 
 -(void) drawTheHandle:(CGContextRef)context {
     CGContextSaveGState(context);
-    CGPoint handleCenter =  [self pointFromSecondLeft];
+    
+    CGPoint handleCenter = [self handleCenterPoint];
+    
+    CGContextSetStrokeColorWithColor(context, [UIColor grayColor].CGColor);
+    CGContextSetLineWidth(context, 2.0);
+    CGContextMoveToPoint(context, handleBarX, handleBarY+(blockHeight*2-_handlerHeight));
+    CGContextAddLineToPoint(context, handleBarX, paperY+(blockHeight*2));
+    CGContextSetLineCap(context, kCGLineCapRound);
+    CGContextStrokePath(context);
     
     if (_dragTimer == true) {
         [[UIColor colorWithRed:1.0 green:0.8 blue:0.8 alpha:1]set];
@@ -84,14 +130,33 @@
     CGContextAddEllipseInRect(context, CGRectMake(handleCenter.x, handleCenter.y, UXA_CRAZY_HANDLE_WIDTH, UXA_CRAZY_HANDLE_WIDTH));
     [[UIColor colorWithRed:1.0 green:0.0 blue:0.0 alpha:1.0]set];
     CGContextDrawPath(context, kCGPathStroke);
+
+}
+
+#pragma mark - Timer Countdown -
+
+- (void)updateSecondLeft:(int)secondLeft; {
+    
+    hours = secondLeft / 3600;
+    minutes = (secondLeft % 3600) / 60;
+    seconds = (secondLeft % 3600) % 60;
+    
+    _heightPerSecond = ((float)(blockHeight*2)/(float)self.secondsBegin);
+    
+    
+    _countdownLabel.text =  [NSString stringWithFormat:@"%02d:%02d", minutes, seconds];
+    _handlerHeight = _heightPerSecond * secondLeft;
+    
+    [self setCountDownPosition];
+    [self setNeedsDisplay];
 }
 
 #pragma mark - Math -
 
--(CGPoint)pointFromSecondLeft {
+-(CGPoint)handleCenterPoint {    
     CGPoint result;
-    result.y = round(200);
-    result.x = round(200);
+    result.y = round(handleBarY-UXA_CRAZY_HANDLE_RADIUS+(blockHeight*2-_handlerHeight));
+    result.x = round(handleBarX-UXA_CRAZY_HANDLE_RADIUS);
     
     return result;
 }

@@ -17,9 +17,8 @@
     int _radius;
     int _center_x;
     int _center_y;
-    float _rediusPerSecond;
-    UILabel *_countdownLabel;
     BOOL _dragTimer;
+    UILabel *_countdownLabel;
 }
 @end
 
@@ -36,8 +35,6 @@ int hours, minutes, seconds;
         self.opaque = NO;
         
         self.secondsBegin = 300;
-
-        _rediusPerSecond = 360.0 / self.secondsBegin ;
         
         _radius = self.frame.size.width/2 - UXA_TIMERVIEW_PADDING - UXA_TIMERVIEW_MARGIN;
         _center_x = self.frame.size.width/2;

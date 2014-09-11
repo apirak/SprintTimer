@@ -116,6 +116,7 @@
         self.secondsLeft -- ;
         
         [timerView updateSecondLeft:self.secondsLeft];
+        [crazyView updateSecondLeft:self.secondsLeft];
         
         if(self.secondsLeft == 0){
             [self.audioPlayer play];
@@ -216,6 +217,7 @@
     }
     
     [timerView setSecondsBegin:self.secondsBegin];
+    [crazyView setSecondsBegin:self.secondsBegin];
 }
 
 - (void)didReceiveMemoryWarning
