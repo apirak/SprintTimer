@@ -133,6 +133,20 @@ int paperX, paperY, blockWidth, blockHeight;
 
 }
 
+#pragma mark - UIControl Override -
+
+-(BOOL)beginTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event{
+    
+//    CGPoint touchPoint = [touch locationInView:self];
+    
+    [super beginTrackingWithTouch:touch withEvent:event];
+    _dragTimer = true;
+    
+    NSLog(@"begin Tracking");
+    
+    return YES;
+}
+
 #pragma mark - Timer Countdown -
 
 - (void)updateSecondLeft:(int)secondLeft; {
