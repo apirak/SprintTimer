@@ -11,11 +11,14 @@
 @interface UXACrazyView(){
     BOOL _dragTimer;
     float _heightPerSecond;
+    float _paperHeightPerSecond;
     int _handlerHeight;
     UILabel *_countdownLabel;
     
     int handleBarX;
     int handleBarY;
+    int _paperX, _paperY;
+    int _blockWidth, _blockHeight;
 }
 @end
 
@@ -24,7 +27,6 @@
 @synthesize secondsBegin;
 
 int hours, minutes, seconds;
-int paperX, paperY, blockWidth, blockHeight;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -34,11 +36,13 @@ int paperX, paperY, blockWidth, blockHeight;
         
         self.secondsBegin = 300;
         
-        paperX = (UXA_CRAZY_PADDING+UXA_CRAZY_MARGIN);
-        paperY = (UXA_CRAZY_PADDING+UXA_CRAZY_MARGIN);
+        _paperX = (UXA_CRAZY_PADDING+UXA_CRAZY_MARGIN);
+        _paperY = (UXA_CRAZY_PADDING+UXA_CRAZY_MARGIN);
         
-        blockWidth = (UXA_CRAZY_PAPER_WIDTH - (UXA_CRAZY_PADDING*2) - (UXA_CRAZY_MARGIN*2))/4;
-        blockHeight = (UXA_CRAZY_PAPER_HEIGHT - (UXA_CRAZY_PADDING*2) - (UXA_CRAZY_MARGIN*2))/2;
+        _blockWidth = (UXA_CRAZY_PAPER_WIDTH - (UXA_CRAZY_PADDING*2) - (UXA_CRAZY_MARGIN*2))/4;
+        _blockHeight = (UXA_CRAZY_PAPER_HEIGHT - (UXA_CRAZY_PADDING*2) - (UXA_CRAZY_MARGIN*2))/2;
+        
+        _handlerHeight = (_blockHeight*2);
         
         handleBarX = (UXA_CRAZY_WIDTH-(UXA_CRAZY_COUNTDOWN_WIDTH/2));
         handleBarY = (UXA_CRAZY_PADDING+UXA_CRAZY_MARGIN);
@@ -74,33 +78,56 @@ int paperX, paperY, blockWidth, blockHeight;
 - (void)drawRect:(CGRect)rect {
     CGContextRef context = UIGraphicsGetCurrentContext();
 
-    [self drawPaper:context];
+
     [self drawCountDownBar:context];
+    [self drawPaper:context];
     [self drawTheHandle:context];
 }
 
 -(void) drawPaper:(CGContextRef)context{
-    CGContextSetStrokeColorWithColor(context, [UIColor grayColor].CGColor);
+    CGContextSetStrokeColorWithColor(context, [UIColor whiteColor].CGColor);
     CGContextSetLineWidth(context, 2.0);
     
-    CGContextMoveToPoint(context, (paperX+blockWidth), paperY);
-    CGContextAddLineToPoint(context, (paperX+blockWidth), (paperY+blockHeight*2));
+    CGContextMoveToPoint(context, (_paperX+_blockWidth), _paperY);
+    CGContextAddLineToPoint(context, (_paperX+_blockWidth), (_paperY+_blockHeight*2));
     
-    CGContextMoveToPoint(context, (paperX+blockWidth*2), paperY);
-    CGContextAddLineToPoint(context, (paperX+blockWidth*2), (paperY+blockHeight*2));
+    CGContextMoveToPoint(context, (_paperX+_blockWidth*2), _paperY);
+    CGContextAddLineToPoint(context, (_paperX+_blockWidth*2), (_paperY+_blockHeight*2));
     
-    CGContextMoveToPoint(context, (paperX+blockWidth*3), paperY);
-    CGContextAddLineToPoint(context, (paperX+blockWidth*3), (paperY+blockHeight*2));
+    CGContextMoveToPoint(context, (_paperX+_blockWidth*3), _paperY);
+    CGContextAddLineToPoint(context, (_paperX+_blockWidth*3), (_paperY+_blockHeight*2));
     
-    CGContextMoveToPoint(context, paperX, (paperY+blockHeight));
-    CGContextAddLineToPoint(context, (paperX+blockWidth*4), (paperY+blockHeight));
+    CGContextMoveToPoint(context, _paperX, (_paperY+_blockHeight));
+    CGContextAddLineToPoint(context, (_paperX+_blockWidth*4), (_paperY+_blockHeight));
     
     CGContextSetLineCap(context, kCGLineCapRound);
     CGContextStrokePath(context);
 }
 
 -(void) drawCountDownBar:(CGContextRef)context {
-    
+    [self drawCrazyRectangle:context number:1 height:_blockHeight-70];
+    [self drawCrazyRectangle:context number:2 height:_blockHeight-50];
+    [self drawCrazyRectangle:context number:3 height:(_blockHeight/2)];
+    [self drawCrazyRectangle:context number:4 height:_blockHeight];
+    [self drawCrazyRectangle:context number:5 height:_blockHeight-10];
+    [self drawCrazyRectangle:context number:6 height:_blockHeight-50];
+    [self drawCrazyRectangle:context number:7 height:_blockHeight-200];
+    [self drawCrazyRectangle:context number:8 height:_blockHeight-10];
+}
+
+-(void) drawCrazyRectangle:(CGContextRef)context number:(int)barNumber height:(int)height {
+    if (barNumber < 5) {
+        [self drawRectangle:context Rect:CGRectMake(_paperX+_blockWidth*(barNumber-1), _paperY+(_blockHeight-height), _blockWidth, height)];
+    } else {
+        [self drawRectangle:context Rect:CGRectMake(_paperX+_blockWidth*(barNumber-5), _paperY+(_blockHeight-height)+_blockHeight, _blockWidth, height)];
+    }
+}
+
+-(void) drawRectangle:(CGContextRef)context Rect:(CGRect)rectangle {
+
+    CGContextSetRGBFillColor(context, 1.0, 0.0, 0.0, 1.0);
+    CGContextSetRGBStrokeColor(context, 1.0, 0.0, 0.0, 1.0);
+    CGContextFillRect(context, rectangle);
 }
 
 -(void) drawTheHandle:(CGContextRef)context {
@@ -108,10 +135,10 @@ int paperX, paperY, blockWidth, blockHeight;
     
     CGPoint handleCenter = [self handleBeginPoint:_handlerHeight];
     
-    CGContextSetStrokeColorWithColor(context, [UIColor grayColor].CGColor);
-    CGContextSetLineWidth(context, 2.0);
-    CGContextMoveToPoint(context, handleBarX, handleBarY+(blockHeight*2-_handlerHeight));
-    CGContextAddLineToPoint(context, handleBarX, paperY+(blockHeight*2));
+    CGContextSetStrokeColorWithColor(context, [UIColor redColor].CGColor);
+    CGContextSetLineWidth(context, 4.0);
+    CGContextMoveToPoint(context, handleBarX, handleBarY+(_blockHeight*2-_handlerHeight));
+    CGContextAddLineToPoint(context, handleBarX, _paperY+(_blockHeight*2));
     CGContextSetLineCap(context, kCGLineCapRound);
     CGContextStrokePath(context);
     
@@ -171,8 +198,8 @@ int paperX, paperY, blockWidth, blockHeight;
     minutes = (secondLeft % 3600) / 60;
     seconds = (secondLeft % 3600) % 60;
     
-    _heightPerSecond = ((float)(blockHeight*2)/(float)self.secondsBegin);
-    
+    _heightPerSecond = ((float)(_blockHeight*2)/(float)self.secondsBegin);
+    _paperHeightPerSecond = ((float)(_blockHeight*8)/(float)self.secondsBegin);
     
     _countdownLabel.text =  [NSString stringWithFormat:@"%02d:%02d", minutes, seconds];
     _handlerHeight = _heightPerSecond * secondLeft;
@@ -184,9 +211,16 @@ int paperX, paperY, blockWidth, blockHeight;
 #pragma mark - Math -
 
 -(void)movehandle:(CGPoint)lastPoint{
-    
-    _handlerHeight = (blockHeight*2)-(lastPoint.y-UXA_CRAZY_HANDLE_RADIUS);
-    [self handleBeginPoint:_handlerHeight];
+    if((lastPoint.y > UXA_CRAZY_HANDLE_RADIUS) && (lastPoint.y < UXA_CRAZY_HANDLE_RADIUS+(_blockHeight*2))) {
+        _handlerHeight = (_blockHeight*2)-(lastPoint.y-UXA_CRAZY_HANDLE_RADIUS);
+    } else {
+        if(lastPoint.y > UXA_CRAZY_HANDLE_RADIUS) {
+            lastPoint.y = UXA_CRAZY_HANDLE_RADIUS;
+        } else {
+            lastPoint.y = UXA_CRAZY_HANDLE_RADIUS+(_blockHeight*2);
+        }
+        
+    }
     
     if (_delegate != nil) {
         [_delegate changeSecondLeft:(_handlerHeight/_heightPerSecond)];
@@ -198,7 +232,7 @@ int paperX, paperY, blockWidth, blockHeight;
 
 -(CGPoint)handleBeginPoint:(int)handlerHeight {
     CGPoint result;
-    result.y = round(handleBarY-UXA_CRAZY_HANDLE_RADIUS+(blockHeight*2-handlerHeight));
+    result.y = round(handleBarY-UXA_CRAZY_HANDLE_RADIUS+(_blockHeight*2-handlerHeight));
     result.x = round(handleBarX-UXA_CRAZY_HANDLE_RADIUS);
     
     return result;
