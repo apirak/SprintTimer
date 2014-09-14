@@ -61,7 +61,7 @@ int paperX, paperY, blockWidth, blockHeight;
 - (void)setCountDownPosition {
     CGRect frame = _countdownLabel.frame;
     
-    CGPoint handleCenter = [self handleCenterPoint];
+    CGPoint handleCenter = [self handleBeginPoint:_handlerHeight];
 
     frame.origin.x = handleCenter.x;
     frame.origin.y = handleCenter.y;
@@ -106,7 +106,7 @@ int paperX, paperY, blockWidth, blockHeight;
 -(void) drawTheHandle:(CGContextRef)context {
     CGContextSaveGState(context);
     
-    CGPoint handleCenter = [self handleCenterPoint];
+    CGPoint handleCenter = [self handleBeginPoint:_handlerHeight];
     
     CGContextSetStrokeColorWithColor(context, [UIColor grayColor].CGColor);
     CGContextSetLineWidth(context, 2.0);
@@ -147,6 +147,22 @@ int paperX, paperY, blockWidth, blockHeight;
     return YES;
 }
 
+-(BOOL)continueTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event{
+    [super continueTrackingWithTouch:touch withEvent:event];
+    _dragTimer = true;
+    
+    CGPoint lastPoint = [touch locationInView:self];
+    [self movehandle:lastPoint];
+    [self sendActionsForControlEvents:UIControlEventValueChanged];
+    
+    return YES;
+}
+
+-(void)endTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event{
+    [super endTrackingWithTouch:touch withEvent:event];
+    _dragTimer = false;
+}
+
 #pragma mark - Timer Countdown -
 
 - (void)updateSecondLeft:(int)secondLeft; {
@@ -167,9 +183,22 @@ int paperX, paperY, blockWidth, blockHeight;
 
 #pragma mark - Math -
 
--(CGPoint)handleCenterPoint {    
+-(void)movehandle:(CGPoint)lastPoint{
+    
+    _handlerHeight = (blockHeight*2)-(lastPoint.y-UXA_CRAZY_HANDLE_RADIUS);
+    [self handleBeginPoint:_handlerHeight];
+    
+    if (_delegate != nil) {
+        [_delegate changeSecondLeft:(_handlerHeight/_heightPerSecond)];
+    }
+    
+    [self setCountDownPosition];
+    [self setNeedsDisplay];
+}
+
+-(CGPoint)handleBeginPoint:(int)handlerHeight {
     CGPoint result;
-    result.y = round(handleBarY-UXA_CRAZY_HANDLE_RADIUS+(blockHeight*2-_handlerHeight));
+    result.y = round(handleBarY-UXA_CRAZY_HANDLE_RADIUS+(blockHeight*2-handlerHeight));
     result.x = round(handleBarX-UXA_CRAZY_HANDLE_RADIUS);
     
     return result;

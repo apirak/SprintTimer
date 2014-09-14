@@ -39,6 +39,7 @@
     
     crazyView = [[UXACrazyView alloc] initWithFrame:CGRectMake((1024-UXA_CRAZY_WIDTH)/2 ,100, UXA_CRAZY_WIDTH, UXA_CRAZY_HEIGHT)];
     [crazyView setHidden:TRUE];
+    [crazyView setDelegate:self];
     [self.view addSubview:crazyView];
     
     timerButton = [UIButton buttonWithType:UIButtonTypeCustom];

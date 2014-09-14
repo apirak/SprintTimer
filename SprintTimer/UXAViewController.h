@@ -15,7 +15,7 @@
 
 //#define DEFAULT_VIEW @"CRAZY"
 
-@interface UXAViewController : UIViewController <AVAudioPlayerDelegate, TimePickerDelegate, TimeViewerDelegate>
+@interface UXAViewController : UIViewController <AVAudioPlayerDelegate, TimePickerDelegate, TimeViewerDelegate, CrazyViewerDelegate>
 
 @property (strong, nonatomic)  AVAudioPlayer *audioPlayer;
 

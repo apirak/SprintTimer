@@ -22,9 +22,15 @@
 #define UXA_CRAZY_HANDLE_RADIUS UXA_CRAZY_PADDING
 #define TIMER_COUNT_DOWN 0.5
 
+@protocol CrazyViewerDelegate <NSObject>
+@required
+-(void)changeSecondLeft:(NSInteger)secondLeft;
+@end
+
 @interface UXACrazyView : UIControl
 
 @property (nonatomic,assign) int secondsBegin;
+@property (nonatomic, weak) id<CrazyViewerDelegate> delegate;
 
 -(void)updateSecondLeft:(int)secondLeft;
 
