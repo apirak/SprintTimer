@@ -13,6 +13,7 @@
     float _heightPerSecond;
     float _paperHeightPerSecond;
     int _handlerHeight;
+    int _paperHandlerHeight;
     UILabel *_countdownLabel;
     
     int handleBarX;
@@ -105,14 +106,20 @@ int hours, minutes, seconds;
 }
 
 -(void) drawCountDownBar:(CGContextRef)context {
-    [self drawCrazyRectangle:context number:1 height:_blockHeight-70];
-    [self drawCrazyRectangle:context number:2 height:_blockHeight-50];
-    [self drawCrazyRectangle:context number:3 height:(_blockHeight/2)];
-    [self drawCrazyRectangle:context number:4 height:_blockHeight];
-    [self drawCrazyRectangle:context number:5 height:_blockHeight-10];
-    [self drawCrazyRectangle:context number:6 height:_blockHeight-50];
-    [self drawCrazyRectangle:context number:7 height:_blockHeight-200];
-    [self drawCrazyRectangle:context number:8 height:_blockHeight-10];
+    
+    for (int i = 1; i <= 8; i++)
+    {
+        if(_paperHandlerHeight > _blockHeight*(8-i)) {
+            int handlerHeight = (_paperHandlerHeight-(_blockHeight*(8-i)));
+            if (handlerHeight < _blockHeight) {
+                [self drawCrazyRectangle:context number:i height:handlerHeight];
+            } else {
+                [self drawCrazyRectangle:context number:i height:_blockHeight];
+            }
+        } else {
+            [self drawCrazyRectangle:context number:i height:0];
+        }
+    }
 }
 
 -(void) drawCrazyRectangle:(CGContextRef)context number:(int)barNumber height:(int)height {
@@ -200,6 +207,8 @@ int hours, minutes, seconds;
     
     _heightPerSecond = ((float)(_blockHeight*2)/(float)self.secondsBegin);
     _paperHeightPerSecond = ((float)(_blockHeight*8)/(float)self.secondsBegin);
+    
+    _paperHandlerHeight = _paperHeightPerSecond * secondLeft;
     
     _countdownLabel.text =  [NSString stringWithFormat:@"%02d:%02d", minutes, seconds];
     _handlerHeight = _heightPerSecond * secondLeft;
