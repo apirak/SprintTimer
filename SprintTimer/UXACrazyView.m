@@ -14,6 +14,7 @@
     float _paperHeightPerSecond;
     int _handlerHeight;
     int _paperHandlerHeight;
+    int _paperAlertHeight;
     UILabel *_countdownLabel;
     
     int handleBarX;
@@ -79,7 +80,6 @@ int hours, minutes, seconds;
 - (void)drawRect:(CGRect)rect {
     CGContextRef context = UIGraphicsGetCurrentContext();
 
-
     [self drawCountDownBar:context];
     [self drawPaper:context];
     [self drawTheHandle:context];
@@ -106,35 +106,44 @@ int hours, minutes, seconds;
 }
 
 -(void) drawCountDownBar:(CGContextRef)context {
-    
     for (int i = 1; i <= 8; i++)
     {
         if(_paperHandlerHeight > _blockHeight*(8-i)) {
-            int handlerHeight = (_paperHandlerHeight-(_blockHeight*(8-i)));
-            if (handlerHeight < _blockHeight) {
-                [self drawCrazyRectangle:context number:i height:handlerHeight];
-            } else {
-                [self drawCrazyRectangle:context number:i height:_blockHeight];
-            }
+            [self drawCrazyRectangle:context number:i height:(_paperHandlerHeight-(_blockHeight*(8-i)))];
         } else {
             [self drawCrazyRectangle:context number:i height:0];
         }
     }
 }
 
--(void) drawCrazyRectangle:(CGContextRef)context number:(int)barNumber height:(int)height {
-    if (barNumber < 5) {
-        [self drawRectangle:context Rect:CGRectMake(_paperX+_blockWidth*(barNumber-1), _paperY+(_blockHeight-height), _blockWidth, height)];
+-(void) drawCrazyRectangle:(CGContextRef)context number:(int)barNumber height:(int)handlerHeight {
+    int height = (handlerHeight < _blockHeight) ? handlerHeight : _blockHeight;
+    
+    if(height > _paperAlertHeight){
+        CGContextSetRGBFillColor(context, 247.0/255.0, 134.0/255.0, 4.0/255.0, 1.0);
     } else {
-        [self drawRectangle:context Rect:CGRectMake(_paperX+_blockWidth*(barNumber-5), _paperY+(_blockHeight-height)+_blockHeight, _blockWidth, height)];
+        CGContextSetRGBFillColor(context, 1.0, 0.0, 0.0, 1.0);
     }
-}
+    
+    if (barNumber < 5) {
+        CGContextFillRect(context, CGRectMake(_paperX+_blockWidth*(barNumber-1), _paperY+(_blockHeight-height), _blockWidth, height));
+    } else {
+        CGContextFillRect(context, CGRectMake(_paperX+_blockWidth*(barNumber-5), _paperY+(_blockHeight-height)+_blockHeight, _blockWidth, height));
+    }
+    
 
--(void) drawRectangle:(CGContextRef)context Rect:(CGRect)rectangle {
 
-    CGContextSetRGBFillColor(context, 1.0, 0.0, 0.0, 1.0);
-    CGContextSetRGBStrokeColor(context, 1.0, 0.0, 0.0, 1.0);
-    CGContextFillRect(context, rectangle);
+    if (barNumber < 5) {
+        if(height > _paperAlertHeight){
+            CGContextSetRGBFillColor(context, 1.0, 0.0, 0.0, 1.0);
+            CGContextFillRect(context, CGRectMake(_paperX+_blockWidth*(barNumber-1), _paperY+(_blockHeight-_paperAlertHeight), _blockWidth, _paperAlertHeight));
+        }
+    } else {
+        if(height > _paperAlertHeight){
+            CGContextSetRGBFillColor(context, 1.0, 0.0, 0.0, 1.0);
+            CGContextFillRect(context, CGRectMake(_paperX+_blockWidth*(barNumber-5), _paperY+(_blockHeight-_paperAlertHeight)+_blockHeight, _blockWidth, _paperAlertHeight));
+        }
+    }
 }
 
 -(void) drawTheHandle:(CGContextRef)context {
@@ -209,6 +218,7 @@ int hours, minutes, seconds;
     _paperHeightPerSecond = ((float)(_blockHeight*8)/(float)self.secondsBegin);
     
     _paperHandlerHeight = _paperHeightPerSecond * secondLeft;
+    _paperAlertHeight = _blockHeight/4;
     
     _countdownLabel.text =  [NSString stringWithFormat:@"%02d:%02d", minutes, seconds];
     _handlerHeight = _heightPerSecond * secondLeft;
