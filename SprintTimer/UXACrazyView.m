@@ -25,6 +25,7 @@
     int _linePadding;
     
     UIColor *_clockColor;
+    UIColor *_clock2Color;
     UIColor *_paperColor;
     UIColor *_guideColor;
 }
@@ -44,9 +45,10 @@ int hours, minutes, seconds;
         
         self.secondsBegin = 300;
         
-        _clockColor = [UIColor colorWithRed:224.0/255.0 green:0/255.0 blue:0/255.0 alpha:1];
-        _paperColor = [UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1];
-        _guideColor = [UIColor colorWithRed:204.0/255.0 green:204.0/255.0 blue:204.0/255.0 alpha:1];
+        _clockColor  = [UIColor colorWithRed:224.0/255.0 green:0/255.0 blue:0/255.0 alpha:1];
+        _clock2Color = [UIColor colorWithRed:247.0/255.0 green:134.0/255.0 blue:4.0/255.0 alpha:1];
+        _paperColor  = [UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1];
+        _guideColor  = [UIColor colorWithRed:204.0/255.0 green:204.0/255.0 blue:204.0/255.0 alpha:1];
         
         _linePadding = 20;
         
@@ -132,9 +134,9 @@ int hours, minutes, seconds;
     int height = (handlerHeight < _blockHeight) ? handlerHeight : _blockHeight;
     
     if(height > _paperAlertHeight){
-        CGContextSetRGBFillColor(context, 247.0/255.0, 134.0/255.0, 4.0/255.0, 1.0);
+        CGContextSetFillColorWithColor(context, _clock2Color.CGColor);
     } else {
-        CGContextSetRGBFillColor(context, 1.0, 0.0, 0.0, 1.0);
+        CGContextSetFillColorWithColor(context, _clockColor.CGColor);
     }
     
     int linePosition = (barNumber < 5) ? 1 : 5;
