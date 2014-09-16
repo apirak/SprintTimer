@@ -23,6 +23,10 @@
     int _blockWidth, _blockHeight;
     int _paperBlockWidth, _paperBlockHeight;
     int _linePadding;
+    
+    UIColor *_clockColor;
+    UIColor *_paperColor;
+    UIColor *_guideColor;
 }
 @end
 
@@ -39,6 +43,10 @@ int hours, minutes, seconds;
         self.opaque = NO;
         
         self.secondsBegin = 300;
+        
+        _clockColor = [UIColor colorWithRed:224.0/255.0 green:0/255.0 blue:0/255.0 alpha:1];
+        _paperColor = [UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1];
+        _guideColor = [UIColor colorWithRed:204.0/255.0 green:204.0/255.0 blue:204.0/255.0 alpha:1];
         
         _linePadding = 20;
         
@@ -59,7 +67,7 @@ int hours, minutes, seconds;
         _countdownLabel = [ [UILabel alloc ] initWithFrame:CGRectMake(handleBarX, handleBarY , UXA_CRAZY_HANDLE_WIDTH, UXA_CRAZY_HANDLE_WIDTH) ];
         _countdownLabel.opaque = NO;
         _countdownLabel.textAlignment = NSTextAlignmentCenter;
-        _countdownLabel.textColor = [UIColor redColor];
+        _countdownLabel.textColor = _clockColor;
         _countdownLabel.font = [UIFont fontWithName:@"Helvetica Neue" size:(24.0)];
         _countdownLabel.text =  [NSString stringWithFormat:@"%02d:%02d", 5, 0];
         
@@ -93,7 +101,7 @@ int hours, minutes, seconds;
 }
 
 -(void) drawPaper:(CGContextRef)context{
-    CGContextSetStrokeColorWithColor(context, [UIColor colorWithRed:204.0/255.0 green:204.0/255.0 blue:204.0/255.0 alpha:1].CGColor);
+    CGContextSetStrokeColorWithColor(context, _guideColor.CGColor);
     CGContextSetLineWidth(context, 2.0);
     
     CGContextMoveToPoint(context, (_paperX+_blockWidth), _paperY);
@@ -147,7 +155,7 @@ int hours, minutes, seconds;
                                      _blockWidth-(_linePadding*2),
                                      _paperAlertHeight);
         CGPathRef roundedBottomRectPath = [self pathForRoundedRect:smallBar radius:5 onlyBottom:FALSE];
-        CGContextSetRGBFillColor(context, 1.0, 0.0, 0.0, 1.0);
+        CGContextSetFillColorWithColor(context, _clockColor.CGColor);
         CGContextAddPath(context, roundedBottomRectPath);
         CGContextFillPath(context);
     }
@@ -158,14 +166,14 @@ int hours, minutes, seconds;
     
 
 
-    CGContextSetStrokeColorWithColor(context, [UIColor colorWithRed:204.0/255.0 green:204.0/255.0 blue:204.0/255.0 alpha:1].CGColor);
+    CGContextSetStrokeColorWithColor(context, _guideColor.CGColor);
     CGContextSetLineWidth(context, 8.0);
     CGContextMoveToPoint(context, handleBarX, handleBarY);
     CGContextAddLineToPoint(context, handleBarX, _paperY+(_paperBlockHeight*2));
     CGContextSetLineCap(context, kCGLineCapRound);
     CGContextStrokePath(context);
     
-    CGContextSetStrokeColorWithColor(context, [UIColor redColor].CGColor);
+    CGContextSetStrokeColorWithColor(context, _clockColor.CGColor);
     CGContextSetLineWidth(context, 8.0);
     CGContextMoveToPoint(context, handleBarX, handleBarY+(_paperBlockHeight*2-_handlerHeight));
     CGContextAddLineToPoint(context, handleBarX, _paperY+(_paperBlockHeight*2));
@@ -184,7 +192,7 @@ int hours, minutes, seconds;
     CGContextBeginPath(context);
     CGContextSetLineWidth(context, 2.0);
     CGContextAddEllipseInRect(context, CGRectMake(handleCenter.x, handleCenter.y, UXA_CRAZY_HANDLE_WIDTH, UXA_CRAZY_HANDLE_WIDTH));
-    [[UIColor colorWithRed:1.0 green:0.0 blue:0.0 alpha:1.0]set];
+    [_clockColor set];
     CGContextDrawPath(context, kCGPathStroke);
 
 }
