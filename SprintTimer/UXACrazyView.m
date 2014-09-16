@@ -108,11 +108,8 @@ int hours, minutes, seconds;
 -(void) drawCountDownBar:(CGContextRef)context {
     for (int i = 1; i <= 8; i++)
     {
-        if(_paperHandlerHeight > _blockHeight*(8-i)) {
-            [self drawCrazyRectangle:context number:i height:(_paperHandlerHeight-(_blockHeight*(8-i)))];
-        } else {
-            [self drawCrazyRectangle:context number:i height:0];
-        }
+        int height = (_paperHandlerHeight > _blockHeight*(8-i)) ? (_paperHandlerHeight-(_blockHeight*(8-i))) : 0;
+        [self drawCrazyRectangle:context number:i height:height];
     }
 }
 
@@ -125,24 +122,20 @@ int hours, minutes, seconds;
         CGContextSetRGBFillColor(context, 1.0, 0.0, 0.0, 1.0);
     }
     
-    if (barNumber < 5) {
-        CGContextFillRect(context, CGRectMake(_paperX+_blockWidth*(barNumber-1), _paperY+(_blockHeight-height), _blockWidth, height));
-    } else {
-        CGContextFillRect(context, CGRectMake(_paperX+_blockWidth*(barNumber-5), _paperY+(_blockHeight-height)+_blockHeight, _blockWidth, height));
-    }
+    int linePosition = (barNumber < 5) ? 1 : 5;
+    int lineHeightPosition = (barNumber < 5) ? 0 : _blockHeight;
     
+    CGContextFillRect(context, CGRectMake(_paperX+_blockWidth*(barNumber-linePosition),
+                                          _paperY+(_blockHeight-height)+lineHeightPosition,
+                                          _blockWidth,
+                                          height));
 
-
-    if (barNumber < 5) {
-        if(height > _paperAlertHeight){
-            CGContextSetRGBFillColor(context, 1.0, 0.0, 0.0, 1.0);
-            CGContextFillRect(context, CGRectMake(_paperX+_blockWidth*(barNumber-1), _paperY+(_blockHeight-_paperAlertHeight), _blockWidth, _paperAlertHeight));
-        }
-    } else {
-        if(height > _paperAlertHeight){
-            CGContextSetRGBFillColor(context, 1.0, 0.0, 0.0, 1.0);
-            CGContextFillRect(context, CGRectMake(_paperX+_blockWidth*(barNumber-5), _paperY+(_blockHeight-_paperAlertHeight)+_blockHeight, _blockWidth, _paperAlertHeight));
-        }
+    if(height > _paperAlertHeight){
+        CGContextSetRGBFillColor(context, 1.0, 0.0, 0.0, 1.0);
+        CGContextFillRect(context, CGRectMake(_paperX+_blockWidth*(barNumber-linePosition),
+                                              _paperY+(_blockHeight-_paperAlertHeight)+lineHeightPosition,
+                                              _blockWidth,
+                                              _paperAlertHeight));
     }
 }
 
@@ -238,7 +231,6 @@ int hours, minutes, seconds;
         } else {
             lastPoint.y = UXA_CRAZY_HANDLE_RADIUS+(_blockHeight*2);
         }
-        
     }
     
     if (_delegate != nil) {
