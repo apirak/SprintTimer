@@ -27,8 +27,8 @@
 @property (nonatomic, retain) UXATimerView *timerView;
 @property (nonatomic, retain) UXACrazyView *crazyView;
 
-@property (nonatomic,assign) int secondsBegin;
-@property (nonatomic,assign) int secondsLeft;
+@property (nonatomic,assign) float secondsBegin;
+@property (nonatomic,assign) float secondsLeft;
 
 @property (nonatomic, strong) UXATimePickerViewController *timePicker;
 @property (nonatomic, strong) UIPopoverController *timePickerPopover;

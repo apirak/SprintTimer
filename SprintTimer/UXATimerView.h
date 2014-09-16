@@ -22,11 +22,11 @@
 @interface UXATimerView : UIControl 
 
 
-@property (nonatomic,assign) int angle;
-@property (nonatomic,assign) int secondsBegin;
+@property (nonatomic,assign) float angle;
+@property (nonatomic,assign) float secondsBegin;
 @property (nonatomic, weak) id<TimeViewerDelegate> delegate;
 
--(void)updateSecondLeft:(int)secondLeft;
+-(void)updateSecondLeft:(float)secondLeft;
 
 
 @end

@@ -164,17 +164,15 @@ int hours, minutes, seconds;
 -(void) drawTheHandle:(CGContextRef)context {
     CGContextSaveGState(context);
     
-
-
     CGContextSetStrokeColorWithColor(context, _guideColor.CGColor);
-    CGContextSetLineWidth(context, 8.0);
+    CGContextSetLineWidth(context, 16.0);
     CGContextMoveToPoint(context, handleBarX, handleBarY);
     CGContextAddLineToPoint(context, handleBarX, _paperY+(_paperBlockHeight*2));
     CGContextSetLineCap(context, kCGLineCapRound);
     CGContextStrokePath(context);
     
     CGContextSetStrokeColorWithColor(context, _clockColor.CGColor);
-    CGContextSetLineWidth(context, 8.0);
+    CGContextSetLineWidth(context, 16.0);
     CGContextMoveToPoint(context, handleBarX, handleBarY+(_paperBlockHeight*2-_handlerHeight));
     CGContextAddLineToPoint(context, handleBarX, _paperY+(_paperBlockHeight*2));
     CGContextSetLineCap(context, kCGLineCapRound);
@@ -269,11 +267,11 @@ int hours, minutes, seconds;
 
 #pragma mark - Timer Countdown -
 
-- (void)updateSecondLeft:(int)secondLeft; {
+- (void)updateSecondLeft:(float)secondLeft; {
     
     hours = secondLeft / 3600;
-    minutes = (secondLeft % 3600) / 60;
-    seconds = (secondLeft % 3600) % 60;
+    minutes = ((int)secondLeft % 3600) / 60;
+    seconds = ((int)secondLeft % 3600) % 60;
     
     _heightPerSecond = ((float)(_paperBlockHeight*2)/(float)self.secondsBegin);
     _paperHeightPerSecond = ((float)(_blockHeight*8)/(float)self.secondsBegin);

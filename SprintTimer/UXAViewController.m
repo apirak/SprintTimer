@@ -114,30 +114,28 @@
 
 - (void)updateCounter {
     if(self.secondsLeft > 0 ){
-        self.secondsLeft -- ;
-        
+        self.secondsLeft = self.secondsLeft - 0.0625;
         [timerView updateSecondLeft:self.secondsLeft];
         [crazyView updateSecondLeft:self.secondsLeft];
         
-        if(self.secondsLeft == 0){
+        if(self.secondsLeft <= 0){
             [self.audioPlayer play];
         }
-    }
-    else{
+    } else {
         self.secondsLeft = 0;
     }
 }
 
 
 -(void)countdownTimer{
-    _timer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(updateCounter) userInfo:nil repeats:YES];
+    _timer = [NSTimer scheduledTimerWithTimeInterval:0.0625f target:self selector:@selector(updateCounter) userInfo:nil repeats:YES];
 }
 
 
 /** This function is called when Circular slider value changes **/
 -(void)newValue:(UXATimerView*)timer{
     //TBCircularSlider *slider = (TBCircularSlider*)sender;
-    NSLog(@"Slider Value %d",timer.angle);
+//    NSLog(@"Slider Value %d",timer.angle);
 }
 
 -(void)selectTimerType:(id)sender {
@@ -208,7 +206,7 @@
 }
 
 -(void)updateTotalTime:(int)totalTime {
-    int runningTime = self.secondsBegin - self.secondsLeft;
+    float runningTime = self.secondsBegin - self.secondsLeft;
     self.secondsBegin = totalTime;
     
     if(runningTime < self.secondsBegin && self.secondsLeft > 0){

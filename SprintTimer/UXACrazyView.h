@@ -29,9 +29,9 @@
 
 @interface UXACrazyView : UIControl
 
-@property (nonatomic,assign) int secondsBegin;
+@property (nonatomic,assign) float secondsBegin;
 @property (nonatomic, weak) id<CrazyViewerDelegate> delegate;
 
--(void)updateSecondLeft:(int)secondLeft;
+-(void)updateSecondLeft:(float)secondLeft;
 
 @end

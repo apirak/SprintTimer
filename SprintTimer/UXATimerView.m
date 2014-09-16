@@ -131,11 +131,11 @@ int hours, minutes, seconds;
 
 #pragma mark - Timer Countdown -
 
-- (void)updateSecondLeft:(int)secondLeft; {
+- (void)updateSecondLeft:(float)secondLeft; {
     
     hours = secondLeft / 3600;
-    minutes = (secondLeft % 3600) / 60;
-    seconds = (secondLeft % 3600) % 60;
+    minutes = ((int)secondLeft % 3600) / 60;
+    seconds = ((int)secondLeft % 3600) % 60;
     
     _countdownLabel.text =  [NSString stringWithFormat:@"%02d:%02d", minutes, seconds];
     self.angle = AngleFromTime(self.secondsBegin, secondLeft);
@@ -151,8 +151,8 @@ int hours, minutes, seconds;
     CGPoint centerPoint = CGPointMake(self.frame.size.width/2, self.frame.size.height/2);
     
     float currentAngle = AngleFromNorth(centerPoint, lastPoint, NO);
-    int angleInt = floor(currentAngle);
-    self.angle = 360 - angleInt;
+    float angleFloat = floor(currentAngle);
+    self.angle = 360.0 - angleFloat;
     
     if (_delegate != nil) {
         [_delegate changeSecondLeft:TimeFromAngle(self.secondsBegin, self.angle)];
@@ -182,13 +182,13 @@ static inline float AngleFromNorth(CGPoint p1, CGPoint p2, BOOL flipped) {
     return (result >=0  ? result : result + 360.0);
 }
 
-static inline int AngleFromTime(int begin, int left){
-    float rediusPerSecond = 360.0 / (float)begin ;
+static inline float AngleFromTime(float begin, float left){
+    float rediusPerSecond = 360.0 / begin ;
     float rediusLeft = left * rediusPerSecond;
-    return (int)rediusLeft+90;
+    return (float)rediusLeft+90;
 }
 
-static inline int TimeFromAngle(int begin, int angle){
+static inline int TimeFromAngle(float begin, float angle){
     float rediusPerSecond = 360.0 / (float)begin ;
     float countAngle = angle > 90 ? angle-90 : 270+angle;
     float time = countAngle / rediusPerSecond;
