@@ -21,6 +21,7 @@
     int handleBarY;
     int _paperX, _paperY;
     int _blockWidth, _blockHeight;
+    int _paperBlockWidth, _paperBlockHeight;
     int _linePadding;
 }
 @end
@@ -44,13 +45,16 @@ int hours, minutes, seconds;
         _paperX = (UXA_CRAZY_PADDING+UXA_CRAZY_MARGIN);
         _paperY = (UXA_CRAZY_PADDING+UXA_CRAZY_MARGIN);
         
-        _blockWidth = (UXA_CRAZY_PAPER_WIDTH - (UXA_CRAZY_PADDING*2) - (UXA_CRAZY_MARGIN*2))/4;
-        _blockHeight = (UXA_CRAZY_PAPER_HEIGHT - (UXA_CRAZY_PADDING*2) - (UXA_CRAZY_MARGIN*2))/2;
+        _paperBlockWidth = (UXA_CRAZY_PAPER_WIDTH - (UXA_CRAZY_PADDING*2) - (UXA_CRAZY_MARGIN*2))/4;
+        _paperBlockHeight = (UXA_CRAZY_PAPER_HEIGHT - (UXA_CRAZY_PADDING*2) - (UXA_CRAZY_MARGIN*2))/2;
+
+        _blockWidth = _paperBlockWidth;
+        _blockHeight = _paperBlockHeight-_linePadding;
         
-        _handlerHeight = (_blockHeight*2);
+        _handlerHeight = _paperBlockHeight*2;
         
-        handleBarX = (UXA_CRAZY_WIDTH-(UXA_CRAZY_COUNTDOWN_WIDTH/2));
-        handleBarY = (UXA_CRAZY_PADDING+UXA_CRAZY_MARGIN);
+        handleBarX = (UXA_CRAZY_WIDTH-(UXA_CRAZY_COUNTDOWN_WIDTH/2)-(UXA_CRAZY_MARGIN*2));
+        handleBarY = _paperY;
         
         _countdownLabel = [ [UILabel alloc ] initWithFrame:CGRectMake(handleBarX, handleBarY , UXA_CRAZY_HANDLE_WIDTH, UXA_CRAZY_HANDLE_WIDTH) ];
         _countdownLabel.opaque = NO;
@@ -93,16 +97,16 @@ int hours, minutes, seconds;
     CGContextSetLineWidth(context, 2.0);
     
     CGContextMoveToPoint(context, (_paperX+_blockWidth), _paperY);
-    CGContextAddLineToPoint(context, (_paperX+_blockWidth), (_paperY+_blockHeight*2+(_linePadding*2)));
+    CGContextAddLineToPoint(context, (_paperX+_blockWidth), (_paperY+_paperBlockHeight*2));
     
     CGContextMoveToPoint(context, (_paperX+_blockWidth*2), _paperY);
-    CGContextAddLineToPoint(context, (_paperX+_blockWidth*2), (_paperY+_blockHeight*2+(_linePadding*2)));
+    CGContextAddLineToPoint(context, (_paperX+_blockWidth*2), (_paperY+_paperBlockHeight*2));
     
     CGContextMoveToPoint(context, (_paperX+_blockWidth*3), _paperY);
-    CGContextAddLineToPoint(context, (_paperX+_blockWidth*3), (_paperY+_blockHeight*2+(_linePadding*2)));
+    CGContextAddLineToPoint(context, (_paperX+_blockWidth*3), (_paperY+_paperBlockHeight*2));
     
-    CGContextMoveToPoint(context, _paperX, (_paperY+_blockHeight)+_linePadding);
-    CGContextAddLineToPoint(context, (_paperX+_blockWidth*4), (_paperY+_blockHeight)+_linePadding);
+    CGContextMoveToPoint(context, _paperX, (_paperY+_paperBlockHeight));
+    CGContextAddLineToPoint(context, (_paperX+_blockWidth*4), (_paperY+_paperBlockHeight));
     
     CGContextSetLineCap(context, kCGLineCapRound);
     CGContextStrokePath(context);
@@ -152,32 +156,31 @@ int hours, minutes, seconds;
 -(void) drawTheHandle:(CGContextRef)context {
     CGContextSaveGState(context);
     
-    CGPoint handleCenter = [self handleBeginPoint:_handlerHeight];
+
 
     CGContextSetStrokeColorWithColor(context, [UIColor colorWithRed:204.0/255.0 green:204.0/255.0 blue:204.0/255.0 alpha:1].CGColor);
     CGContextSetLineWidth(context, 8.0);
     CGContextMoveToPoint(context, handleBarX, handleBarY);
-    CGContextAddLineToPoint(context, handleBarX, _paperY+(_blockHeight*2));
+    CGContextAddLineToPoint(context, handleBarX, _paperY+(_paperBlockHeight*2));
     CGContextSetLineCap(context, kCGLineCapRound);
     CGContextStrokePath(context);
     
     CGContextSetStrokeColorWithColor(context, [UIColor redColor].CGColor);
     CGContextSetLineWidth(context, 8.0);
-    CGContextMoveToPoint(context, handleBarX, handleBarY+(_blockHeight*2-_handlerHeight));
-    CGContextAddLineToPoint(context, handleBarX, _paperY+(_blockHeight*2));
+    CGContextMoveToPoint(context, handleBarX, handleBarY+(_paperBlockHeight*2-_handlerHeight));
+    CGContextAddLineToPoint(context, handleBarX, _paperY+(_paperBlockHeight*2));
     CGContextSetLineCap(context, kCGLineCapRound);
     CGContextStrokePath(context);
-    
+
     if (_dragTimer == true) {
         [[UIColor colorWithRed:1.0 green:0.8 blue:0.8 alpha:1]set];
     } else {
         [[UIColor colorWithWhite:1.0 alpha:1]set];
     }
     
+    CGPoint handleCenter = [self handleBeginPoint:_handlerHeight];
     CGContextFillEllipseInRect(context, CGRectMake(handleCenter.x, handleCenter.y, UXA_CRAZY_HANDLE_WIDTH, UXA_CRAZY_HANDLE_WIDTH));
-    
     CGContextRestoreGState(context);
-    
     CGContextBeginPath(context);
     CGContextSetLineWidth(context, 2.0);
     CGContextAddEllipseInRect(context, CGRectMake(handleCenter.x, handleCenter.y, UXA_CRAZY_HANDLE_WIDTH, UXA_CRAZY_HANDLE_WIDTH));
@@ -264,7 +267,7 @@ int hours, minutes, seconds;
     minutes = (secondLeft % 3600) / 60;
     seconds = (secondLeft % 3600) % 60;
     
-    _heightPerSecond = ((float)(_blockHeight*2)/(float)self.secondsBegin);
+    _heightPerSecond = ((float)(_paperBlockHeight*2)/(float)self.secondsBegin);
     _paperHeightPerSecond = ((float)(_blockHeight*8)/(float)self.secondsBegin);
     
     _paperHandlerHeight = _paperHeightPerSecond * secondLeft;
@@ -283,15 +286,15 @@ int hours, minutes, seconds;
     
     int secondLeft;
     
-    if((lastPoint.y > UXA_CRAZY_HANDLE_RADIUS) && (lastPoint.y < UXA_CRAZY_HANDLE_RADIUS+(_blockHeight*2))) {
-        _handlerHeight = (_blockHeight*2)-(lastPoint.y-UXA_CRAZY_HANDLE_RADIUS);
+    if((lastPoint.y > UXA_CRAZY_HANDLE_RADIUS) && (lastPoint.y < UXA_CRAZY_HANDLE_RADIUS+(_paperBlockHeight*2))) {
+        _handlerHeight = (_paperBlockHeight*2)-(lastPoint.y-UXA_CRAZY_HANDLE_RADIUS);
         secondLeft = (_handlerHeight/_heightPerSecond);
     } else {
         if(lastPoint.y > UXA_CRAZY_HANDLE_RADIUS) {
             lastPoint.y = UXA_CRAZY_HANDLE_RADIUS;
             secondLeft = 1;
         } else {
-            lastPoint.y = UXA_CRAZY_HANDLE_RADIUS+(_blockHeight*2);
+            lastPoint.y = UXA_CRAZY_HANDLE_RADIUS+(_paperBlockHeight*2);
             secondLeft = secondsBegin;
         }
     }
@@ -306,7 +309,7 @@ int hours, minutes, seconds;
 
 -(CGPoint)handleBeginPoint:(int)handlerHeight {
     CGPoint result;
-    result.y = round(handleBarY-UXA_CRAZY_HANDLE_RADIUS+(_blockHeight*2-handlerHeight));
+    result.y = round(handleBarY-UXA_CRAZY_HANDLE_RADIUS+(_paperBlockHeight*2-handlerHeight));
     result.x = round(handleBarX-UXA_CRAZY_HANDLE_RADIUS);
     
     return result;
