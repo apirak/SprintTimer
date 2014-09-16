@@ -21,6 +21,7 @@
     int handleBarY;
     int _paperX, _paperY;
     int _blockWidth, _blockHeight;
+    int _linePadding;
 }
 @end
 
@@ -37,6 +38,8 @@ int hours, minutes, seconds;
         self.opaque = NO;
         
         self.secondsBegin = 300;
+        
+        _linePadding = 20;
         
         _paperX = (UXA_CRAZY_PADDING+UXA_CRAZY_MARGIN);
         _paperY = (UXA_CRAZY_PADDING+UXA_CRAZY_MARGIN);
@@ -86,20 +89,20 @@ int hours, minutes, seconds;
 }
 
 -(void) drawPaper:(CGContextRef)context{
-    CGContextSetStrokeColorWithColor(context, [UIColor whiteColor].CGColor);
+    CGContextSetStrokeColorWithColor(context, [UIColor colorWithRed:204.0/255.0 green:204.0/255.0 blue:204.0/255.0 alpha:1].CGColor);
     CGContextSetLineWidth(context, 2.0);
     
     CGContextMoveToPoint(context, (_paperX+_blockWidth), _paperY);
-    CGContextAddLineToPoint(context, (_paperX+_blockWidth), (_paperY+_blockHeight*2));
+    CGContextAddLineToPoint(context, (_paperX+_blockWidth), (_paperY+_blockHeight*2+(_linePadding*2)));
     
     CGContextMoveToPoint(context, (_paperX+_blockWidth*2), _paperY);
-    CGContextAddLineToPoint(context, (_paperX+_blockWidth*2), (_paperY+_blockHeight*2));
+    CGContextAddLineToPoint(context, (_paperX+_blockWidth*2), (_paperY+_blockHeight*2+(_linePadding*2)));
     
     CGContextMoveToPoint(context, (_paperX+_blockWidth*3), _paperY);
-    CGContextAddLineToPoint(context, (_paperX+_blockWidth*3), (_paperY+_blockHeight*2));
+    CGContextAddLineToPoint(context, (_paperX+_blockWidth*3), (_paperY+_blockHeight*2+(_linePadding*2)));
     
-    CGContextMoveToPoint(context, _paperX, (_paperY+_blockHeight));
-    CGContextAddLineToPoint(context, (_paperX+_blockWidth*4), (_paperY+_blockHeight));
+    CGContextMoveToPoint(context, _paperX, (_paperY+_blockHeight)+_linePadding);
+    CGContextAddLineToPoint(context, (_paperX+_blockWidth*4), (_paperY+_blockHeight)+_linePadding);
     
     CGContextSetLineCap(context, kCGLineCapRound);
     CGContextStrokePath(context);
@@ -124,18 +127,25 @@ int hours, minutes, seconds;
     
     int linePosition = (barNumber < 5) ? 1 : 5;
     int lineHeightPosition = (barNumber < 5) ? 0 : _blockHeight;
+    int linePaddingTop = (barNumber < 5) ? 0 : _linePadding*2;
     
-    CGContextFillRect(context, CGRectMake(_paperX+_blockWidth*(barNumber-linePosition),
-                                          _paperY+(_blockHeight-height)+lineHeightPosition,
-                                          _blockWidth,
-                                          height));
+    CGRect largeBar = CGRectMake(_paperX+_blockWidth*(barNumber-linePosition)+_linePadding,
+                              _paperY+(_blockHeight-height)+lineHeightPosition+linePaddingTop,
+                              _blockWidth-(_linePadding*2),
+                              height);
+    CGPathRef roundedRectPath = [self pathForRoundedRect:largeBar radius:5 onlyBottom:FALSE];
+    CGContextAddPath(context, roundedRectPath);
+    CGContextFillPath(context);
 
     if(height > _paperAlertHeight){
+        CGRect smallBar = CGRectMake(_paperX+_blockWidth*(barNumber-linePosition)+_linePadding,
+                                     _paperY+(_blockHeight-_paperAlertHeight)+lineHeightPosition+linePaddingTop,
+                                     _blockWidth-(_linePadding*2),
+                                     _paperAlertHeight);
+        CGPathRef roundedBottomRectPath = [self pathForRoundedRect:smallBar radius:5 onlyBottom:FALSE];
         CGContextSetRGBFillColor(context, 1.0, 0.0, 0.0, 1.0);
-        CGContextFillRect(context, CGRectMake(_paperX+_blockWidth*(barNumber-linePosition),
-                                              _paperY+(_blockHeight-_paperAlertHeight)+lineHeightPosition,
-                                              _blockWidth,
-                                              _paperAlertHeight));
+        CGContextAddPath(context, roundedBottomRectPath);
+        CGContextFillPath(context);
     }
 }
 
@@ -143,9 +153,16 @@ int hours, minutes, seconds;
     CGContextSaveGState(context);
     
     CGPoint handleCenter = [self handleBeginPoint:_handlerHeight];
+
+    CGContextSetStrokeColorWithColor(context, [UIColor colorWithRed:204.0/255.0 green:204.0/255.0 blue:204.0/255.0 alpha:1].CGColor);
+    CGContextSetLineWidth(context, 8.0);
+    CGContextMoveToPoint(context, handleBarX, handleBarY);
+    CGContextAddLineToPoint(context, handleBarX, _paperY+(_blockHeight*2));
+    CGContextSetLineCap(context, kCGLineCapRound);
+    CGContextStrokePath(context);
     
     CGContextSetStrokeColorWithColor(context, [UIColor redColor].CGColor);
-    CGContextSetLineWidth(context, 4.0);
+    CGContextSetLineWidth(context, 8.0);
     CGContextMoveToPoint(context, handleBarX, handleBarY+(_blockHeight*2-_handlerHeight));
     CGContextAddLineToPoint(context, handleBarX, _paperY+(_blockHeight*2));
     CGContextSetLineCap(context, kCGLineCapRound);
@@ -167,6 +184,46 @@ int hours, minutes, seconds;
     [[UIColor colorWithRed:1.0 green:0.0 blue:0.0 alpha:1.0]set];
     CGContextDrawPath(context, kCGPathStroke);
 
+}
+
+#pragma mark - Drawing function -
+
+- (CGPathRef) pathForRoundedRect:(CGRect)rect radius:(CGFloat)radius onlyBottom:(BOOL)onlyBottom
+{
+	CGMutablePathRef retPath = CGPathCreateMutable();
+    
+	CGRect innerRect = CGRectInset(rect, radius, radius);
+    
+	CGFloat inside_right = innerRect.origin.x + innerRect.size.width;
+	CGFloat outside_right = rect.origin.x + rect.size.width;
+	CGFloat inside_bottom = innerRect.origin.y + innerRect.size.height;
+	CGFloat outside_bottom = rect.origin.y + rect.size.height;
+    
+	CGFloat inside_top = innerRect.origin.y;
+	CGFloat outside_top = rect.origin.y;
+	CGFloat outside_left = rect.origin.x;
+    
+    if(onlyBottom){
+        CGPathMoveToPoint(retPath, NULL, rect.origin.x, rect.origin.y);
+        CGPathAddLineToPoint(retPath, NULL, outside_right, outside_top);
+    } else {
+        CGPathMoveToPoint(retPath, NULL, innerRect.origin.x, outside_top);
+        CGPathAddLineToPoint(retPath, NULL, inside_right, outside_top);
+        CGPathAddArcToPoint(retPath, NULL, outside_right, outside_top, outside_right, inside_top, radius);
+    }
+	CGPathAddLineToPoint(retPath, NULL, outside_right, inside_bottom);
+	CGPathAddArcToPoint(retPath, NULL,  outside_right, outside_bottom, inside_right, outside_bottom, radius);
+    
+	CGPathAddLineToPoint(retPath, NULL, innerRect.origin.x, outside_bottom);
+	CGPathAddArcToPoint(retPath, NULL,  outside_left, outside_bottom, outside_left, inside_bottom, radius);
+	CGPathAddLineToPoint(retPath, NULL, outside_left, inside_top);
+    if(!onlyBottom) {
+        CGPathAddArcToPoint(retPath, NULL,  outside_left, outside_top, innerRect.origin.x, outside_top, radius);
+    }
+    
+	CGPathCloseSubpath(retPath);
+    
+	return retPath;
 }
 
 #pragma mark - UIControl Override -
@@ -223,18 +280,24 @@ int hours, minutes, seconds;
 #pragma mark - Math -
 
 -(void)movehandle:(CGPoint)lastPoint{
+    
+    int secondLeft;
+    
     if((lastPoint.y > UXA_CRAZY_HANDLE_RADIUS) && (lastPoint.y < UXA_CRAZY_HANDLE_RADIUS+(_blockHeight*2))) {
         _handlerHeight = (_blockHeight*2)-(lastPoint.y-UXA_CRAZY_HANDLE_RADIUS);
+        secondLeft = (_handlerHeight/_heightPerSecond);
     } else {
         if(lastPoint.y > UXA_CRAZY_HANDLE_RADIUS) {
             lastPoint.y = UXA_CRAZY_HANDLE_RADIUS;
+            secondLeft = 1;
         } else {
             lastPoint.y = UXA_CRAZY_HANDLE_RADIUS+(_blockHeight*2);
+            secondLeft = secondsBegin;
         }
     }
     
     if (_delegate != nil) {
-        [_delegate changeSecondLeft:(_handlerHeight/_heightPerSecond)];
+        [_delegate changeSecondLeft:secondLeft];
     }
     
     [self setCountDownPosition];
