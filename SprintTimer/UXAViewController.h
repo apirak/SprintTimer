@@ -13,13 +13,16 @@
 #import "UXATimerView.h"
 #import "UXACrazyView.h"
 
+#define TIMER_INTERVAL 0.03f
+
 //#define DEFAULT_VIEW @"CRAZY"
 
 @interface UXAViewController : UIViewController <AVAudioPlayerDelegate, TimePickerDelegate, TimeViewerDelegate, CrazyViewerDelegate>
 
-@property (strong, nonatomic)  AVAudioPlayer *audioPlayer;
+@property (strong, nonatomic) AVAudioPlayer *timeoutSound;
+@property (strong, nonatomic) AVAudioPlayer *nextSound;
 
-@property (weak, nonatomic) IBOutlet UILabel *timerLabel;
+@property (weak, nonatomic)   IBOutlet UILabel *timerLabel;
 @property (nonatomic, assign) IBOutlet UIButton *crazyButton;
 @property (nonatomic, assign) IBOutlet UIButton *timerButton;
 @property (nonatomic, assign) IBOutlet UIButton *totalTimeButton;

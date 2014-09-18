@@ -13,15 +13,17 @@
     float _heightPerSecond;
     float _paperHeightPerSecond;
     int _handlerHeight;
-    int _paperHandlerHeight;
+    float _paperHandlerHeight;
     int _paperAlertHeight;
     UILabel *_countdownLabel;
     
     int handleBarX;
     int handleBarY;
     int _paperX, _paperY;
-    int _blockWidth, _blockHeight;
-    int _paperBlockWidth, _paperBlockHeight;
+    int _blockWidth;
+    int _blockHeight;
+    int _paperBlockWidth;
+    int _paperBlockHeight;
     int _linePadding;
     
     UIColor *_clockColor;
@@ -123,15 +125,15 @@ int hours, minutes, seconds;
 }
 
 -(void) drawCountDownBar:(CGContextRef)context {
-    for (int i = 1; i <= 8; i++)
+    for (float i = 1; i <= 8; i=i+1.0)
     {
-        int height = (_paperHandlerHeight > _blockHeight*(8-i)) ? (_paperHandlerHeight-(_blockHeight*(8-i))) : 0;
+        float height = (_paperHandlerHeight > _blockHeight*(8.0-i)) ? (_paperHandlerHeight-(_blockHeight*(8.0-i))) : 0;
         [self drawCrazyRectangle:context number:i height:height];
     }
 }
 
--(void) drawCrazyRectangle:(CGContextRef)context number:(int)barNumber height:(int)handlerHeight {
-    int height = (handlerHeight < _blockHeight) ? handlerHeight : _blockHeight;
+-(void) drawCrazyRectangle:(CGContextRef)context number:(int)barNumber height:(float)handlerHeight {
+    float height = (handlerHeight < _blockHeight) ? handlerHeight : _blockHeight;
     
     if(height > _paperAlertHeight){
         CGContextSetFillColorWithColor(context, _clock2Color.CGColor);
@@ -143,6 +145,10 @@ int hours, minutes, seconds;
     int lineHeightPosition = (barNumber < 5) ? 0 : _blockHeight;
     int linePaddingTop = (barNumber < 5) ? 0 : _linePadding*2;
     
+    
+    if (height != 254.0){
+//        NSLog(@"_blockHeight:%d height:%f handlerHeight:%f",_blockHeight, height, handlerHeight);
+    }
     CGRect largeBar = CGRectMake(_paperX+_blockWidth*(barNumber-linePosition)+_linePadding,
                               _paperY+(_blockHeight-height)+lineHeightPosition+linePaddingTop,
                               _blockWidth-(_linePadding*2),
@@ -202,8 +208,10 @@ int hours, minutes, seconds;
 - (CGPathRef) pathForRoundedRect:(CGRect)rect radius:(CGFloat)radius onlyBottom:(BOOL)onlyBottom
 {
 	CGMutablePathRef retPath = CGPathCreateMutable();
+
+    CGFloat optimizeRadius = (rect.size.height <= radius*2) ? rect.size.height/2.0 : radius;
     
-	CGRect innerRect = CGRectInset(rect, radius, radius);
+	CGRect innerRect = CGRectInset(rect, optimizeRadius, optimizeRadius);
     
 	CGFloat inside_right = innerRect.origin.x + innerRect.size.width;
 	CGFloat outside_right = rect.origin.x + rect.size.width;
@@ -220,16 +228,16 @@ int hours, minutes, seconds;
     } else {
         CGPathMoveToPoint(retPath, NULL, innerRect.origin.x, outside_top);
         CGPathAddLineToPoint(retPath, NULL, inside_right, outside_top);
-        CGPathAddArcToPoint(retPath, NULL, outside_right, outside_top, outside_right, inside_top, radius);
+        CGPathAddArcToPoint(retPath, NULL, outside_right, outside_top, outside_right, inside_top, optimizeRadius);
     }
 	CGPathAddLineToPoint(retPath, NULL, outside_right, inside_bottom);
-	CGPathAddArcToPoint(retPath, NULL,  outside_right, outside_bottom, inside_right, outside_bottom, radius);
+	CGPathAddArcToPoint(retPath, NULL,  outside_right, outside_bottom, inside_right, outside_bottom, optimizeRadius);
     
 	CGPathAddLineToPoint(retPath, NULL, innerRect.origin.x, outside_bottom);
-	CGPathAddArcToPoint(retPath, NULL,  outside_left, outside_bottom, outside_left, inside_bottom, radius);
+	CGPathAddArcToPoint(retPath, NULL,  outside_left, outside_bottom, outside_left, inside_bottom, optimizeRadius);
 	CGPathAddLineToPoint(retPath, NULL, outside_left, inside_top);
     if(!onlyBottom) {
-        CGPathAddArcToPoint(retPath, NULL,  outside_left, outside_top, innerRect.origin.x, outside_top, radius);
+        CGPathAddArcToPoint(retPath, NULL,  outside_left, outside_top, innerRect.origin.x, outside_top, optimizeRadius);
     }
     
 	CGPathCloseSubpath(retPath);

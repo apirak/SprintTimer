@@ -24,7 +24,8 @@
 @synthesize crazyView;
 @synthesize secondsLeft;
 @synthesize secondsBegin;
-@synthesize audioPlayer;
+@synthesize timeoutSound;
+@synthesize nextSound;
 
 - (void)viewDidLoad
 {
@@ -81,12 +82,39 @@
     self.secondsBegin = 60*5;
     self.secondsLeft = self.secondsBegin;
     
-    NSString *soundFilePath = [NSString stringWithFormat:@"%@/bell.caf", [[NSBundle mainBundle] resourcePath]];
-    NSURL *soundFileURL = [NSURL fileURLWithPath:soundFilePath];
-    NSError *error;
-    self.audioPlayer = [[AVAudioPlayer alloc]
-                        initWithContentsOfURL:soundFileURL
-                        error:&error];
+    NSString *endSoundFilePath = [NSString stringWithFormat:@"%@/bell.caf", [[NSBundle mainBundle] resourcePath]];
+    NSURL *endSoundFileURL = [NSURL fileURLWithPath:endSoundFilePath];
+    NSError *endSoundError;
+    self.timeoutSound = [[AVAudioPlayer alloc]
+                        initWithContentsOfURL:endSoundFileURL
+                        error:&endSoundError];
+
+    if (endSoundError) {
+        NSLog(@"Error in audioPlayer: %@",
+              [endSoundError localizedDescription]);
+    } else {
+        [self.timeoutSound setNumberOfLoops:0];
+        [self.timeoutSound setVolume: 1];
+        self.timeoutSound.delegate = self;
+        [self.timeoutSound prepareToPlay];
+    }
+    
+    NSString *nextSoundFilePath = [NSString stringWithFormat:@"%@/short_bell_2.caf", [[NSBundle mainBundle] resourcePath]];
+    NSURL *nextSoundFileURL = [NSURL fileURLWithPath:nextSoundFilePath];
+    NSError *nextSoundError;
+    self.nextSound = [[AVAudioPlayer alloc]
+                      initWithContentsOfURL:nextSoundFileURL
+                      error:&nextSoundError];
+
+    if (nextSoundError) {
+        NSLog(@"Error in audioPlayer: %@",
+        [nextSoundError localizedDescription]);
+    } else {
+        [self.nextSound setNumberOfLoops:0];
+        [self.nextSound setVolume: 1];
+        self.nextSound.delegate = self;
+        [self.nextSound prepareToPlay];
+    }
     
     [[AVAudioSession sharedInstance] setDelegate: self];
     NSError *setCategoryError = nil;
@@ -95,31 +123,34 @@
         NSLog(@"Error setting category! %@", setCategoryError);
     }
     
-    if (error)
-    {
-        NSLog(@"Error in audioPlayer: %@",
-              [error localizedDescription]);
-    } else {
-        [self.audioPlayer setNumberOfLoops:0];
-        [self.audioPlayer setVolume: 1];
-        self.audioPlayer.delegate = self;
-        [self.audioPlayer prepareToPlay];
-    }
-    
     [self countdownTimer];
     
-    [self setTimerName:@"Timer_button.png" Crazy8Name:@"Crazy8_button_selected.png" BarXPoition:196 TimerViewHidden:YES];
+//    [self setTimerName:@"Timer_button.png" Crazy8Name:@"Crazy8_button_selected.png" BarXPoition:196 TimerViewHidden:YES];
     
 }
 
 - (void)updateCounter {
     if(self.secondsLeft > 0 ){
-        self.secondsLeft = self.secondsLeft - 0.0625;
+        self.secondsLeft = self.secondsLeft - TIMER_INTERVAL;
         [timerView updateSecondLeft:self.secondsLeft];
         [crazyView updateSecondLeft:self.secondsLeft];
         
+
         if(self.secondsLeft <= 0){
-            [self.audioPlayer play];
+            [self.timeoutSound play];
+        }
+        if(timerView.hidden == YES) {
+            float timeBox = self.secondsBegin/8;
+            float warningTimerBox = timeBox/4;
+            for (float i = 1; i <= 7; i = i + 1.0)
+            {
+                if (self.secondsLeft > ((timeBox*i)-TIMER_INTERVAL) && self.secondsLeft < (timeBox*i)) {
+                    [self.nextSound play];
+                }
+                if (self.secondsLeft > ((timeBox*i)+warningTimerBox-TIMER_INTERVAL) && self.secondsLeft < (timeBox*i)+warningTimerBox) {
+                    [self.nextSound play];
+                }
+            }
         }
     } else {
         self.secondsLeft = 0;
@@ -128,7 +159,7 @@
 
 
 -(void)countdownTimer{
-    _timer = [NSTimer scheduledTimerWithTimeInterval:0.0625f target:self selector:@selector(updateCounter) userInfo:nil repeats:YES];
+    _timer = [NSTimer scheduledTimerWithTimeInterval:TIMER_INTERVAL target:self selector:@selector(updateCounter) userInfo:nil repeats:YES];
 }
 
 
