@@ -146,26 +146,26 @@ int hours, minutes, seconds;
     int linePaddingTop = (barNumber < 5) ? 0 : _linePadding*2;
     
     
-    if (height != 254.0){
-//        NSLog(@"_blockHeight:%d height:%f handlerHeight:%f",_blockHeight, height, handlerHeight);
-    }
     CGRect largeBar = CGRectMake(_paperX+_blockWidth*(barNumber-linePosition)+_linePadding,
                               _paperY+(_blockHeight-height)+lineHeightPosition+linePaddingTop,
                               _blockWidth-(_linePadding*2),
                               height);
-    CGPathRef roundedRectPath = [self pathForRoundedRect:largeBar radius:5 onlyBottom:FALSE];
+    CGPathRef roundedRectPath = [self newPathForRoundedRect:largeBar radius:5 onlyBottom:FALSE];
     CGContextAddPath(context, roundedRectPath);
-    CGContextFillPath(context);
-
+    CGPathDrawingMode mode = kCGPathFill;
+    CGContextDrawPath( context, mode );
+    CGPathRelease(roundedRectPath);
+    
     if(height > _paperAlertHeight){
         CGRect smallBar = CGRectMake(_paperX+_blockWidth*(barNumber-linePosition)+_linePadding,
                                      _paperY+(_blockHeight-_paperAlertHeight)+lineHeightPosition+linePaddingTop,
                                      _blockWidth-(_linePadding*2),
                                      _paperAlertHeight);
-        CGPathRef roundedBottomRectPath = [self pathForRoundedRect:smallBar radius:5 onlyBottom:FALSE];
+        CGPathRef roundedBottomRectPath = [self newPathForRoundedRect:smallBar radius:5 onlyBottom:FALSE];
         CGContextSetFillColorWithColor(context, _clockColor.CGColor);
         CGContextAddPath(context, roundedBottomRectPath);
         CGContextFillPath(context);
+        CGPathRelease(roundedBottomRectPath);
     }
 }
 
@@ -205,10 +205,10 @@ int hours, minutes, seconds;
 
 #pragma mark - Drawing function -
 
-- (CGPathRef) pathForRoundedRect:(CGRect)rect radius:(CGFloat)radius onlyBottom:(BOOL)onlyBottom
+- (CGPathRef) newPathForRoundedRect:(CGRect)rect radius:(CGFloat)radius onlyBottom:(BOOL)onlyBottom
 {
-	CGMutablePathRef retPath = CGPathCreateMutable();
-
+    CGMutablePathRef retPath = CGPathCreateMutable();
+    
     CGFloat optimizeRadius = (rect.size.height <= radius*2) ? rect.size.height/2.0 : radius;
     
 	CGRect innerRect = CGRectInset(rect, optimizeRadius, optimizeRadius);
@@ -242,7 +242,10 @@ int hours, minutes, seconds;
     
 	CGPathCloseSubpath(retPath);
     
-	return retPath;
+
+    return retPath;
+
+        
 }
 
 #pragma mark - UIControl Override -
