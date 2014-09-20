@@ -20,6 +20,7 @@
 @interface UXAViewController : UIViewController <AVAudioPlayerDelegate, TimePickerDelegate, TimeViewerDelegate, CrazyViewerDelegate>
 
 @property (strong, nonatomic) AVAudioPlayer *timeoutSound;
+@property (strong, nonatomic) AVAudioPlayer *almostSound;
 @property (strong, nonatomic) AVAudioPlayer *nextSound;
 
 @property (weak, nonatomic)   IBOutlet UILabel *timerLabel;

@@ -19,6 +19,11 @@
     int _center_y;
     BOOL _dragTimer;
     UILabel *_countdownLabel;
+    
+    UIColor *_clockColor;
+    UIColor *_clock2Color;
+    UIColor *_paperColor;
+    UIColor *_guideColor;
 }
 @end
 
@@ -35,6 +40,11 @@ int hours, minutes, seconds;
         self.opaque = NO;
         
         self.secondsBegin = 300;
+
+        _clockColor  = [UIColor colorWithRed:224.0/255.0 green:0/255.0 blue:0/255.0 alpha:1];
+        _clock2Color = [UIColor colorWithRed:247.0/255.0 green:134.0/255.0 blue:4.0/255.0 alpha:1];
+        _paperColor  = [UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1];
+        _guideColor  = [UIColor colorWithRed:204.0/255.0 green:204.0/255.0 blue:204.0/255.0 alpha:1];
         
         _radius = self.frame.size.width/2 - UXA_TIMERVIEW_PADDING - UXA_TIMERVIEW_MARGIN;
         _center_x = self.frame.size.width/2;
@@ -44,7 +54,7 @@ int hours, minutes, seconds;
         _countdownLabel = [ [UILabel alloc ] initWithFrame:CGRectMake(_center_x, _center_y , UXA_HANDLE_WIDTH, UXA_HANDLE_WIDTH) ];
         _countdownLabel.opaque = NO;
         _countdownLabel.textAlignment = NSTextAlignmentCenter;
-        _countdownLabel.textColor = [UIColor redColor];
+        _countdownLabel.textColor = _clockColor;
         _countdownLabel.font = [UIFont fontWithName:@"Helvetica Neue" size:(24.0)];
         _countdownLabel.text =  [NSString stringWithFormat:@"%02d:%02d", 5, 0];
         
@@ -99,7 +109,7 @@ int hours, minutes, seconds;
 }
 
 -(void) drawTheCircle:(CGContextRef)context{
-    CGContextSetFillColorWithColor(context, [[UIColor redColor] CGColor]);
+    CGContextSetFillColorWithColor(context, [_clockColor CGColor]);
     CGContextMoveToPoint(context, _center_x, _center_y);
     int angle = self.angle != 90 ? self.angle : 89;
     CGContextAddArc(context, _center_x, _center_y, _radius,  ToRad(-90), ToRad(-angle), 1);
@@ -125,7 +135,7 @@ int hours, minutes, seconds;
     CGContextBeginPath(context);
     CGContextSetLineWidth(context, 2.0);
     CGContextAddEllipseInRect(context, CGRectMake(handleCenter.x, handleCenter.y, UXA_HANDLE_WIDTH, UXA_HANDLE_WIDTH));
-    [[UIColor colorWithRed:1.0 green:0.0 blue:0.0 alpha:1.0]set];
+    [_clockColor set];
     CGContextDrawPath(context, kCGPathStroke);
 }
 

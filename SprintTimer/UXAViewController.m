@@ -25,6 +25,7 @@
 @synthesize secondsLeft;
 @synthesize secondsBegin;
 @synthesize timeoutSound;
+@synthesize almostSound;
 @synthesize nextSound;
 
 - (void)viewDidLoad
@@ -64,9 +65,9 @@
     
     totalTimeButton = [UIButton buttonWithType:UIButtonTypeSystem];
     [totalTimeButton setTitleColor:[UIColor colorWithRed:155/255.0 green:155/255.0 blue:155/255.0 alpha:1.0] forState:UIControlStateNormal];
-    [[totalTimeButton titleLabel] setFont:[UIFont fontWithName:@"Avenir Next" size:30]];
-    [totalTimeButton setFrame:CGRectMake(780, 50, 200, 29)];
-    [totalTimeButton setTitle:@"5 min" forState:UIControlStateNormal];
+    [[totalTimeButton titleLabel] setFont:[UIFont fontWithName:@"Avenir Next" size:35]];
+    [totalTimeButton setFrame:CGRectMake(780, 53, 200, 30)];
+    [totalTimeButton setTitle:@"5 Min" forState:UIControlStateNormal];
     [totalTimeButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
     [totalTimeButton setContentEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 10)];
     [totalTimeButton addTarget:self action:@selector(chooseTimeButtonTapped:)
@@ -98,7 +99,24 @@
         [self.timeoutSound prepareToPlay];
     }
     
-    NSString *nextSoundFilePath = [NSString stringWithFormat:@"%@/short_bell_2.caf", [[NSBundle mainBundle] resourcePath]];
+    NSString *almostSoundFilePath = [NSString stringWithFormat:@"%@/long_bell.caf", [[NSBundle mainBundle] resourcePath]];
+    NSURL *almostSoundFileURL = [NSURL fileURLWithPath:almostSoundFilePath];
+    NSError *almostSoundError;
+    self.almostSound = [[AVAudioPlayer alloc]
+                      initWithContentsOfURL:almostSoundFileURL
+                      error:&almostSoundError];
+    
+    if (almostSoundError) {
+        NSLog(@"Error in audioPlayer: %@",
+              [almostSoundError localizedDescription]);
+    } else {
+        [self.almostSound setNumberOfLoops:0];
+        [self.almostSound setVolume: 1];
+        self.almostSound.delegate = self;
+        [self.almostSound prepareToPlay];
+    }
+    
+    NSString *nextSoundFilePath = [NSString stringWithFormat:@"%@/short_bell.caf", [[NSBundle mainBundle] resourcePath]];
     NSURL *nextSoundFileURL = [NSURL fileURLWithPath:nextSoundFilePath];
     NSError *nextSoundError;
     self.nextSound = [[AVAudioPlayer alloc]
@@ -147,7 +165,7 @@
                     [self.nextSound play];
                 }
                 if (self.secondsLeft > ((timeBox*i)+warningTimerBox-TIMER_INTERVAL) && self.secondsLeft < (timeBox*i)+warningTimerBox) {
-                    [self.nextSound play];
+                    [self.almostSound play];
                 }
             }
         }
@@ -211,7 +229,7 @@
 
     if (_timePickerPopover == nil) {
         _timePickerPopover = [[UIPopoverController alloc] initWithContentViewController:_timePicker];
-        [_timePickerPopover presentPopoverFromRect:CGRectMake(890, 45, 113, 29) inView:self.view
+        [_timePickerPopover presentPopoverFromRect:CGRectMake(880, 55, 113, 29) inView:self.view
           permittedArrowDirections:UIPopoverArrowDirectionAny
                           animated:YES];
     }

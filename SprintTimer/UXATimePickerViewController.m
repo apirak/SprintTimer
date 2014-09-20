@@ -26,27 +26,27 @@
         _selectedRow = [NSIndexPath indexPathForRow:4 inSection:4];
 
         // Values and keys as arrays
-        _names = @[@"30 second",
-                            @"1 Min",
-                            @"2 Min",
-                            @"3 Min",
-                            @"5 Min",
-                            @"8 Min",
-                            @"13 Min",
-                            @"21 Min",
-                            @"30 Min",
-                            @"60 min"];
+        _names = @[@"30 Sec",
+                    @"1 Min",
+                    @"2 Min",
+                    @"3 Min",
+                    @"5 Min",
+                    @"8 Min",
+                    @"13 Min",
+                    @"21 Min",
+                    @"30 Min",
+                    @"60 Min"];
         
         _seconds = @[[NSNumber numberWithInt:30],
-                           [NSNumber numberWithInt:1*60],
-                           [NSNumber numberWithInt:2*60],
-                           [NSNumber numberWithInt:3*60],
-                           [NSNumber numberWithInt:5*60],
-                           [NSNumber numberWithInt:8*60],
-                           [NSNumber numberWithInt:13*60],
-                           [NSNumber numberWithInt:21*60],
-                           [NSNumber numberWithInt:30*60],
-                           [NSNumber numberWithInt:60*60]];
+                       [NSNumber numberWithInt:1*60],
+                       [NSNumber numberWithInt:2*60],
+                       [NSNumber numberWithInt:3*60],
+                       [NSNumber numberWithInt:5*60],
+                       [NSNumber numberWithInt:8*60],
+                       [NSNumber numberWithInt:13*60],
+                       [NSNumber numberWithInt:21*60],
+                       [NSNumber numberWithInt:30*60],
+                       [NSNumber numberWithInt:60*60]];
         
         _timeNamesValue = [NSDictionary dictionaryWithObjects:_seconds forKeys:_names];
         

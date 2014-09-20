@@ -12,8 +12,7 @@
 		5D21D3CA19BE06D1003E95E4 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D21D3C919BE06D1003E95E4 /* AudioToolbox.framework */; };
 		5D21D3D019BE18F6003E95E4 /* bell.caf in Resources */ = {isa = PBXBuildFile; fileRef = 5D21D3CF19BE18F6003E95E4 /* bell.caf */; };
 		5D2BF62119BF5B6200728645 /* UXACrazyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D2BF62019BF5B6200728645 /* UXACrazyView.m */; };
-		5D54980B19CB3D8B00C3656E /* short_bell.caf in Resources */ = {isa = PBXBuildFile; fileRef = 5D54980A19CB3D8B00C3656E /* short_bell.caf */; };
-		5D54980D19CB3F5A00C3656E /* short_bell_2.caf in Resources */ = {isa = PBXBuildFile; fileRef = 5D54980C19CB3F5A00C3656E /* short_bell_2.caf */; };
+		5D54980D19CB3F5A00C3656E /* long_bell.caf in Resources */ = {isa = PBXBuildFile; fileRef = 5D54980C19CB3F5A00C3656E /* long_bell.caf */; };
 		5D758A4919AE2D1A00E6E520 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D758A4819AE2D1A00E6E520 /* Foundation.framework */; };
 		5D758A4B19AE2D1A00E6E520 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D758A4A19AE2D1A00E6E520 /* CoreGraphics.framework */; };
 		5D758A4D19AE2D1A00E6E520 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D758A4C19AE2D1A00E6E520 /* UIKit.framework */; };
@@ -29,6 +28,7 @@
 		5D758A7219AE2D1A00E6E520 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5D758A7019AE2D1A00E6E520 /* InfoPlist.strings */; };
 		5D758A7419AE2D1A00E6E520 /* SprintTimerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D758A7319AE2D1A00E6E520 /* SprintTimerTests.m */; };
 		5D758AC819AE33BB00E6E520 /* UXATimerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D758AC719AE33BB00E6E520 /* UXATimerView.m */; };
+		5D7E623F19CD47550077ED43 /* short_bell.caf in Resources */ = {isa = PBXBuildFile; fileRef = 5D7E623E19CD47550077ED43 /* short_bell.caf */; };
 		5DF34D0019B4D30B004B086C /* Crazy8_button_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 5DF34CF819B4D30B004B086C /* Crazy8_button_selected.png */; };
 		5DF34D0119B4D30B004B086C /* Crazy8_button_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5DF34CF919B4D30B004B086C /* Crazy8_button_selected@2x.png */; };
 		5DF34D0219B4D30B004B086C /* Crazy8_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 5DF34CFA19B4D30B004B086C /* Crazy8_button.png */; };
@@ -57,8 +57,7 @@
 		5D21D3CF19BE18F6003E95E4 /* bell.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = bell.caf; sourceTree = "<group>"; };
 		5D2BF61F19BF5B6200728645 /* UXACrazyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UXACrazyView.h; sourceTree = "<group>"; };
 		5D2BF62019BF5B6200728645 /* UXACrazyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UXACrazyView.m; sourceTree = "<group>"; };
-		5D54980A19CB3D8B00C3656E /* short_bell.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = short_bell.caf; sourceTree = "<group>"; };
-		5D54980C19CB3F5A00C3656E /* short_bell_2.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = short_bell_2.caf; sourceTree = "<group>"; };
+		5D54980C19CB3F5A00C3656E /* long_bell.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = long_bell.caf; sourceTree = "<group>"; };
 		5D758A4519AE2D1A00E6E520 /* SprintTimer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SprintTimer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D758A4819AE2D1A00E6E520 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		5D758A4A19AE2D1A00E6E520 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -80,6 +79,7 @@
 		5D758A7319AE2D1A00E6E520 /* SprintTimerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SprintTimerTests.m; sourceTree = "<group>"; };
 		5D758AC619AE33BB00E6E520 /* UXATimerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UXATimerView.h; sourceTree = "<group>"; };
 		5D758AC719AE33BB00E6E520 /* UXATimerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UXATimerView.m; sourceTree = "<group>"; };
+		5D7E623E19CD47550077ED43 /* short_bell.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = short_bell.caf; sourceTree = "<group>"; };
 		5DF34CF819B4D30B004B086C /* Crazy8_button_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Crazy8_button_selected.png; sourceTree = "<group>"; };
 		5DF34CF919B4D30B004B086C /* Crazy8_button_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Crazy8_button_selected@2x.png"; sourceTree = "<group>"; };
 		5DF34CFA19B4D30B004B086C /* Crazy8_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Crazy8_button.png; sourceTree = "<group>"; };
@@ -211,8 +211,8 @@
 		5DB3C89219B0CF5D00C7A40F /* Asset */ = {
 			isa = PBXGroup;
 			children = (
-				5D54980C19CB3F5A00C3656E /* short_bell_2.caf */,
-				5D54980A19CB3D8B00C3656E /* short_bell.caf */,
+				5D7E623E19CD47550077ED43 /* short_bell.caf */,
+				5D54980C19CB3F5A00C3656E /* long_bell.caf */,
 				5D21D3CF19BE18F6003E95E4 /* bell.caf */,
 				5D21D3C519BE0407003E95E4 /* bell.m4a */,
 				5DF34D0819B4D39B004B086C /* Timer_button_selected.png */,
@@ -311,12 +311,12 @@
 				5DF34D0119B4D30B004B086C /* Crazy8_button_selected@2x.png in Resources */,
 				5D758A6119AE2D1A00E6E520 /* Images.xcassets in Resources */,
 				5DF34D0E19B4D39B004B086C /* Timer_button.png in Resources */,
-				5D54980D19CB3F5A00C3656E /* short_bell_2.caf in Resources */,
+				5D54980D19CB3F5A00C3656E /* long_bell.caf in Resources */,
 				5DF34D0D19B4D39B004B086C /* Timer_button_selected@2x.png in Resources */,
 				5DF34D0019B4D30B004B086C /* Crazy8_button_selected.png in Resources */,
-				5D54980B19CB3D8B00C3656E /* short_bell.caf in Resources */,
 				5D758A5319AE2D1A00E6E520 /* InfoPlist.strings in Resources */,
 				5D21D3D019BE18F6003E95E4 /* bell.caf in Resources */,
+				5D7E623F19CD47550077ED43 /* short_bell.caf in Resources */,
 				5D21D3C619BE0407003E95E4 /* bell.m4a in Resources */,
 				5DF34D0F19B4D39B004B086C /* Timer_button@2x.png in Resources */,
 				5DF34D0219B4D30B004B086C /* Crazy8_button.png in Resources */,
