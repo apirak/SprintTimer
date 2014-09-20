@@ -32,7 +32,6 @@
     [super viewDidLoad];
     
     timerView = [[UXATimerView alloc] initWithFrame:CGRectMake((1024-UXA_TIMERVIEW_WIDTH)/2 ,100, UXA_TIMERVIEW_WIDTH, UXA_TIMERVIEW_WIDTH)];
-    
     [timerView addTarget:self action:@selector(newValue:) forControlEvents:UIControlEventValueChanged];
     [timerView setDelegate:self];
     [self.view addSubview:timerView];
@@ -65,8 +64,8 @@
     
     totalTimeButton = [UIButton buttonWithType:UIButtonTypeSystem];
     [totalTimeButton setTitleColor:[UIColor colorWithRed:155/255.0 green:155/255.0 blue:155/255.0 alpha:1.0] forState:UIControlStateNormal];
-    [[totalTimeButton titleLabel] setFont:[UIFont fontWithName:@"Avenir Next" size:36]];
-    [totalTimeButton setFrame:CGRectMake(800, 45, 200, 29)];
+    [[totalTimeButton titleLabel] setFont:[UIFont fontWithName:@"Avenir Next" size:30]];
+    [totalTimeButton setFrame:CGRectMake(780, 50, 200, 29)];
     [totalTimeButton setTitle:@"5 min" forState:UIControlStateNormal];
     [totalTimeButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
     [totalTimeButton setContentEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 10)];

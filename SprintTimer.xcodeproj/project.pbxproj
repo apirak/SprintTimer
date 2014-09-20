@@ -169,12 +169,12 @@
 				5D758A5819AE2D1A00E6E520 /* UXAAppDelegate.m */,
 				5D758A5D19AE2D1A00E6E520 /* UXAViewController.h */,
 				5D758A5E19AE2D1A00E6E520 /* UXAViewController.m */,
+				5DF34D1019B5A119004B086C /* UXATimePickerViewController.h */,
+				5DF34D1119B5A119004B086C /* UXATimePickerViewController.m */,
 				5D2BF62219BF5B7200728645 /* ClockView */,
 				5D758A5A19AE2D1A00E6E520 /* Main.storyboard */,
 				5D758A6019AE2D1A00E6E520 /* Images.xcassets */,
 				5D758A4F19AE2D1A00E6E520 /* Supporting Files */,
-				5DF34D1019B5A119004B086C /* UXATimePickerViewController.h */,
-				5DF34D1119B5A119004B086C /* UXATimePickerViewController.m */,
 			);
 			path = SprintTimer;
 			sourceTree = "<group>";

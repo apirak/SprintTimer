@@ -239,13 +239,9 @@ int hours, minutes, seconds;
     if(!onlyBottom) {
         CGPathAddArcToPoint(retPath, NULL,  outside_left, outside_top, innerRect.origin.x, outside_top, optimizeRadius);
     }
-    
 	CGPathCloseSubpath(retPath);
     
-
     return retPath;
-
-        
 }
 
 #pragma mark - UIControl Override -
