@@ -31,6 +31,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self setNeedsStatusBarAppearanceUpdate];
     
     timerView = [[UXATimerView alloc] initWithFrame:CGRectMake((1024-UXA_TIMERVIEW_WIDTH)/2 ,100, UXA_TIMERVIEW_WIDTH, UXA_TIMERVIEW_WIDTH)];
     [timerView addTarget:self action:@selector(newValue:) forControlEvents:UIControlEventValueChanged];
@@ -144,6 +145,10 @@
     
 //    [self setTimerName:@"Timer_button.png" Crazy8Name:@"Crazy8_button_selected.png" BarXPoition:196 TimerViewHidden:YES];
     
+}
+
+-(UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleDefault;
 }
 
 - (void)updateCounter {
