@@ -216,7 +216,29 @@ int hours, minutes, seconds;
     
     float currentAngle = AngleFromNorth(centerPoint, lastPoint, NO);
     float angleFloat = floor(currentAngle);
-    self.angle = 360.0 - angleFloat;
+    float newAngle = 360.0 - angleFloat;
+    
+    NSLog(@"Angle %f", self.angle);
+    
+    if ((self.angle <= 90) && (self.angle > 45)) {
+        if (newAngle > 90) {
+            self.angle = 90;
+        } else {
+            self.angle = newAngle;
+        }
+    } else {
+        if(self.angle > 90 && self.angle < 180){
+            if(newAngle < 90){
+                self.angle = 91;
+            } else {
+                self.angle = newAngle;
+            }
+        } else {
+            self.angle = newAngle;
+        }
+    }
+//    self.angle = 360.0 - angleFloat;
+
     
     int secondLeft = TimeFromAngle(self.secondsBegin, self.angle);
     
