@@ -191,21 +191,25 @@ int hours, minutes, seconds;
 
 #pragma mark - Timer Countdown -
 
-- (void)updateSecondLeft:(float)secondLeft; {
-    
+- (void)updateSecondLeft:(float)secondLeft {
+    if(!_dragTimer){
+        [self updateCountDownLabel:secondLeft];
+        self.angle = AngleFromTime(self.secondsBegin, secondLeft);
+        
+        [self setCountDownPosition];
+        [self setNeedsDisplay];
+    }
+}
+
+#pragma mark - Math -
+
+- (void)updateCountDownLabel:(float)secondLeft {
     hours = secondLeft / 3600;
     minutes = ((int)secondLeft % 3600) / 60;
     seconds = ((int)secondLeft % 3600) % 60;
     
     _countdownLabel.text =  [NSString stringWithFormat:@"%02d:%02d", minutes, seconds];
-    self.angle = AngleFromTime(self.secondsBegin, secondLeft);
-    
-    [self setCountDownPosition];
-    [self setNeedsDisplay];
 }
-
-
-#pragma mark - Math -
 
 -(void)movehandle:(CGPoint)lastPoint{
     CGPoint centerPoint = CGPointMake(self.frame.size.width/2, self.frame.size.height/2);
@@ -214,8 +218,11 @@ int hours, minutes, seconds;
     float angleFloat = floor(currentAngle);
     self.angle = 360.0 - angleFloat;
     
+    int secondLeft = TimeFromAngle(self.secondsBegin, self.angle);
+    
+    [self updateCountDownLabel:secondLeft];
     if (_delegate != nil) {
-        [_delegate changeSecondLeft:TimeFromAngle(self.secondsBegin, self.angle)];
+        [_delegate changeSecondLeft:secondLeft];
     }
     
     [self setCountDownPosition];
