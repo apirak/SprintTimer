@@ -115,37 +115,55 @@ int hours, minutes, seconds;
     CGContextSetFillColorWithColor(context, [_guideColor CGColor]);
     float circlePadding = UXA_TIMERVIEW_PADDING+UXA_TIMERVIEW_MARGIN;
     CGContextFillEllipseInRect(context, CGRectMake(0+circlePadding,0+circlePadding,self.frame.size.width-(circlePadding*2),self.frame.size.height-(circlePadding*2)));
-    
-    CGContextClosePath(context);
     CGContextFillPath(context);
     
     CGContextSetFillColorWithColor(context, [_clockColor CGColor]);
     CGContextMoveToPoint(context, _center_x, _center_y);
     int angle = self.angle != 90 ? self.angle : 89;
     CGContextAddArc(context, _center_x, _center_y, _radius,  ToRad(-90), ToRad(-angle), 1);
-    CGContextClosePath(context);
     CGContextFillPath(context);
 }
 
 -(void) drawMinuteMarker:(CGContextRef)context {
-    int bigRadius = 6;
-    int minutes = self.secondsBegin/60;
-
     CGContextSetFillColorWithColor(context, [[UIColor whiteColor] CGColor]);
-    for(int i=0; i<=minutes; i++){
-        float markAngle = AngleFromTime(self.secondsBegin, i*60);
-        CGPoint point = [self pointFromAngle:(int)markAngle Radius:_radius-(bigRadius*4) OffsetX:0.0 OffsetY:0.0];
-        CGContextFillEllipseInRect(context, CGRectMake(point.x-bigRadius, point.y-bigRadius, bigRadius*2, bigRadius*2));
-    }
     
-    int smallRadius = 3;
-    float fiveSecond = self.secondsBegin/5;
-    if(minutes <= 13){
-        for(int i=0; i<=fiveSecond; i++){
-            float markAngle = AngleFromTime(self.secondsBegin, i*12);
-            CGPoint point = [self pointFromAngle:(int)markAngle Radius:_radius-(bigRadius*4) OffsetX:0.0 OffsetY:0.0];
-            CGContextFillEllipseInRect(context, CGRectMake(point.x-smallRadius, point.y-smallRadius, smallRadius*2, smallRadius*2));
-        }
+    int minutesPath = 60;
+    int minutes = self.secondsBegin/minutesPath;
+    
+    int secondsPath = (minutes <= 5) ? 5 : 10;
+    int minutesStroke = (minutes <= 21) ? 4 : 2;
+    int secondStroke = (minutes <= 5) ? 4 : 2;
+    int markRadius = 6;
+
+    for(int i=0; i<=minutes; i++){
+        float markAngle = AngleFromTime(self.secondsBegin, i*minutesPath);
+        CGPoint point1 = [self pointFromAngle:(int)markAngle Radius:_radius-(markRadius*2) OffsetX:0.0 OffsetY:0.0];
+        CGPoint point2 = [self pointFromAngle:(int)markAngle Radius:_radius-(markRadius*8) OffsetX:0.0 OffsetY:0.0];
+        [self drawLine:context point1:point1 point2:point2 stroke:minutesStroke];
+    }
+
+    float fiveSecond = self.secondsBegin/secondsPath;
+    for(int i=0; i<=fiveSecond; i++){
+        float markAngle = AngleFromTime(self.secondsBegin, i*secondsPath);
+        CGPoint point1 = [self pointFromAngle:(int)markAngle Radius:_radius-(markRadius*2) OffsetX:0.0 OffsetY:0.0];
+        CGPoint point2 = [self pointFromAngle:(int)markAngle Radius:_radius-(markRadius*4) OffsetX:0.0 OffsetY:0.0];
+        [self drawLine:context point1:point1 point2:point2 stroke:secondStroke];
+    }
+}
+
+-(void) drawLine:(CGContextRef)context point1:(CGPoint)point1 point2:(CGPoint)point2 stroke:(int)stroke{
+    CGContextSetStrokeColorWithColor(context, [[UIColor whiteColor] CGColor]);
+    CGContextSetLineWidth(context, stroke);
+    CGContextMoveToPoint(context, point1.x, point1.y);
+    CGContextAddLineToPoint(context, point2.x, point2.y);
+    CGContextDrawPath(context, kCGPathStroke);
+    if(stroke > 2){
+        CGContextFillEllipseInRect(context, CGRectMake(point1.x-(stroke/2),
+                                                       point1.y-(stroke/2),
+                                                       stroke, stroke));
+        CGContextFillEllipseInRect(context, CGRectMake(point2.x-(stroke/2),
+                                                       point2.y-(stroke/2),
+                                                       stroke, stroke));
     }
 }
 
