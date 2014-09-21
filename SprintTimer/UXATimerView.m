@@ -23,6 +23,7 @@
     UIColor *_clockColor;
     UIColor *_clock2Color;
     UIColor *_paperColor;
+    UIColor *_textGuideColor;
     UIColor *_guideColor;
 }
 @end
@@ -44,7 +45,8 @@ int hours, minutes, seconds;
         _clockColor  = [UIColor colorWithRed:224.0/255.0 green:0/255.0 blue:0/255.0 alpha:1];
         _clock2Color = [UIColor colorWithRed:247.0/255.0 green:134.0/255.0 blue:4.0/255.0 alpha:1];
         _paperColor  = [UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1];
-        _guideColor  = [UIColor colorWithRed:204.0/255.0 green:204.0/255.0 blue:204.0/255.0 alpha:1];
+        _textGuideColor  = [UIColor colorWithRed:204.0/255.0 green:204.0/255.0 blue:204.0/255.0 alpha:1];
+        _guideColor  = [UIColor colorWithRed:237.0/255.0 green:237.0/255.0 blue:237.0/255.0 alpha:1];
         
         _radius = self.frame.size.width/2 - UXA_TIMERVIEW_PADDING - UXA_TIMERVIEW_MARGIN;
         _center_x = self.frame.size.width/2;
@@ -105,16 +107,46 @@ int hours, minutes, seconds;
     CGContextRef context = UIGraphicsGetCurrentContext();
     
     [self drawTheCircle:context];
+    [self drawMinuteMarker:context];
     [self drawTheHandle:context];
 }
 
 -(void) drawTheCircle:(CGContextRef)context{
+    CGContextSetFillColorWithColor(context, [_guideColor CGColor]);
+    float circlePadding = UXA_TIMERVIEW_PADDING+UXA_TIMERVIEW_MARGIN;
+    CGContextFillEllipseInRect(context, CGRectMake(0+circlePadding,0+circlePadding,self.frame.size.width-(circlePadding*2),self.frame.size.height-(circlePadding*2)));
+    
+    CGContextClosePath(context);
+    CGContextFillPath(context);
+    
     CGContextSetFillColorWithColor(context, [_clockColor CGColor]);
     CGContextMoveToPoint(context, _center_x, _center_y);
     int angle = self.angle != 90 ? self.angle : 89;
     CGContextAddArc(context, _center_x, _center_y, _radius,  ToRad(-90), ToRad(-angle), 1);
     CGContextClosePath(context);
     CGContextFillPath(context);
+}
+
+-(void) drawMinuteMarker:(CGContextRef)context {
+    int bigRadius = 6;
+    int minutes = self.secondsBegin/60;
+
+    CGContextSetFillColorWithColor(context, [[UIColor whiteColor] CGColor]);
+    for(int i=0; i<=minutes; i++){
+        float markAngle = AngleFromTime(self.secondsBegin, i*60);
+        CGPoint point = [self pointFromAngle:(int)markAngle Radius:_radius-(bigRadius*4) OffsetX:0.0 OffsetY:0.0];
+        CGContextFillEllipseInRect(context, CGRectMake(point.x-bigRadius, point.y-bigRadius, bigRadius*2, bigRadius*2));
+    }
+    
+    int smallRadius = 3;
+    float fiveSecond = self.secondsBegin/5;
+    if(minutes <= 13){
+        for(int i=0; i<=fiveSecond; i++){
+            float markAngle = AngleFromTime(self.secondsBegin, i*12);
+            CGPoint point = [self pointFromAngle:(int)markAngle Radius:_radius-(bigRadius*4) OffsetX:0.0 OffsetY:0.0];
+            CGContextFillEllipseInRect(context, CGRectMake(point.x-smallRadius, point.y-smallRadius, smallRadius*2, smallRadius*2));
+        }
+    }
 }
 
 -(void) drawTheHandle:(CGContextRef)context{
@@ -172,14 +204,18 @@ int hours, minutes, seconds;
     [self setNeedsDisplay];
 }
 
--(CGPoint)pointFromAngle:(int)angleInt{
-    CGPoint centerPoint = CGPointMake(self.frame.size.width/2 - UXA_HANDLE_WIDTH/2, self.frame.size.height/2 - UXA_HANDLE_WIDTH/2);
+-(CGPoint)pointFromAngle:(int)angleInt Radius:(float)radius OffsetX:(float)offsetX OffsetY:(float)offsetY {
+    CGPoint centerPoint = CGPointMake((self.frame.size.width/2)+offsetX, self.frame.size.height/2+(offsetY));
     
     CGPoint result;
-    result.y = round(centerPoint.y + _radius * sin(ToRad(-angleInt)));
-    result.x = round(centerPoint.x + _radius * cos(ToRad(-angleInt)));
+    result.y = round(centerPoint.y + radius * sin(ToRad(-angleInt)));
+    result.x = round(centerPoint.x + radius * cos(ToRad(-angleInt)));
     
     return result;
+}
+
+-(CGPoint)pointFromAngle:(int)angleInt{
+    return [self pointFromAngle:angleInt Radius:_radius OffsetX:-(UXA_HANDLE_WIDTH/2) OffsetY:-(UXA_HANDLE_WIDTH/2)];
 }
 
 static inline float AngleFromNorth(CGPoint p1, CGPoint p2, BOOL flipped) {

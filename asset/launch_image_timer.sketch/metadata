@@ -11,9 +11,11 @@
 	<key>fonts</key>
 	<array>
 		<string>AvenirNext-Regular</string>
+		<string>HelveticaNeue</string>
+		<string>HelveticaNeue-Medium</string>
 	</array>
 	<key>length</key>
-	<integer>1246902</integer>
+	<integer>2484013</integer>
 	<key>version</key>
 	<integer>37</integer>
 </dict>

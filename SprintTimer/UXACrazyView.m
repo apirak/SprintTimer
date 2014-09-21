@@ -29,6 +29,7 @@
     UIColor *_clockColor;
     UIColor *_clock2Color;
     UIColor *_paperColor;
+    UIColor *_textGuideColor;
     UIColor *_guideColor;
 }
 @end
@@ -50,7 +51,8 @@ int hours, minutes, seconds;
         _clockColor  = [UIColor colorWithRed:224.0/255.0 green:0/255.0 blue:0/255.0 alpha:1];
         _clock2Color = [UIColor colorWithRed:247.0/255.0 green:134.0/255.0 blue:4.0/255.0 alpha:1];
         _paperColor  = [UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1];
-        _guideColor  = [UIColor colorWithRed:204.0/255.0 green:204.0/255.0 blue:204.0/255.0 alpha:1];
+        _textGuideColor  = [UIColor colorWithRed:204.0/255.0 green:204.0/255.0 blue:204.0/255.0 alpha:1];
+        _guideColor  = [UIColor colorWithRed:237.0/255.0 green:237.0/255.0 blue:237.0/255.0 alpha:1];        
         
         _linePadding = 20;
         
@@ -172,7 +174,7 @@ int hours, minutes, seconds;
 -(void) drawTheHandle:(CGContextRef)context {
     CGContextSaveGState(context);
     
-    CGContextSetStrokeColorWithColor(context, _guideColor.CGColor);
+    CGContextSetStrokeColorWithColor(context, _textGuideColor.CGColor);
     CGContextSetLineWidth(context, 16.0);
     CGContextMoveToPoint(context, handleBarX, handleBarY);
     CGContextAddLineToPoint(context, handleBarX, _paperY+(_paperBlockHeight*2));
