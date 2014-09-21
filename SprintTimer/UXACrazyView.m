@@ -278,8 +278,17 @@ int hours, minutes, seconds;
 
 #pragma mark - Timer Countdown -
 
-- (void)updateSecondLeft:(float)secondLeft; {
-    
+- (void)updateSecondLeft:(float)secondLeft {
+    if(!_dragTimer){
+        [self updateViewFromSecondLeft:secondLeft];
+        [self setCountDownPosition];
+        [self setNeedsDisplay];
+    }
+}
+
+#pragma mark - Math -
+
+-(void)updateViewFromSecondLeft:(float)secondLeft {
     hours = secondLeft / 3600;
     minutes = ((int)secondLeft % 3600) / 60;
     seconds = ((int)secondLeft % 3600) % 60;
@@ -292,12 +301,7 @@ int hours, minutes, seconds;
     
     _countdownLabel.text =  [NSString stringWithFormat:@"%02d:%02d", minutes, seconds];
     _handlerHeight = _heightPerSecond * secondLeft;
-    
-    [self setCountDownPosition];
-    [self setNeedsDisplay];
 }
-
-#pragma mark - Math -
 
 -(void)movehandle:(CGPoint)lastPoint{
     
@@ -320,6 +324,7 @@ int hours, minutes, seconds;
         [_delegate changeSecondLeft:secondLeft];
     }
     
+    [self updateViewFromSecondLeft:secondLeft];
     [self setCountDownPosition];
     [self setNeedsDisplay];
 }
