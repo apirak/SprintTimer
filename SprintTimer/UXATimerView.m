@@ -107,7 +107,7 @@ int hours, minutes, seconds;
     CGContextRef context = UIGraphicsGetCurrentContext();
     
     [self drawTheCircle:context];
-    [self drawMinuteMarker:context];
+//    [self drawMinuteMarker:context];
     [self drawTheHandle:context];
 }
 
@@ -228,8 +228,8 @@ int hours, minutes, seconds;
         }
     } else {
         if(self.angle > 90 && self.angle < 180){
-            if(newAngle < 90){
-                self.angle = 91;
+            if(newAngle <= 90){
+                self.angle = 92;
             } else {
                 self.angle = newAngle;
             }

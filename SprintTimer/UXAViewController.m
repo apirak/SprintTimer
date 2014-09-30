@@ -33,7 +33,7 @@
     [super viewDidLoad];
     [self setNeedsStatusBarAppearanceUpdate];
     
-    timerView = [[UXATimerView alloc] initWithFrame:CGRectMake((1024-UXA_TIMERVIEW_WIDTH)/2 ,100, UXA_TIMERVIEW_WIDTH, UXA_TIMERVIEW_WIDTH)];
+    timerView = [[UXATimerView alloc] initWithFrame:CGRectMake((1024-UXA_TIMERVIEW_WIDTH)/2 ,90, UXA_TIMERVIEW_WIDTH, UXA_TIMERVIEW_WIDTH)];
     [timerView addTarget:self action:@selector(newValue:) forControlEvents:UIControlEventValueChanged];
     [timerView setDelegate:self];
     [self.view addSubview:timerView];
@@ -133,13 +133,12 @@
         self.nextSound.delegate = self;
         [self.nextSound prepareToPlay];
     }
+
+    [AVAudioSession sharedInstance];
     
-    [[AVAudioSession sharedInstance] setDelegate: self];
-    NSError *setCategoryError = nil;
-    [[AVAudioSession sharedInstance] setCategory: AVAudioSessionCategoryPlayback error: &setCategoryError];
-    if (setCategoryError) {
-        NSLog(@"Error setting category! %@", setCategoryError);
-    }
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    [center addObserver:self selector:@selector(sessionDidInterrupt:) name:AVAudioSessionInterruptionNotification object:nil];
+    [center addObserver:self selector:@selector(sessionRouteDidChange:) name:AVAudioSessionRouteChangeNotification object:nil];
     
     [self countdownTimer];
     
@@ -286,20 +285,38 @@
 
 #pragma mark -- Play Alarm --
 
--(void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag {
-    NSLog(@"Play successfully");
+//-(void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag {
+//    NSLog(@"Play successfully");
+//}
+//
+//-(void)audioPlayerDecodeErrorDidOccur:(AVAudioPlayer *)player error:(NSError *)error {
+//    NSLog(@"Player Decode Error Did Occour");
+//}
+//
+//-(void)audioPlayerBeginInterruption:(AVAudioPlayer *)player {
+//    NSLog(@"Player Begin Interruption");
+//}
+//
+//-(void)audioPlayerEndInterruption:(AVAudioPlayer *)player {
+//    NSLog(@"Audio Player End Interruption");
+//}
+
+- (void)sessionDidInterrupt:(NSNotification *)notification
+{
+    switch ([notification.userInfo[AVAudioSessionInterruptionTypeKey] intValue]) {
+        case AVAudioSessionInterruptionTypeBegan:
+            NSLog(@"Interruption began");
+            break;
+        case AVAudioSessionInterruptionTypeEnded:
+        default:
+            NSLog(@"Interruption ended");
+            break;
+    }
 }
 
--(void)audioPlayerDecodeErrorDidOccur:(AVAudioPlayer *)player error:(NSError *)error {
-    NSLog(@"Player Decode Error Did Occour");
-}
-
--(void)audioPlayerBeginInterruption:(AVAudioPlayer *)player {
-    NSLog(@"Player Begin Interruption");
-}
-
--(void)audioPlayerEndInterruption:(AVAudioPlayer *)player {
-    NSLog(@"Audio Player End Interruption");
+- (void)sessionRouteDidChange:(NSNotification *)notification
+{
+    NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
 @end
