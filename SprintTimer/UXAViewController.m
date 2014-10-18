@@ -83,12 +83,20 @@
     self.secondsBegin = 60*5;
     self.secondsLeft = self.secondsBegin;
     
-    NSString *endSoundFilePath = [NSString stringWithFormat:@"%@/bell.caf", [[NSBundle mainBundle] resourcePath]];
-    NSURL *endSoundFileURL = [NSURL fileURLWithPath:endSoundFilePath];
-    NSError *endSoundError;
-    self.timeoutSound = [[AVAudioPlayer alloc]
-                        initWithContentsOfURL:endSoundFileURL
-                        error:&endSoundError];
+    NSString *endSoundFilePath = [[NSBundle mainBundle] pathForResource:@"bell" ofType:@"caf"];
+    NSError *endSoundError = nil;
+    
+    NSData *endSoundData = [ NSData dataWithContentsOfFile:endSoundFilePath options:NSDataReadingMapped error:&endSoundError ] ;
+    if ( !endSoundData )
+    {
+        if ( endSoundError ) { @throw endSoundError ; }
+    }
+    
+    self.timeoutSound = endSoundData ? [[AVAudioPlayer alloc] initWithData:endSoundData error:&endSoundError ] : nil ;
+    if ( !self.timeoutSound )
+    {
+        if ( endSoundError ) { @throw endSoundError ; }
+    }
 
     if (endSoundError) {
         NSLog(@"Error in audioPlayer: %@",
@@ -100,12 +108,21 @@
         [self.timeoutSound prepareToPlay];
     }
     
-    NSString *almostSoundFilePath = [NSString stringWithFormat:@"%@/long_bell.caf", [[NSBundle mainBundle] resourcePath]];
-    NSURL *almostSoundFileURL = [NSURL fileURLWithPath:almostSoundFilePath];
-    NSError *almostSoundError;
-    self.almostSound = [[AVAudioPlayer alloc]
-                      initWithContentsOfURL:almostSoundFileURL
-                      error:&almostSoundError];
+    NSString *almostSoundFilePath = [[NSBundle mainBundle] pathForResource:@"long_bell" ofType:@"caf"];
+    NSError *almostSoundError = nil;
+
+    NSData *almostSoundData = [ NSData dataWithContentsOfFile:almostSoundFilePath options:NSDataReadingMapped error:&almostSoundError ] ;
+    if ( !almostSoundData )
+    {
+        if ( almostSoundError ) { @throw almostSoundError ; }
+    }
+    
+    self.almostSound = almostSoundData ? [[AVAudioPlayer alloc] initWithData:almostSoundData error:&almostSoundError ] : nil ;
+    if ( !self.almostSound )
+    {
+        if ( almostSoundError ) { @throw almostSoundError ; }
+    }
+    
     
     if (almostSoundError) {
         NSLog(@"Error in audioPlayer: %@",
@@ -117,12 +134,20 @@
         [self.almostSound prepareToPlay];
     }
     
-    NSString *nextSoundFilePath = [NSString stringWithFormat:@"%@/short_bell.caf", [[NSBundle mainBundle] resourcePath]];
-    NSURL *nextSoundFileURL = [NSURL fileURLWithPath:nextSoundFilePath];
-    NSError *nextSoundError;
-    self.nextSound = [[AVAudioPlayer alloc]
-                      initWithContentsOfURL:nextSoundFileURL
-                      error:&nextSoundError];
+    NSString *nextSoundFilePath = [[NSBundle mainBundle] pathForResource:@"short_bell" ofType:@"caf"];
+    NSError *nextSoundError = nil;
+
+    NSData *nextSoundData = [ NSData dataWithContentsOfFile:nextSoundFilePath options:NSDataReadingMapped error:&nextSoundError ] ;
+    if ( !nextSoundData )
+    {
+        if ( nextSoundError ) { @throw nextSoundError ; }
+    }
+    
+    self.nextSound = nextSoundData ? [[AVAudioPlayer alloc] initWithData:nextSoundData error:&nextSoundError ] : nil ;
+    if ( !self.nextSound )
+    {
+        if ( nextSoundError ) { @throw nextSoundError ; }
+    }
 
     if (nextSoundError) {
         NSLog(@"Error in audioPlayer: %@",

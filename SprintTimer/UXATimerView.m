@@ -218,8 +218,6 @@ int hours, minutes, seconds;
     float angleFloat = floor(currentAngle);
     float newAngle = 360.0 - angleFloat;
     
-    NSLog(@"Angle %f", self.angle);
-    
     if ((self.angle <= 90) && (self.angle > 45)) {
         if (newAngle > 90) {
             self.angle = 90;
