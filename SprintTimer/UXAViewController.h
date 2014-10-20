@@ -19,20 +19,21 @@
 
 @interface UXAViewController : UIViewController <AVAudioPlayerDelegate, TimePickerDelegate, TimeViewerDelegate, CrazyViewerDelegate>
 
-@property (strong, nonatomic) AVAudioPlayer *timeoutSound;
-@property (strong, nonatomic) AVAudioPlayer *almostSound;
-@property (strong, nonatomic) AVAudioPlayer *nextSound;
+@property (nonatomic, strong) AVAudioPlayer *timeoutSound;
+@property (nonatomic, strong) AVAudioPlayer *almostSound;
+@property (nonatomic, strong) AVAudioPlayer *nextSound;
 
-@property (weak, nonatomic)   IBOutlet UILabel *timerLabel;
-@property (nonatomic, assign) IBOutlet UIButton *crazyButton;
-@property (nonatomic, assign) IBOutlet UIButton *timerButton;
-@property (nonatomic, assign) IBOutlet UIButton *totalTimeButton;
-@property (nonatomic, retain) UIView *tabLineBarView;
-@property (nonatomic, retain) UXATimerView *timerView;
-@property (nonatomic, retain) UXACrazyView *crazyView;
+@property (nonatomic, strong) UILabel *timerLabel;
+@property (nonatomic, strong) UIButton *crazyButton;
+@property (nonatomic, strong) UIButton *timerButton;
+@property (nonatomic, strong) UIButton *totalTimeButton;
 
-@property (nonatomic,assign) float secondsBegin;
-@property (nonatomic,assign) float secondsLeft;
+@property (nonatomic, strong) UIView *tabLineBarView;
+@property (nonatomic, strong) UXATimerView *timerView;
+@property (nonatomic, strong) UXACrazyView *crazyView;
+
+@property (nonatomic, assign) float secondsBegin;
+@property (nonatomic, assign) float secondsLeft;
 
 @property (nonatomic, strong) UXATimePickerViewController *timePicker;
 @property (nonatomic, strong) UIPopoverController *timePickerPopover;

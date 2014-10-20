@@ -104,10 +104,10 @@ int hours, minutes, seconds;
 #pragma mark - Drawing Functions -
 
 - (void)drawRect:(CGRect)rect {
+    [super drawRect:rect];
     CGContextRef context = UIGraphicsGetCurrentContext();
     
     [self drawTheCircle:context];
-//    [self drawMinuteMarker:context];
     [self drawTheHandle:context];
 }
 

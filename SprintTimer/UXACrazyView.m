@@ -99,6 +99,7 @@ int hours, minutes, seconds;
 #pragma mark - Drawing Functions -
 
 - (void)drawRect:(CGRect)rect {
+    [super drawRect:rect];
     CGContextRef context = UIGraphicsGetCurrentContext();
 
     [self drawCountDownBar:context];
